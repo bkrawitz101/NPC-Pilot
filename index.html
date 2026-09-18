@@ -1,0 +1,2958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Paradigm Capital | Nevada County Pilot Foundation</title>
+  <meta name="description" content="Executive think tank, masterminds, and land-and-labor backed asset architecture in Nevada County, California." />
+  
+  <!-- Typography Imports: Libre Caslon (Adobe Caslon Pro web alternative) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       3. DESIGN TOKENS & VISUAL STYLEGUIDE (NPC Implementation Spec 2.0)
+       ========================================================================== */
+    :root {
+      /* Color Palette (CSS Variables) */
+      --color-bg-primary: #FFFFFF;
+      --color-bg-surface: #FAF8F5;
+      --color-bg-card: #b6a690;
+      --color-bg-card-light: #f3ede4;
+      --color-bg-card-subtle: #f9f6f0;
+      --color-bg-dark: #1e1610;
+      --color-bg-darker: #130d09;
+      --color-bg-obsidian: #30210F;
+      
+      --color-text-primary: #000000;
+      --color-text-muted: #4a4238;
+      --color-text-light: #FFFFFF;
+      --color-text-dim: #7d7265;
+      
+      --color-text-heading: #D4AF37;
+      --color-gold-metallic: #D4AF37;
+      --color-gold-light: #f3df9b;
+      --color-accent: #bf8b2d;
+      --color-accent-hover: #d69f38;
+      --color-accent-blue: #9eb0d1;
+      --color-accent-blue-deep: #4d6896;
+      --color-accent-green: #3a6b4c;
+      
+      --border-gold-subtle: rgba(212, 175, 55, 0.45);
+      --border-taupe: rgba(182, 166, 144, 0.55);
+      --border-dark: rgba(48, 33, 15, 0.2);
+      
+      /* Typography Specification */
+      --font-family-primary: 'Adobe Caslon Pro', 'Libre Caslon Text', 'Libre Caslon Display', Georgia, serif, Arial, sans-serif;
+      --font-family-headlines: 'Adobe Caslon Pro', 'Libre Caslon Display', 'Libre Caslon Text', Georgia, serif, Arial, sans-serif;
+      --font-family-body: 'Helvetica Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --font-family-body-medium: 'Helvetica Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      
+      --shadow-sm: 0 2px 8px rgba(30, 22, 16, 0.06);
+      --shadow-md: 0 8px 24px rgba(30, 22, 16, 0.09);
+      --shadow-lg: 0 16px 40px rgba(30, 22, 16, 0.14);
+      --shadow-gold: 0 0 20px rgba(212, 175, 55, 0.28);
+      
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 14px;
+      --radius-full: 9999px;
+      
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-base: 200ms ease;
+      --transition-smooth: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Reset & Global */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      background-color: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      font-family: var(--font-family-body);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-color: var(--color-bg-primary);
+      background-image: 
+        radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.05) 0%, transparent 60%),
+        linear-gradient(180deg, #FFFFFF 0%, #FAF8F5 100%);
+      font-family: var(--font-family-body);
+      font-weight: 300;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--color-text-primary);
+    }
+
+    /* Section Labels Specification:
+       text-transform: uppercase; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; color: var(--color-accent) */
+    .section-label {
+      font-family: var(--font-family-primary);
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--color-accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 14px;
+      height: 1.5px;
+      background-color: var(--color-accent);
+    }
+
+    /* Main Headlines Specification:
+       font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; color: var(--color-text-heading); */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-family-headlines);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: var(--color-text-heading);
+    }
+
+    /* Body Copy Specification:
+       Helvetica Light, Helvetica Medium (All Caps for accents); font-size: 1rem; line-height: 1.6; color: var(--color-text-primary); */
+    p {
+      font-family: var(--font-family-body);
+      font-weight: 300;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--color-text-primary);
+    }
+
+    strong, b {
+      font-family: var(--font-family-body-medium);
+      font-weight: 600;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    /* Layout Containers */
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .container-narrow {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Buttons & Interactivity Specification:
+       Primary CTA: Background #30210F, Border 1px solid #D4A359, Color #FFFFFF, Padding 0.85rem 2rem, Tracking 0.12em uppercase.
+       Hover Effects: Subtle gold glow, clean opacity transitions (200ms ease). */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-family: var(--font-family-body-medium);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.85rem 2rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      border: 1px solid transparent;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background-color: #30210F;
+      border: 1px solid #D4A359;
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(48, 33, 15, 0.25);
+    }
+
+    .btn-primary:hover {
+      background-color: #422d15;
+      border-color: #f3df9b;
+      box-shadow: var(--shadow-gold);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border: 1px solid var(--color-accent);
+      color: var(--color-text-primary);
+      font-family: var(--font-family-body-medium);
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(191, 139, 45, 0.08);
+      border-color: var(--color-text-heading);
+      color: var(--color-accent);
+    }
+
+    .btn-blue {
+      background-color: var(--color-accent-blue);
+      color: #1a2538;
+      border: 1px solid rgba(77, 104, 150, 0.3);
+      font-family: var(--font-family-body-medium);
+      font-weight: 700;
+    }
+
+    .btn-blue:hover {
+      background-color: #8da2c7;
+      box-shadow: 0 4px 12px rgba(158, 176, 209, 0.4);
+    }
+
+    .btn-sm {
+      padding: 0.5rem 1.15rem;
+      font-size: 0.72rem;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.28rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-family: var(--font-family-body-medium);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .badge-blue {
+      background-color: rgba(158, 176, 209, 0.25);
+      color: #2b3e5e;
+      border: 1px solid rgba(158, 176, 209, 0.6);
+    }
+
+    .badge-gold {
+      background-color: rgba(212, 175, 55, 0.12);
+      color: var(--color-accent);
+      border: 1px solid var(--border-gold-subtle);
+    }
+
+    .badge-dark {
+      background-color: var(--color-bg-obsidian);
+      color: var(--color-gold-light);
+      border: 1px solid var(--border-gold-subtle);
+    }
+
+    .badge-live {
+      background-color: rgba(58, 107, 76, 0.12);
+      color: var(--color-accent-green);
+      border: 1px solid rgba(58, 107, 76, 0.3);
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--color-accent-green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(58, 107, 76, 0.6); }
+      70% { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(58, 107, 76, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(58, 107, 76, 0); }
+    }
+
+    /* ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-taupe);
+      transition: all var(--transition-base);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand-logo {
+      font-family: var(--font-family-primary);
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--color-text-heading);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-transform: uppercase;
+    }
+
+    .brand-icon {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, var(--color-bg-obsidian), #4d351c);
+      border: 1px solid var(--color-gold-metallic);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-gold-metallic);
+      font-size: 0.85rem;
+      font-weight: 700;
+      box-shadow: 0 2px 6px rgba(48, 33, 15, 0.15);
+    }
+
+    .brand-tagline {
+      font-size: 0.72rem;
+      font-family: var(--font-family-body);
+      font-weight: 400;
+      color: var(--color-text-muted);
+      letter-spacing: 0.04em;
+      padding-left: 0.85rem;
+      border-left: 1px solid var(--border-taupe);
+      display: none;
+    }
+
+    @media (min-width: 640px) {
+      .brand-tagline { display: block; }
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-auth-status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-family: var(--font-family-body-medium);
+      font-weight: 600;
+      color: var(--color-accent);
+      background: rgba(191, 139, 45, 0.08);
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-gold-subtle);
+    }
+
+    /* ==========================================================================
+       HERO SECTION (Level 1)
+       ========================================================================== */
+    .hero-section {
+      padding: 4.5rem 0 3.5rem;
+      position: relative;
+      border-bottom: 1px solid var(--border-taupe);
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    @media (min-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 3.5rem;
+      }
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+      margin-bottom: 1.25rem;
+      color: var(--color-text-heading);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    .hero-subheadline {
+      font-family: var(--font-family-primary);
+      font-size: 1.25rem;
+      line-height: 1.5;
+      color: var(--color-text-primary);
+      margin-bottom: 1.75rem;
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .vision-callout {
+      background: linear-gradient(135deg, var(--color-bg-card-subtle) 0%, #ede5d8 100%);
+      border: 1px solid var(--border-taupe);
+      border-left: 4px solid var(--color-accent);
+      padding: 1.4rem 1.6rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+
+    .vision-callout-quote {
+      font-family: var(--font-family-primary);
+      font-size: 1.15rem;
+      line-height: 1.5;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .vision-callout-author {
+      font-family: var(--font-family-body-medium);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    /* Executive Hero Card Preview */
+    .hero-card-preview {
+      background: #FFFFFF;
+      border: 1px solid var(--border-taupe);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+
+    .hero-card-preview::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--color-gold-metallic), var(--color-accent-blue), var(--color-bg-obsidian));
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+    }
+
+    .card-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid var(--border-taupe);
+    }
+
+    .metric-grid-preview {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .metric-box {
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(182, 166, 144, 0.35);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem;
+    }
+
+    .metric-box .label {
+      font-family: var(--font-family-body-medium);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .metric-box .val {
+      font-family: var(--font-family-headlines);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-text-heading);
+    }
+
+    .metric-box .note {
+      font-size: 0.72rem;
+      color: var(--color-text-dim);
+    }
+
+    .security-notice-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      background: rgba(158, 176, 209, 0.15);
+      border: 1px solid rgba(158, 176, 209, 0.4);
+      padding: 0.75rem 0.9rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      color: #2a3c5a;
+    }
+
+    /* ==========================================================================
+       2. ETHAN'S 4 QUALIFYING QUESTIONS FRAMEWORK SECTION
+       ========================================================================== */
+    .framework-section {
+      padding: 4.5rem 0;
+      background-color: var(--color-bg-surface);
+      border-bottom: 1px solid var(--border-taupe);
+    }
+
+    .section-header-centered {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 3rem;
+    }
+
+    .section-header-centered h2 {
+      font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-header-centered p {
+      font-size: 1.05rem;
+      color: var(--color-text-muted);
+    }
+
+    .questions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .question-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-taupe);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+    }
+
+    .question-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-accent);
+    }
+
+    .question-num-badge {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(191, 139, 45, 0.12);
+      color: var(--color-accent);
+      font-family: var(--font-family-body-medium);
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-gold-subtle);
+    }
+
+    .question-card .q-title {
+      font-family: var(--font-family-body-medium);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 0.4rem;
+    }
+
+    .question-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.9rem;
+      color: var(--color-text-heading);
+    }
+
+    .question-card p {
+      font-size: 0.92rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+    }
+
+    .question-card .highlight-pill {
+      margin-top: auto;
+      padding-top: 0.75rem;
+      border-top: 1px dashed var(--border-taupe);
+      font-family: var(--font-family-body-medium);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--color-bg-obsidian);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* ==========================================================================
+       DASHBOARD LEVEL 2: EXECUTIVE THINK TANK DASHBOARD
+       ========================================================================== */
+    .dashboard-wrapper {
+      padding: 3.5rem 0 5rem;
+      background: #FFFFFF;
+    }
+
+    /* Status Banner */
+    .exec-status-banner {
+      background: linear-gradient(135deg, var(--color-bg-obsidian) 0%, #24170a 100%);
+      color: #FFFFFF;
+      border: 1px solid var(--border-gold-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.75rem 2rem;
+      margin-bottom: 3rem;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .exec-status-banner::after {
+      content: '';
+      position: absolute;
+      right: -40px;
+      bottom: -40px;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .exec-banner-info h2 {
+      color: var(--color-gold-light);
+      font-size: 1.6rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .exec-banner-info p {
+      color: #d1c8bd;
+      font-size: 0.9rem;
+    }
+
+    .exec-banner-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .meta-stat {
+      border-left: 2px solid var(--color-gold-metallic);
+      padding-left: 0.85rem;
+    }
+
+    .meta-stat .label {
+      font-family: var(--font-family-body-medium);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-gold-light);
+      opacity: 0.85;
+    }
+
+    .meta-stat .value {
+      font-family: var(--font-family-headlines);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    /* $500k Dual-Asset Breakdown */
+    .architecture-section {
+      margin-bottom: 4.5rem;
+    }
+
+    .asset-dual-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 992px) {
+      .asset-dual-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .asset-card {
+      background: var(--color-bg-surface);
+      border: 1px solid var(--border-taupe);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      position: relative;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-base);
+    }
+
+    .asset-card:hover {
+      border-color: var(--color-accent);
+      box-shadow: var(--shadow-md);
+    }
+
+    .asset-card.position-a {
+      border-top: 4px solid var(--color-accent-green);
+    }
+
+    .asset-card.position-b {
+      border-top: 4px solid var(--color-accent-blue-deep);
+    }
+
+    .asset-badge-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .asset-card h3 {
+      font-size: 1.45rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .asset-location {
+      font-family: var(--font-family-body);
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .asset-specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25rem 0;
+      font-size: 0.88rem;
+    }
+
+    .asset-specs-table tr {
+      border-bottom: 1px solid rgba(182, 166, 144, 0.3);
+    }
+
+    .asset-specs-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .asset-specs-table td {
+      padding: 0.65rem 0;
+    }
+
+    .asset-specs-table td:first-child {
+      color: var(--color-text-muted);
+      font-weight: 500;
+      width: 42%;
+    }
+
+    .asset-specs-table td:last-child {
+      color: var(--color-text-primary);
+      font-family: var(--font-family-body-medium);
+      font-weight: 600;
+      text-align: right;
+    }
+
+    /* Ring Fence & Labor Crossing Mechanics */
+    .mechanics-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 840px) {
+      .mechanics-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .mechanic-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-taupe);
+      border-radius: var(--radius-sm);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .mechanic-card.highlight {
+      background: linear-gradient(180deg, #FFFFFF 0%, var(--color-bg-card-subtle) 100%);
+      border: 1px solid var(--border-gold-subtle);
+    }
+
+    .mechanic-card h4 {
+      font-size: 1.05rem;
+      margin-bottom: 0.65rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .mechanic-card p {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      line-height: 1.55;
+    }
+
+    /* Interactive Labor & Land Calculator */
+    .calc-box {
+      margin-top: 2rem;
+      background: var(--color-bg-dark);
+      color: #FFFFFF;
+      border-radius: var(--radius-md);
+      padding: 1.75rem 2rem;
+      border: 1px solid var(--border-gold-subtle);
+    }
+
+    .calc-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .calc-header h4 {
+      color: var(--color-gold-light);
+      font-size: 1.2rem;
+    }
+
+    .calc-controls {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .calc-controls {
+        grid-template-columns: 1.2fr 1fr;
+        align-items: center;
+      }
+    }
+
+    .slider-group label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #e5ded4;
+      margin-bottom: 0.5rem;
+    }
+
+    .slider-input {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: #4a3829;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .slider-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--color-gold-metallic);
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+    }
+
+    .calc-results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1.25rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+    }
+
+    .calc-res-item .lbl {
+      font-family: var(--font-family-body-medium);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #b5a999;
+    }
+
+    .calc-res-item .num {
+      font-family: var(--font-family-headlines);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--color-gold-light);
+      margin-top: 0.2rem;
+    }
+
+    /* ==========================================================================
+       DOCUMENT & INTELLIGENCE REPOSITORY (File Clusters)
+       ========================================================================== */
+    .docs-section {
+      margin-top: 4.5rem;
+      padding-top: 4rem;
+      border-top: 1px solid var(--border-taupe);
+    }
+
+    .cluster-group {
+      margin-bottom: 3rem;
+    }
+
+    .cluster-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-taupe);
+    }
+
+    .cluster-title h3 {
+      font-size: 1.3rem;
+      color: var(--color-text-heading);
+    }
+
+    .doc-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+
+    @media (min-width: 768px) {
+      .doc-cards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      }
+    }
+
+    .doc-card {
+      background: var(--color-bg-surface);
+      border: 1px solid var(--border-taupe);
+      border-radius: var(--radius-md);
+      padding: 1.4rem 1.5rem;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .doc-card:hover {
+      background: #FFFFFF;
+      border-color: var(--color-accent);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .doc-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+
+    .doc-id {
+      font-family: var(--font-family-body-medium);
+      font-size: 0.7rem;
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    .doc-card h4 {
+      font-size: 1.05rem;
+      color: var(--color-text-heading);
+      margin-bottom: 0.5rem;
+      line-height: 1.35;
+    }
+
+    .doc-card p {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .doc-card-footer {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-family-body-medium);
+      font-size: 0.75rem;
+      color: var(--color-accent);
+      font-weight: 600;
+      padding-top: 0.75rem;
+      border-top: 1px dashed rgba(182, 166, 144, 0.4);
+    }
+
+    /* ==========================================================================
+       LEVEL 3: FAMILY OF BUSINESSES (Light Portal Ecosystem)
+       ========================================================================== */
+    .ecosystem-section {
+      padding: 5rem 0;
+      background: linear-gradient(180deg, #FFFFFF 0%, var(--color-bg-surface) 100%);
+      border-top: 1px solid var(--border-taupe);
+      border-bottom: 1px solid var(--border-taupe);
+    }
+
+    .ecosystem-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+
+    @media (min-width: 860px) {
+      .ecosystem-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .eco-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-taupe);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .eco-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-gold-metallic);
+    }
+
+    .eco-icon-header {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    .eco-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    .icon-earth {
+      background: rgba(58, 107, 76, 0.12);
+      color: var(--color-accent-green);
+      border: 1px solid rgba(58, 107, 76, 0.3);
+    }
+
+    .icon-light {
+      background: rgba(212, 175, 55, 0.12);
+      color: var(--color-accent);
+      border: 1px solid var(--border-gold-subtle);
+    }
+
+    .icon-ni {
+      background: rgba(158, 176, 209, 0.2);
+      color: var(--color-accent-blue-deep);
+      border: 1px solid rgba(158, 176, 209, 0.5);
+    }
+
+    .eco-card h3 {
+      font-size: 1.35rem;
+      color: var(--color-text-heading);
+      margin-bottom: 0.35rem;
+    }
+
+    .eco-focus {
+      font-size: 0.75rem;
+      font-family: var(--font-family-body-medium);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-accent);
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+    }
+
+    .eco-card p {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .eco-features-list {
+      list-style: none;
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(182, 166, 144, 0.3);
+      font-size: 0.82rem;
+    }
+
+    .eco-features-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-text-primary);
+    }
+
+    .eco-features-list li::before {
+      content: '✦';
+      color: var(--color-accent);
+      font-size: 0.75rem;
+      line-height: 1.3;
+    }
+
+    /* Sub-Businesses inside LIGHT */
+    .sub-business-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .sub-business-item {
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(182, 166, 144, 0.45);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem 1rem;
+      transition: all var(--transition-fast);
+    }
+
+    .sub-business-item:hover {
+      border-color: var(--color-accent);
+      background: #FFFFFF;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sub-business-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.25rem;
+    }
+
+    .sub-business-title {
+      font-family: var(--font-family-headlines);
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--color-text-heading);
+    }
+
+    .sub-business-tag {
+      font-family: var(--font-family-body-medium);
+      font-size: 0.68rem;
+      color: var(--color-accent);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .sub-business-desc {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    /* ==========================================================================
+       LEVEL 4: DYNAMIC APPLICANT INTAKE & DISCOVERY SORTING
+       ========================================================================== */
+    .intake-section {
+      padding: 5rem 0;
+      background: var(--color-bg-surface);
+    }
+
+    .intake-card-container {
+      background: #FFFFFF;
+      border: 1px solid var(--border-taupe);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+
+    @media (max-width: 640px) {
+      .intake-card-container {
+        padding: 1.5rem;
+      }
+    }
+
+    .lane-selector-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .lane-selector-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .lane-selector-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .lane-option {
+      background: var(--color-bg-surface);
+      border: 2px solid var(--border-taupe);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .lane-option:hover {
+      border-color: var(--color-accent);
+      background: #FFFFFF;
+      transform: translateY(-2px);
+    }
+
+    .lane-option.active {
+      background: #FFFFFF;
+      border-color: var(--color-accent);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .lane-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .lane-option .lane-tag {
+      font-family: var(--font-family-body-medium);
+      font-size: 0.68rem;
+      color: var(--color-accent);
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .lane-option h4 {
+      font-size: 1.05rem;
+      color: var(--color-text-heading);
+      margin-bottom: 0.35rem;
+    }
+
+    .lane-option p {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      line-height: 1.45;
+    }
+
+    /* Form Fields */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+
+    @media (min-width: 768px) {
+      .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      font-family: var(--font-family-body-medium);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-primary);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--border-taupe);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-family-body);
+      font-size: 0.92rem;
+      background-color: #FFFFFF;
+      color: var(--color-text-primary);
+      transition: all var(--transition-fast);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(191, 139, 45, 0.15);
+    }
+
+    textarea.form-control {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      line-height: 1.45;
+    }
+
+    .checkbox-container input {
+      margin-top: 0.2rem;
+      accent-color: var(--color-accent);
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    .site-footer {
+      background-color: var(--color-bg-darker);
+      color: #FFFFFF;
+      padding: 4.5rem 0 2.5rem;
+      border-top: 1px solid var(--border-gold-subtle);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+    }
+
+    @media (min-width: 860px) {
+      .footer-grid {
+        grid-template-columns: 1.3fr 0.9fr 0.8fr;
+      }
+    }
+
+    .footer-brand h3 {
+      color: var(--color-gold-light);
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-brand p {
+      color: #b5a999;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-contact-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem;
+    }
+
+    .contact-line {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: 0.85rem;
+      color: #e5ded4;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-line:last-child {
+      margin-bottom: 0;
+    }
+
+    .contact-line strong {
+      color: var(--color-gold-light);
+    }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.75rem;
+      color: #8c8072;
+    }
+
+    /* ==========================================================================
+       MODAL OVERLAY ENGINE & DOCUMENT VIEWER
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(19, 13, 9, 0.8);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition-base), visibility var(--transition-base);
+    }
+
+    .modal-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-window {
+      background: #FFFFFF;
+      border: 1px solid var(--border-taupe);
+      border-radius: var(--radius-md);
+      width: 100%;
+      max-width: 680px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.96) translateY(10px);
+      transition: transform var(--transition-smooth);
+      position: relative;
+    }
+
+    .modal-backdrop.active .modal-window {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-header {
+      padding: 1.5rem 1.75rem;
+      border-bottom: 1px solid var(--border-taupe);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--color-bg-surface);
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+    }
+
+    .modal-header h3 {
+      font-size: 1.25rem;
+      color: var(--color-text-heading);
+    }
+
+    .modal-close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      line-height: 1;
+      padding: 0.25rem;
+      transition: color var(--transition-fast);
+    }
+
+    .modal-close-btn:hover {
+      color: var(--color-text-primary);
+    }
+
+    .modal-body {
+      padding: 1.75rem;
+      overflow-y: auto;
+    }
+
+    .modal-footer {
+      padding: 1.25rem 1.75rem;
+      border-top: 1px solid var(--border-taupe);
+      background: var(--color-bg-surface);
+      border-radius: 0 0 var(--radius-md) var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.75rem;
+    }
+
+    /* Document Reader Specific Modal Styling */
+    .doc-viewer-modal {
+      max-width: 820px;
+    }
+
+    .doc-meta-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .doc-reader-body h4 {
+      font-size: 1.15rem;
+      margin: 1.25rem 0 0.5rem;
+      color: var(--color-text-heading);
+    }
+
+    .doc-reader-body p {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      margin-bottom: 0.85rem;
+      color: var(--color-text-primary);
+    }
+
+    .doc-reader-body ul {
+      padding-left: 1.25rem;
+      margin-bottom: 1rem;
+      font-size: 0.92rem;
+      color: var(--color-text-primary);
+    }
+
+    .doc-reader-body li {
+      margin-bottom: 0.4rem;
+    }
+
+    .doc-highlight-box {
+      background: var(--color-bg-card-subtle);
+      border-left: 3px solid var(--color-accent);
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+      font-size: 0.9rem;
+      font-family: var(--font-family-body);
+    }
+
+    /* State Switcher Visual Notice */
+    #state-dashboard {
+      display: none;
+    }
+
+    #state-dashboard.unlocked {
+      display: block;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .demo-unlock-bar {
+      background: #f1ebd9;
+      border: 1px solid var(--border-gold-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1.25rem;
+      margin: 1.5rem 0 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-size: 0.82rem;
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .toast {
+      background: var(--color-bg-obsidian);
+      color: #FFFFFF;
+      border: 1px solid var(--color-gold-metallic);
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-lg);
+      font-size: 0.85rem;
+      font-family: var(--font-family-body-medium);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Toast Notification System -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand-group">
+        <a href="#hero" class="brand-logo">
+          <span class="brand-icon">✦</span>
+          <span>NEW PARADIGM CAPITAL</span>
+        </a>
+        <span class="brand-tagline">Nevada County Pilot Foundation</span>
+      </div>
+
+      <div class="header-actions">
+        <div id="header-auth-badge" class="nav-auth-status" style="display: none;">
+          <span class="pulse-dot"></span>
+          <span>Level 2 Unlocked: Executive Portal</span>
+        </div>
+        <button id="btn-open-nda-nav" class="btn btn-primary btn-sm" onclick="openModal('nda-modal')">
+          Member Access / NDA Request
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       LEVEL 1: PUBLIC GATEWAY & HERO LANDING (Pre-NDA)
+       ========================================================================== -->
+  <main id="state-public">
+    <section id="hero" class="hero-section">
+      <div class="container hero-grid">
+        <!-- Hero Text Content -->
+        <div class="hero-content">
+          <div class="section-label">SYSTEMIC RESILIENCE &amp; CAPITAL ARCHITECTURE</div>
+          <h1>Redefining Wealth, Reimagining Progress</h1>
+          <p class="hero-subheadline">
+            A land- and labor-backed asset class structured via a targeted capital pool to deploy our flagship countywide pilot program in Nevada County, California.
+          </p>
+
+          <div class="vision-callout">
+            <div class="vision-callout-quote">
+              "At Rethinking Capital, we believe that there is more than enough wealth to solve all of society's core resilience, settlement, and capital challenges."
+            </div>
+            <div class="vision-callout-author">Core Governance Philosophy &bull; Nevada County Pilot</div>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary" onclick="openModal('nda-modal')">
+              Request Executive NDA &amp; Access
+            </button>
+            <a href="#framework" class="btn btn-secondary">
+              Explore Strategic Vision
+            </a>
+          </div>
+
+          <!-- Quick Access Helper for Mastermind / Reviewers -->
+          <div class="demo-unlock-bar">
+            <span><strong>Executive Mastermind Review:</strong> Password is <code style="font-family: monospace; background: #fff; padding: 2px 6px; border-radius: 3px; border: 1px solid #d4af37;">MEDICI2026</code></span>
+            <button class="btn btn-blue btn-sm" onclick="quickUnlock()">
+              One-Click Executive Unlock &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- Hero Preview Card -->
+        <div class="hero-card-preview">
+          <div class="card-meta-row">
+            <div>
+              <div class="badge badge-gold">Design-Build Phase</div>
+              <div style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.3rem;">Target Raised: $500,000 Seed</div>
+            </div>
+            <div class="badge badge-blue">Confidential Think Tank</div>
+          </div>
+
+          <div class="metric-grid-preview">
+            <div class="metric-box">
+              <div class="label">Position A: Village Land</div>
+              <div class="val">160 Acres</div>
+              <div class="note">Sebastopol Parcel (Intact Water)</div>
+            </div>
+            <div class="metric-box">
+              <div class="label">Position B: Hospitality</div>
+              <div class="val">9.0 Acres</div>
+              <div class="note">Castile on the Ridge (Cash Flow)</div>
+            </div>
+            <div class="metric-box">
+              <div class="label">Labor Equity Standard</div>
+              <div class="val">1,560 Hrs</div>
+              <div class="note">Per 5 Sovereign Acres</div>
+            </div>
+            <div class="metric-box">
+              <div class="label">Stranded Land Pool</div>
+              <div class="val">10,000+ Ac</div>
+              <div class="note">Regional Nevada County Base</div>
+            </div>
+          </div>
+
+          <div class="security-notice-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <div>
+              <strong>Gated Think Tank Architecture:</strong> Full balance sheets, 8 Forms of Capital index, ring-fence legal deeds, and normative accounting dossiers require signed NDA verification.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         2. ETHAN'S 4 QUALIFYING QUESTIONS FRAMEWORK
+         ========================================================================== -->
+    <section id="framework" class="framework-section">
+      <div class="container">
+        <div class="section-header-centered">
+          <div class="section-label">Mastermind Alignment Framework</div>
+          <h2>Ethan's 4 Qualifying Questions</h2>
+          <p>
+            Integrated directly from the Sunday Mastermind session to anchor all messaging, governance, and capital allocation flows.
+          </p>
+        </div>
+
+        <div class="questions-grid">
+          <!-- Question 1 -->
+          <div class="question-card">
+            <div class="question-num-badge">01</div>
+            <div class="q-title">Audience Architecture</div>
+            <h3>Who is the audience?</h3>
+            <p>
+              <strong>The New Medici:</strong> Multidisciplinary leaders, angel investors, land stewards, financial architects, legal experts, and conscious creators.
+            </p>
+            <p>
+              Individuals who recognize that a county-level mastermind must be deployed <em>now</em> to create a replicable civilizational template.
+            </p>
+            <div class="highlight-pill">
+              <span>✦</span> Executive Think Tank &amp; Capital Stewards
+            </div>
+          </div>
+
+          <!-- Question 2 -->
+          <div class="question-card">
+            <div class="question-num-badge">02</div>
+            <div class="q-title">Civilizational Thesis</div>
+            <h3>What is the message?</h3>
+            <p>
+              <strong>Living Villages as the Core Solution:</strong> Solving multigenerational housing, local food security, and creating ideal sanctuaries to raise children and honor elders.
+            </p>
+            <p>
+              <strong>The Nevada County Opportunity:</strong> 10,000+ acres of former cannabis cultivation land sit idle with intact water rights—ideal for labor-backed agroforestry.
+            </p>
+            <div class="highlight-pill">
+              <span>✦</span> Land-Labor Settlement &amp; Abundance
+            </div>
+          </div>
+
+          <!-- Question 3 -->
+          <div class="question-card">
+            <div class="question-num-badge">03</div>
+            <div class="q-title">Deployment Protocol</div>
+            <h3>How do we deliver it?</h3>
+            <p>
+              <strong>Need-to-Know Invite-Only Outreach:</strong> High-trust direct engagement backed by a private, gated web intelligence portal.
+            </p>
+            <p>
+              Holding high-level spatial data, normative accounting models, and legal conveyance instruments required for informed executive commitment.
+            </p>
+            <div class="highlight-pill">
+              <span>✦</span> Gated Intelligence &amp; Verified Data
+            </div>
+          </div>
+
+          <!-- Question 4 -->
+          <div class="question-card">
+            <div class="question-num-badge">04</div>
+            <div class="q-title">Executive Action</div>
+            <h3>What action do we ask?</h3>
+            <p>
+              <strong>5-Step Mastermind Onboarding:</strong>
+            </p>
+            <p>
+              Sign NDA &rarr; Log In &rarr; Complete Profile &amp; Bio &rarr; Review Interest-Matching Briefs &rarr; Participate in Nevada County Mastermind or refer exceptional peers.
+            </p>
+            <div class="highlight-pill">
+              <span>✦</span> Active Think Tank Participation
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <!-- ==========================================================================
+       LEVEL 2: EXECUTIVE THINK TANK DASHBOARD (Post-NDA Unlocked)
+       ========================================================================== -->
+  <section id="state-dashboard" class="dashboard-wrapper">
+    <div class="container">
+      
+      <!-- Executive Status Banner -->
+      <div class="exec-status-banner">
+        <div class="exec-banner-info">
+          <div class="badge badge-gold" style="margin-bottom: 0.5rem;">CONFIDENTIAL EXECUTIVE PORTAL</div>
+          <h2>Nevada County Pilot Foundation</h2>
+          <p>Pre-Phase Design-Build Mastermind &bull; 2-Property Coordinated Settlement Architecture</p>
+        </div>
+
+        <div class="exec-banner-meta">
+          <div class="meta-stat">
+            <div class="label">Capital Seed Target</div>
+            <div class="value">$500,000</div>
+          </div>
+          <div class="meta-stat">
+            <div class="label">Deployment Radius</div>
+            <div class="value">15–30 Min</div>
+          </div>
+          <div class="meta-stat">
+            <div class="label">Security Tier</div>
+            <div class="value">Level 2 Think Tank</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- $500k Dual-Asset Architecture Breakdown -->
+      <div class="architecture-section">
+        <div class="section-label">CAPITAL STRUCTURAL MECHANICS</div>
+        <h2 style="font-size: 2rem; margin-bottom: 0.75rem;">The $500k Dual-Asset Architecture</h2>
+        <p style="max-width: 850px; margin-bottom: 2rem; color: var(--color-text-muted);">
+          A paired-asset structure solving the historical tension between land preservation, capital repayment, and sovereign sweat-equity settlement.
+        </p>
+
+        <div class="asset-dual-grid">
+          <!-- Position A -->
+          <div class="asset-card position-a">
+            <div class="asset-badge-header">
+              <span class="badge badge-live">Position A &bull; Land Equity Base</span>
+              <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-accent-green);">~$250,000 Allocation</span>
+            </div>
+            <h3>Village Land Acquisition</h3>
+            <div class="asset-location">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Sebastopol Raw Land Parcel &bull; Nevada County, CA
+            </div>
+            <p style="font-size: 0.9rem; color: var(--color-text-muted);">
+              160-acre pristine former cultivation parcel with intact senior water rights, unburdened by conventional municipal debt.
+            </p>
+
+            <table class="asset-specs-table">
+              <tr>
+                <td>Asset Scale</td>
+                <td>160 Sovereign Gross Acres</td>
+              </tr>
+              <tr>
+                <td>Water Rights</td>
+                <td>Senior Certified Surface &amp; Wells</td>
+              </tr>
+              <tr>
+                <td>Labor Settlement Rate</td>
+                <td>1,560 Hours / 5 Sovereign Acres</td>
+              </tr>
+              <tr>
+                <td>Parcel Potential</td>
+                <td>Up to ~32 Gross Subdivided Plots</td>
+              </tr>
+              <tr>
+                <td>Downside Shield</td>
+                <td>Ring-Fenced from Commercial Debt</td>
+              </tr>
+            </table>
+
+            <div style="background: rgba(58, 107, 76, 0.08); padding: 0.85rem; border-radius: 4px; font-size: 0.82rem; color: #22472e;">
+              <strong>Equity Mechanics:</strong> Skilled craftspeople and land stewards settle direct fee/cooperative title against sweat-equity hours without taking on commercial bank mortgages.
+            </div>
+          </div>
+
+          <!-- Position B -->
+          <div class="asset-card position-b">
+            <div class="asset-badge-header">
+              <span class="badge badge-blue">Position B &bull; Operating Commercial</span>
+              <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-accent-blue-deep);">~$250,000 Allocation</span>
+            </div>
+            <h3>Commercial Asset Buyout</h3>
+            <div class="asset-location">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Castile on the Ridge &bull; Nevada County, CA
+            </div>
+            <p style="font-size: 0.9rem; color: var(--color-text-muted);">
+              9-acre operating hospitality and retreat sanctuary generating immediate liquid cash flows and paid employment.
+            </p>
+
+            <table class="asset-specs-table">
+              <tr>
+                <td>Asset Scale</td>
+                <td>9 Operating Commercial Acres</td>
+              </tr>
+              <tr>
+                <td>Revenue Engine</td>
+                <td>LightHouse Retreats &amp; Masterminds</td>
+              </tr>
+              <tr>
+                <td>Cash Flow Utility</td>
+                <td>Pays Worker Wages &amp; Debt Service</td>
+              </tr>
+              <tr>
+                <td>Investor Security</td>
+                <td>Direct Commercial Asset Collateral</td>
+              </tr>
+              <tr>
+                <td>Proximity</td>
+                <td>Within 20 Mins of Sebastopol Parcel</td>
+              </tr>
+            </table>
+
+            <div style="background: rgba(158, 176, 209, 0.15); padding: 0.85rem; border-radius: 4px; font-size: 0.82rem; color: #1e3352;">
+              <strong>Cash Flow Engine:</strong> Generates liquid enterprise cash flow from conscious hospitality, executive masterminds, and events to service capital yields.
+            </div>
+          </div>
+        </div>
+
+        <!-- Mechanics Trio (Position Zero, Ring Fence, Labor Crossing) -->
+        <div class="mechanics-grid">
+          <div class="mechanic-card">
+            <h4>
+              <span style="color: var(--color-accent);">✦</span> Position Zero: The Land Option
+            </h4>
+            <p>
+              A low five-figure option securing the baseline 160-acre village parcel baseline prior to full raise completion, preserving prime acreage during diligence.
+            </p>
+          </div>
+
+          <div class="mechanic-card highlight">
+            <h4>
+              <span style="color: var(--color-gold-metallic);">🛡</span> The Ring-Fence Protocol
+            </h4>
+            <p>
+              <strong>Zero Cross-Collateralization:</strong> Investor capital risk is strictly bounded to Castile on the Ridge. Worker land equity is strictly bounded to Sebastopol land, protecting sweat-equity from financial liquidation.
+            </p>
+          </div>
+
+          <div class="mechanic-card">
+            <h4>
+              <span style="color: var(--color-accent-blue-deep);">⟲</span> The Labor Crossing Mechanism
+            </h4>
+            <p>
+              Workers earn liquid wages at Castile while earning land equity at Sebastopol. Avoiding commercial payroll cash expenses covers annual debt service on Castile seamlessly.
+            </p>
+          </div>
+        </div>
+
+        <!-- Interactive Calculator: Sweat-Equity to Land Model -->
+        <div class="calc-box">
+          <div class="calc-header">
+            <div>
+              <h4>Interactive Labor-to-Land Settlement Model</h4>
+              <p style="font-size: 0.82rem; color: #b5a999;">Standard Formula: 1,560 Qualified Labor Hours = 5 Sovereign Acres</p>
+            </div>
+            <div class="badge badge-gold">Live Simulation</div>
+          </div>
+
+          <div class="calc-controls">
+            <div class="slider-group">
+              <label>
+                <span>Contributed Skilled Labor Hours:</span>
+                <strong id="hours-val" style="color: var(--color-gold-light); font-size: 1.1rem;">1,560 hrs</strong>
+              </label>
+              <input type="range" id="hours-slider" class="slider-input" min="312" max="6240" step="156" value="1560" oninput="updateCalculator(this.value)">
+              <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: #8c8072; margin-top: 0.3rem;">
+                <span>312 hrs (1 Acre)</span>
+                <span>1,560 hrs (5 Acres)</span>
+                <span>3,120 hrs (10 Acres)</span>
+                <span>6,240 hrs (20 Acres)</span>
+              </div>
+            </div>
+
+            <div class="calc-results-grid">
+              <div class="calc-res-item">
+                <div class="lbl">Sovereign Land Title</div>
+                <div class="num" id="calc-acres">5.00 Ac</div>
+              </div>
+              <div class="calc-res-item">
+                <div class="lbl">Imputed Equity Value</div>
+                <div class="num" id="calc-value">$78,000</div>
+              </div>
+              <div class="calc-res-item">
+                <div class="lbl">Effective Wage Equiv</div>
+                <div class="num" id="calc-rate">$50.00/hr</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Document & Intelligence Repository (Interactive File Cluster) -->
+      <div id="repository" class="docs-section">
+        <div class="section-label">INTELLIGENCE DOSSIERS &amp; RESEARCH</div>
+        <h2 style="font-size: 2rem; margin-bottom: 0.75rem;">Document &amp; Intelligence Repository</h2>
+        <p style="max-width: 800px; margin-bottom: 2.5rem; color: var(--color-text-muted);">
+          Confidential briefings, legal conveyance vehicles, and normative accounting indexes for mastermind members. Click any dossier to view full executive brief.
+        </p>
+
+        <!-- Cluster A -->
+        <div class="cluster-group">
+          <div class="cluster-title">
+            <span class="badge badge-gold">Cluster A</span>
+            <h3>Normative Accounting &amp; Intangibles Framework</h3>
+          </div>
+          <div class="doc-cards-grid">
+            <div class="doc-card" onclick="openDocModal('doc-8forms')">
+              <div class="doc-card-top">
+                <span class="doc-id">DOC-ACC-01</span>
+                <span class="badge badge-gold">Active Index</span>
+              </div>
+              <h4>Nevada County 8 Forms of Capital Assessment</h4>
+              <p>Comprehensive baseline quantifying Financial, Social, Intellectual, Natural, Cultural, Spiritual, Experiential, and Material assets.</p>
+              <div class="doc-card-footer">
+                <span>View Full Brief &rarr;</span>
+                <span>18 Pages &bull; PDF</span>
+              </div>
+            </div>
+
+            <div class="doc-card" onclick="openDocModal('doc-normative')">
+              <div class="doc-card-top">
+                <span class="doc-id">DOC-ACC-02</span>
+                <span class="badge badge-gold">Methodology</span>
+              </div>
+              <h4>Rethinking Capital Normative Accounting Briefing</h4>
+              <p>Double-entry bookkeeping protocol capitalizing natural ecosystem services and human capability directly onto corporate balance sheets.</p>
+              <div class="doc-card-footer">
+                <span>View Full Brief &rarr;</span>
+                <span>12 Pages &bull; PDF</span>
+              </div>
+            </div>
+
+            <div class="doc-card" onclick="openDocModal('doc-thesis')">
+              <div class="doc-card-top">
+                <span class="doc-id">DOC-ACC-03</span>
+                <span class="badge badge-gold">Mastermind</span>
+              </div>
+              <h4>Mastermind Core Thesis: Civilizational Resilience</h4>
+              <p>The strategic whitepaper establishing county-level self-sufficiency, child rearing, elder honoring, and sovereign village blueprints.</p>
+              <div class="doc-card-footer">
+                <span>View Full Brief &rarr;</span>
+                <span>24 Pages &bull; PDF</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cluster B -->
+        <div class="cluster-group">
+          <div class="cluster-title">
+            <span class="badge badge-live">Cluster B</span>
+            <h3>Land &amp; Stranded Asset Recovery</h3>
+          </div>
+          <div class="doc-cards-grid">
+            <div class="doc-card" onclick="openDocModal('doc-10kacres')">
+              <div class="doc-card-top">
+                <span class="doc-id">DOC-LND-01</span>
+                <span class="badge badge-live">Opportunity</span>
+              </div>
+              <h4>10,000+ Acre Agroforestry Recovery Brief</h4>
+              <p>Rehabilitating post-cannabis cultivation sites in Nevada County. Intact water systems valued at zero by conventional cash buyers.</p>
+              <div class="doc-card-footer">
+                <span>View Full Brief &rarr;</span>
+                <span>15 Pages &bull; GIS Map</span>
+              </div>
+            </div>
+
+            <div class="doc-card" onclick="openDocModal('doc-fire')">
+              <div class="doc-card-top">
+                <span class="doc-id">DOC-LND-02</span>
+                <span class="badge badge-live">Risk Mitigation</span>
+              </div>
+              <h4>Stranded Assets &amp; Fire Remediation Whitepaper</h4>
+              <p>Overcoming California fire insurance non-renewals, underwater legacy debt, and implementing goat/forestry firebreak guilds.</p>
+              <div class="doc-card-footer">
+                <span>View Full Brief &rarr;</span>
+                <span>14 Pages &bull; Technical</span>
+              </div>
+            </div>
+
+            <div class="doc-card" onclick="openDocModal('doc-audits')">
+              <div class="doc-card-top">
+                <span class="doc-id">DOC-LND-03</span>
+                <span class="badge badge-live">Field Reports</span>
+              </div>
+              <h4>Historic Sample Audits: Nail Factory &amp; Ranches</h4>
+              <p>Redacted engineering, zoning, and title feasibility assessments across initial Nevada County pilot candidate parcels.</p>
+              <div class="doc-card-footer">
+                <span>View Full Brief &rarr;</span>
+                <span>31 Pages &bull; Audits</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cluster C -->
+        <div class="cluster-group">
+          <div class="cluster-title">
+            <span class="badge badge-blue">Cluster C</span>
+            <h3>Legal &amp; County Viability Briefs</h3>
+          </div>
+          <div class="doc-cards-grid">
+            <div class="doc-card" onclick="openDocModal('doc-deeds')">
+              <div class="doc-card-top">
+                <span class="doc-id">DOC-LEG-01</span>
+                <span class="badge badge-blue">Legal Instruments</span>
+              </div>
+              <h4>Full Spec Deeds &amp; Conveyance Vehicles</h4>
+              <p>Fee title, tenancy-in-common, cooperative land membership, and 99-year ground lease mechanics guaranteeing ring-fenced tenure.</p>
+              <div class="doc-card-footer">
+                <span>View Full Brief &rarr;</span>
+                <span>22 Pages &bull; Legal Draft</span>
+              </div>
+            </div>
+
+            <div class="doc-card" onclick="openDocModal('doc-county')">
+              <div class="doc-card-top">
+                <span class="doc-id">DOC-LEG-02</span>
+                <span class="badge badge-blue">Policy Analysis</span>
+              </div>
+              <h4>County Viability &amp; 0.5% Buy-In Evaluation</h4>
+              <p>Tracking local municipal alignment, supervisor engagement, permit expediting, and fallback relocation protocols.</p>
+              <div class="doc-card-footer">
+                <span>View Full Brief &rarr;</span>
+                <span>9 Pages &bull; Policy</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       LEVEL 3: FAMILY OF BUSINESSES (Light Portal Ecosystem)
+       ========================================================================== -->
+  <section id="ecosystem" class="ecosystem-section">
+    <div class="container">
+      <div class="section-header-centered">
+        <div class="section-label">THE LIGHT PORTAL ECOSYSTEM</div>
+        <h2>Family of Businesses &amp; Guilds</h2>
+        <p>
+          Four interconnected nodes bridging physical land stewardship, generative culture, natural intelligence, and capital architecture.
+        </p>
+      </div>
+
+      <div class="ecosystem-grid">
+        <!-- 1. Earth Force -->
+        <div class="eco-card">
+          <div class="eco-icon-header">
+            <div class="eco-icon icon-earth">🌱</div>
+            <div>
+              <h3>Earth Force</h3>
+              <div class="eco-focus">Ecological Infrastructure</div>
+            </div>
+          </div>
+          <p>
+            Cultivating resilient food forest villages, living university guilds, and self-sufficient settlements across Nevada County and the Sierra foothills.
+          </p>
+          <ul class="eco-features-list">
+            <li><strong>Living University:</strong> Permaculture training guilds &amp; earthworks.</li>
+            <li><strong>Permaculture Ranger Force:</strong> Deployment of a 200-strong field crew.</li>
+            <li><strong>Land Stewardship:</strong> Biochar pyrolysis &amp; active firebreak management.</li>
+          </ul>
+        </div>
+
+        <!-- 2. LIGHT (with 3 Sub-Businesses) -->
+        <div class="eco-card" style="border-top: 4px solid var(--color-gold-metallic);">
+          <div class="eco-icon-header">
+            <div class="eco-icon icon-light">⚡</div>
+            <div>
+              <h3>LIGHT</h3>
+              <div class="eco-focus">Cultural, Creative &amp; Hospitality Engine</div>
+            </div>
+          </div>
+          <p style="margin-bottom: 0.85rem;">
+            The tripartite cultural and commercial infrastructure driving enterprise revenue, artisan networking, and spatial brand design.
+          </p>
+          
+          <div class="sub-business-list">
+            <!-- Sub 1: LighTribe -->
+            <div class="sub-business-item">
+              <div class="sub-business-header">
+                <span class="sub-business-title">LighTribe</span>
+                <span class="sub-business-tag">Gig-Economy Network</span>
+              </div>
+              <p class="sub-business-desc">
+                Creative network connecting cultural talent, artists, landowners, and active land projects for sweat-equity settlement.
+              </p>
+            </div>
+
+            <!-- Sub 2: Light Creative -->
+            <div class="sub-business-item">
+              <div class="sub-business-header">
+                <span class="sub-business-title">Light Creative</span>
+                <span class="sub-business-tag">Creative Agency</span>
+              </div>
+              <p class="sub-business-desc">
+                Full-spectrum agency providing brand strategy, spatial village design, architectural rendering, and messaging architecture.
+              </p>
+            </div>
+
+            <!-- Sub 3: LightHouse -->
+            <div class="sub-business-item">
+              <div class="sub-business-header">
+                <span class="sub-business-title">LightHouse</span>
+                <span class="sub-business-tag">Conscious Hospitality</span>
+              </div>
+              <p class="sub-business-desc">
+                Transformative membership retreat sanctuaries (anchored at Castile on the Ridge) generating commercial hospitality cash flow.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Natural Intelligence (NI) -->
+        <div class="eco-card">
+          <div class="eco-icon-header">
+            <div class="eco-icon icon-ni">🧠</div>
+            <div>
+              <h3>Natural Intelligence (NI)</h3>
+              <div class="eco-focus">Ecological AI &amp; Digital Twins</div>
+            </div>
+          </div>
+          <p>
+            Open-source AI ecosystem mapping, real-time bio-metric processing, environmental digital twins, and alignment to living human values.
+          </p>
+          <ul class="eco-features-list">
+            <li><strong>Hydrological &amp; Soil Mesh:</strong> Real-time environmental sensor networks.</li>
+            <li><strong>Digital Twin Ledger:</strong> Dynamic 8 Forms of Capital digital mapping.</li>
+            <li><strong>Ecological AI Agents:</strong> Autonomous resource optimization protocols.</li>
+          </ul>
+        </div>
+
+        <!-- 4. Strategic Partners -->
+        <div class="eco-card">
+          <div class="eco-icon-header">
+            <div class="eco-icon icon-earth">🤝</div>
+            <div>
+              <h3>Strategic Partners</h3>
+              <div class="eco-focus">Institutional Alignment</div>
+            </div>
+          </div>
+          <p>
+            Anchor strategic partners providing fiscal sponsorship, normative double-entry accounting frameworks, and cultural-technological convergence.
+          </p>
+          <ul class="eco-features-list">
+            <li><strong>ReThinking Capital:</strong> Fiscal sponsor &amp; normative double-entry accounting tools.</li>
+            <li><strong>Future Is Now:</strong> Art, music, and breakthrough technology convergence.</li>
+            <li><strong>Nevada County Alliances:</strong> Regional land trusts and municipal policy champions.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       LEVEL 4: DYNAMIC APPLICANT INTAKE & DISCOVERY SORTING
+       ========================================================================== -->
+  <section id="intake" class="intake-section">
+    <div class="container">
+      <div class="section-header-centered">
+        <div class="section-label">MASTERMIND &amp; CAPITAL ONBOARDING</div>
+        <h2>Executive Discovery &amp; Intake Portal</h2>
+        <p>
+          Select your primary discovery lane below to align with the Nevada County Pilot Foundation mastermind and deployment initiatives.
+        </p>
+      </div>
+
+      <div class="intake-card-container">
+        <!-- 4 Lanes Selector -->
+        <div class="lane-selector-grid">
+          <label class="lane-option active" onclick="selectLane('lane-medici', this)">
+            <input type="radio" name="intake_lane" value="Lane 1: Executive / Think Tank" checked />
+            <div class="lane-tag">LANE 01</div>
+            <h4>Executive / The New Medici</h4>
+            <p>Asset class designers, legal architects, financial engineers, and systemic innovators.</p>
+          </label>
+
+          <label class="lane-option" onclick="selectLane('lane-investor', this)">
+            <input type="radio" name="intake_lane" value="Lane 2: Investor Class" />
+            <div class="lane-tag">LANE 02</div>
+            <h4>Investor Class</h4>
+            <p>Seed participants ($250k Land, $250k Commercial) or regional $50M asset pool.</p>
+          </label>
+
+          <label class="lane-option" onclick="selectLane('lane-referrer', this)">
+            <input type="radio" name="intake_lane" value="Lane 3: Strategic Referrers" />
+            <div class="lane-tag">LANE 03</div>
+            <h4>Strategic Referrers</h4>
+            <p>Connecting pivotal political leaders, high-acreage land donors, and capital stewards.</p>
+          </label>
+
+          <label class="lane-option" onclick="selectLane('lane-worker', this)">
+            <input type="radio" name="intake_lane" value="Lane 4: Local Participants / Workers" />
+            <div class="lane-tag">LANE 04</div>
+            <h4>Local Stewards &amp; Workers</h4>
+            <p>Skilled craftspeople, permaculture rangers, builders, and active land stewards.</p>
+          </label>
+        </div>
+
+        <!-- Dynamic Form Fields -->
+        <form id="discovery-form" onsubmit="handleDiscoverySubmit(event)">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="intake-name">Full Name *</label>
+              <input type="text" id="intake-name" class="form-control" placeholder="Kiril Ravensong" required />
+            </div>
+
+            <div class="form-group">
+              <label for="intake-email">Email Address *</label>
+              <input type="email" id="intake-email" class="form-control" placeholder="you@domain.com" required />
+            </div>
+
+            <div class="form-group">
+              <label for="intake-phone">Phone / Signal *</label>
+              <input type="tel" id="intake-phone" class="form-control" placeholder="+1 (530) 859-3888" required />
+            </div>
+
+            <div class="form-group">
+              <label for="intake-entity">Entity / Organization</label>
+              <input type="text" id="intake-entity" class="form-control" placeholder="Rethinking Capital / Private Foundation" />
+            </div>
+
+            <!-- Dynamic Lane Specific Input -->
+            <div class="form-group full-width" id="dynamic-lane-field">
+              <label for="intake-expertise">Area of Expertise &amp; Strategic Contribution *</label>
+              <input type="text" id="intake-expertise" class="form-control" placeholder="Normative accounting, municipal land law, regenerative finance..." required />
+            </div>
+
+            <div class="form-group full-width">
+              <label for="intake-bio">Intangible Assets &amp; Background Summary *</label>
+              <textarea id="intake-bio" class="form-control" placeholder="Describe your relevant background, holdings in Nevada County, or vision for civilizational resilience..." required></textarea>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="intake-availability">Mastermind Availability &amp; Preferred Cadence</label>
+              <select id="intake-availability" class="form-control">
+                <option value="Sunday Mastermind Series (Weekly)">Sunday Mastermind Series (Weekly 10am PT)</option>
+                <option value="Executive Working Group (Bi-Weekly)">Executive Working Group (Bi-Weekly)</option>
+                <option value="In-Person Nevada County Site Walk">In-Person Nevada County Site Walk</option>
+                <option value="Direct Strategic Bilateral with Kiril Ravensong">Direct Strategic Bilateral with Kiril Ravensong</option>
+              </select>
+            </div>
+
+            <div class="form-group full-width" style="margin-top: 0.5rem;">
+              <label class="checkbox-container">
+                <input type="checkbox" id="intake-nda-check" required checked />
+                <span>I agree to participate under the confidential Chatham House &amp; Executive Think Tank protocols of New Paradigm Capital.</span>
+              </label>
+            </div>
+
+            <div class="form-group full-width" style="margin-top: 1rem;">
+              <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.1rem;">
+                Submit Strategic Intake &amp; Request Mastermind Seat &rarr;
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo" style="color: var(--color-gold-light); margin-bottom: 0.75rem;">
+            <span class="brand-icon">✦</span>
+            <span>NEW PARADIGM CAPITAL</span>
+          </div>
+          <p>
+            Deploying land- and labor-backed asset class frameworks across Nevada County, California. Transforming stranded parcels into self-sufficient, multigenerational living villages.
+          </p>
+          <div class="badge badge-gold">Version 2.0 &bull; Mastermind Brief</div>
+        </div>
+
+        <div>
+          <h4 style="color: var(--color-gold-light); font-size: 1.1rem; margin-bottom: 1rem;">Strategic Leadership</h4>
+          <div class="footer-contact-box">
+            <div class="contact-line">
+              <strong>Kiril Ravensong</strong> &mdash; Strategic Director
+            </div>
+            <div class="contact-line">
+              <span>Email:</span>
+              <a href="mailto:KirilRavensong@protonmail.com" style="color: var(--color-gold-light); text-decoration: underline;">KirilRavensong@protonmail.com</a>
+            </div>
+            <div class="contact-line">
+              <span>Phone:</span>
+              <a href="tel:5308593888" style="color: #FFFFFF;">530-859-3888</a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h4 style="color: var(--color-gold-light); font-size: 1.1rem; margin-bottom: 1rem;">Geographic Scope</h4>
+          <p style="color: #b5a999; font-size: 0.85rem; line-height: 1.5; margin-bottom: 0.75rem;">
+            Nevada County, California (Nevada City &amp; Grass Valley Sierra Foothills Corridor)
+          </p>
+          <div style="font-size: 0.8rem; color: #8c8072;">
+            Coordinates: 39.2616° N, 121.0161° W<br>
+            Flagship Parcels: Sebastopol Raw Land &amp; Castile on the Ridge
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 New Paradigm Capital LLC &bull; Nevada County Pilot Foundation. All rights reserved.
+        </div>
+        <div>
+          Confidential Executive Think Tank Briefing &bull; Not an offer to sell securities.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ==========================================================================
+       MODAL 1: NDA GATE & PASSWORD UNLOCK (Level 1 to Level 2)
+       ========================================================================== -->
+  <div id="nda-modal" class="modal-backdrop" onclick="handleBackdropClick(event, 'nda-modal')">
+    <div class="modal-window" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div>
+          <div class="badge badge-gold" style="margin-bottom: 0.3rem;">EXECUTIVE ACCESS GATE</div>
+          <h3>Non-Disclosure &amp; Security Protocol</h3>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('nda-modal')">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <p style="font-size: 0.88rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">
+          To unlock the Executive Think Tank Dashboard (Level 2), review financial spreadsheets, and access the document repository, please verify your credentials.
+        </p>
+
+        <form id="nda-form" onsubmit="handleNDASubmit(event)">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-bottom: 0.85rem;">
+            <div class="form-group">
+              <label for="nda-name">Full Name *</label>
+              <input type="text" id="nda-name" class="form-control" placeholder="Your Name" required value="Ethan Mastermind Member" />
+            </div>
+            <div class="form-group">
+              <label for="nda-email">Email Address *</label>
+              <input type="email" id="nda-email" class="form-control" placeholder="name@domain.com" required value="member@newmedici.org" />
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-bottom: 0.85rem;">
+            <div class="form-group">
+              <label for="nda-phone">Phone / Signal</label>
+              <input type="tel" id="nda-phone" class="form-control" placeholder="+1 (555) 000-0000" />
+            </div>
+            <div class="form-group">
+              <label for="nda-entity">Entity / Fund</label>
+              <input type="text" id="nda-entity" class="form-control" placeholder="Family Office / Guild" />
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0.85rem;">
+            <label for="nda-role">Strategic Interest</label>
+            <select id="nda-role" class="form-control">
+              <option value="Executive Think Tank / New Medici">Executive Think Tank ("The New Medici")</option>
+              <option value="Position A / B Seed Investor ($250k - $500k)">Position A / B Seed Investor ($250k - $500k)</option>
+              <option value="Strategic Advisor / Legal Architect">Strategic Advisor / Legal Architect</option>
+              <option value="Nevada County Land Steward">Nevada County Land Steward / Donor</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label for="nda-password">Executive Access Password *</label>
+            <input type="password" id="nda-password" class="form-control" placeholder="Enter password (e.g. MEDICI2026)" value="MEDICI2026" required />
+            <div style="font-size: 0.75rem; color: var(--color-accent); margin-top: 0.25rem;">
+              Hint: Default Mastermind Key is <strong>MEDICI2026</strong> or <strong>PILOT</strong>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label class="checkbox-container">
+              <input type="checkbox" id="nda-agreement" required checked />
+              <span>I agree to review non-public Pilot Foundation briefs under confidential executive think tank protocol (Chatham House Rule).</span>
+            </label>
+          </div>
+
+          <div id="nda-error" style="color: #b91c1c; font-size: 0.82rem; margin-bottom: 0.75rem; display: none;"></div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            Verify Credentials &amp; Unlock Level 2 Dashboard &rarr;
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==========================================================================
+       MODAL 2: INTERACTIVE DOCUMENT READER (Full Executive Dossiers)
+       ========================================================================== -->
+  <div id="doc-modal" class="modal-backdrop" onclick="handleBackdropClick(event, 'doc-modal')">
+    <div class="modal-window doc-viewer-modal" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div>
+          <div id="doc-modal-badge" class="badge badge-gold" style="margin-bottom: 0.3rem;">EXECUTIVE DOSSIER</div>
+          <h3 id="doc-modal-title">Dossier Viewer</h3>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('doc-modal')">&times;</button>
+      </div>
+
+      <div class="modal-body doc-reader-body" id="doc-modal-content">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="printDocSim()">
+          Download / Print Brief
+        </button>
+        <button class="btn btn-primary btn-sm" onclick="closeModal('doc-modal')">
+          Close Dossier
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==========================================================================
+       5. TECHNICAL IMPLEMENTATION SPECIFICATIONS & SCRIPT ENGINE
+       ========================================================================== -->
+  <script>
+    /* ==========================================================================
+       DOCUMENT CONTENT REPOSITORY DATA (Full Text for Modals)
+       ========================================================================== */
+    const DOSSIERS = {
+      'doc-8forms': {
+        title: 'Nevada County 8 Forms of Capital Assessment Index',
+        badge: 'Cluster A • Normative Accounting',
+        badgeClass: 'badge-gold',
+        content: `
+          <div class="doc-meta-badge-row">
+            <span class="badge badge-gold">Reference: DOC-ACC-01</span>
+            <span class="badge badge-dark">Security Tier: Confidential</span>
+            <span class="badge badge-blue">Nevada County GIS Mesh</span>
+          </div>
+
+          <h4>1. Executive Summary &amp; Scope</h4>
+          <p>
+            Standard financial accounting measures only a single form of wealth—Financial Capital. In Nevada County, California, conventional balance sheets declare thousands of post-cultivation acres to have "zero or negative" net value due to lack of municipal grid connections. This assessment applies the <strong>8 Forms of Capital framework</strong> to establish true systemic asset capitalization:
+          </p>
+
+          <div class="doc-highlight-box">
+            <strong>The 8 Capital Layers:</strong><br>
+            1. <strong>Financial Capital:</strong> $500,000 Seed allocation + Castile cash-flow operations.<br>
+            2. <strong>Material Capital:</strong> Water pumps, gravity storage tanks, timber, agricultural machinery.<br>
+            3. <strong>Natural Capital:</strong> 160 acres of Class-1 soil, senior riparian water rights, solar irradiance.<br>
+            4. <strong>Social Capital:</strong> Trusted landowner networks, masterminds, and regional guild cohesion.<br>
+            5. <strong>Intellectual Capital:</strong> Open-source permaculture blueprints, AI environmental digital twins.<br>
+            6. <strong>Experiential Capital:</strong> Skilled trades, heavy equipment mastery, regenerative construction.<br>
+            7. <strong>Spiritual / Sacred Capital:</strong> Sanctuary alignment, wilderness reverence, generational vision.<br>
+            8. <strong>Cultural Capital:</strong> LighTribe creative talent, artisan heritage, music/art convergence.
+          </div>
+
+          <h4>2. Valuation Parity Analysis</h4>
+          <p>
+            When natural water storage and timber yield are factored into balance sheets using double-entry intangibles accounting, the Sebastopol parcel baseline intrinsic asset value is assessed at <strong>$1.84M</strong>, despite its raw purchase price of ~$250,000.
+          </p>
+        `
+      },
+      'doc-normative': {
+        title: 'Rethinking Capital Normative Accounting Briefing Note',
+        badge: 'Cluster A • Double-Entry Intangibles',
+        badgeClass: 'badge-gold',
+        content: `
+          <div class="doc-meta-badge-row">
+            <span class="badge badge-gold">Reference: DOC-ACC-02</span>
+            <span class="badge badge-dark">Protocol: ReThinking Capital</span>
+          </div>
+
+          <h4>Double-Entry Bookkeeping for Human &amp; Ecological Assets</h4>
+          <p>
+            Conventional corporate accounting treats labor and ecological stewardship exclusively as expenses (debits against income). Normative Accounting establishes dual asset-ledger entries:
+          </p>
+          <ul>
+            <li><strong>Natural Asset Ledger:</strong> Restored watershed acreage is capitalized as an appreciating capital asset under long-term stewardship.</li>
+            <li><strong>Labor Human Asset Ledger:</strong> 1,560 hours of qualified builder/steward labor is credited directly to equity reserves rather than paid out as cash burn.</li>
+          </ul>
+
+          <div class="doc-highlight-box">
+            <strong>Key Takeaway:</strong> Eliminates artificial municipal debt loads and allows the Nevada County Pilot to operate with near-zero external debt service during the buildout phase.
+          </div>
+        `
+      },
+      'doc-thesis': {
+        title: 'Mastermind Core Thesis: The 4 Questions & Civilizational Resilience',
+        badge: 'Cluster A • Strategic Governance',
+        badgeClass: 'badge-gold',
+        content: `
+          <div class="doc-meta-badge-row">
+            <span class="badge badge-gold">Reference: DOC-ACC-03</span>
+            <span class="badge badge-dark">Sunday Mastermind Series</span>
+          </div>
+
+          <h4>The Core Problem Statement</h4>
+          <p>
+            Modern macroeconomic systems suffer from severe fragility: hyper-financialization, housing affordability collapse, generational alienation, and disconnected food supplies.
+          </p>
+
+          <h4>The Nevada County Solution</h4>
+          <p>
+            By combining raw land parcels (Position A) with cash-flowing hospitality assets (Position B), we establish self-sustaining, sovereign living villages. Children are raised in multi-generational security; elders are honored; food forests ensure total local nutrition regardless of supply chain disruptions.
+          </p>
+        `
+      },
+      'doc-10kacres': {
+        title: '10,000+ Acre Agroforestry Recovery Brief',
+        badge: 'Cluster B • Land & Water Infrastructure',
+        badgeClass: 'badge-live',
+        content: `
+          <div class="doc-meta-badge-row">
+            <span class="badge badge-live">Reference: DOC-LND-01</span>
+            <span class="badge badge-dark">Geographic: Nevada County</span>
+          </div>
+
+          <h4>The Post-Cannabis Opportunity</h4>
+          <p>
+            Following regulatory consolidation, over 10,000 acres in Nevada County formerly used for boutique cannabis cultivation now sit idle. These parcels feature:
+          </p>
+          <ul>
+            <li>Intact, permitted high-yield water wells and agricultural water storage tanks.</li>
+            <li>Graded access roads and cleared security perimeters.</li>
+            <li>Zero commercial cash buyer interest due to lack of luxury residential permits.</li>
+          </ul>
+          <div class="doc-highlight-box">
+            <strong>Acquisition Target:</strong> ~$1,500 to $2,000 / acre baseline—an unprecedented historical discount for prime Sierra foothill land with certified water.
+          </div>
+        `
+      },
+      'doc-fire': {
+        title: 'Stranded Assets & Fire Remediation Whitepaper',
+        badge: 'Cluster B • Risk Mitigation',
+        badgeClass: 'badge-live',
+        content: `
+          <div class="doc-meta-badge-row">
+            <span class="badge badge-live">Reference: DOC-LND-02</span>
+            <span class="badge badge-dark">Forestry & Insurance</span>
+          </div>
+
+          <h4>Solving the California Fire Insurance Challenge</h4>
+          <p>
+            Standard insurers have dropped rural Sierra parcels. The Pilot Foundation deploys a 3-tier active fire remediation protocol:
+          </p>
+          <ul>
+            <li><strong>Targeted Goat Grazing &amp; Brush Clearing:</strong> 200-foot defensible perimeters around all village guild clusters.</li>
+            <li><strong>Biochar Pyrolysis Kilns:</strong> Converting cleared ladder fuels into carbon-sequestering soil amendments.</li>
+            <li><strong>Self-Insured Community Captive:</strong> Cooperative risk-pooling underpinned by physical emergency water reserves.</li>
+          </ul>
+        `
+      },
+      'doc-audits': {
+        title: 'Historic Sample Audits: Nail Factory & Redacted Ranch Reports',
+        badge: 'Cluster B • Diligence Records',
+        badgeClass: 'badge-live',
+        content: `
+          <div class="doc-meta-badge-row">
+            <span class="badge badge-live">Reference: DOC-LND-03</span>
+            <span class="badge badge-dark">Engineering Dossiers</span>
+          </div>
+
+          <h4>Field Audits &amp; Spatial Assessments</h4>
+          <p>
+            Detailed engineering reports on industrial-to-community conversion candidates (e.g. historic Nail Factory site) and Sierra foothill ranches.
+          </p>
+          <p>
+            Includes water flow rate tests (GPM), soil contamination assays, power grid interconnect options, and topographical slopes.
+          </p>
+        `
+      },
+      'doc-deeds': {
+        title: 'Full Spec Deeds & Conveyance Vehicle Options',
+        badge: 'Cluster C • Legal Architecture',
+        badgeClass: 'badge-blue',
+        content: `
+          <div class="doc-meta-badge-row">
+            <span class="badge badge-blue">Reference: DOC-LEG-01</span>
+            <span class="badge badge-dark">Legal Instruments</span>
+          </div>
+
+          <h4>Conveyance Options for Sovereign Land Stewards</h4>
+          <p>
+            To avoid subdivision delays while granting rock-solid equity tenure to sweat-equity participants, the legal architecture provides four pathways:
+          </p>
+          <ul>
+            <li><strong>Tenancy-in-Common (TIC) with Exclusive Use Agreements:</strong> Legally binding private parcels mapped via surveyed GPS coordinates.</li>
+            <li><strong>Limited Cooperative Association (LCA):</strong> Equity shares tied to 99-year renewable ground leases.</li>
+            <li><strong>Direct Fee Title Transfer:</strong> Upon completion of 1,560 verified labor hours.</li>
+            <li><strong>The Ring-Fence Clause:</strong> Under no circumstance can debts or lawsuits from commercial assets (Castile) attach to village land (Sebastopol).</li>
+          </ul>
+        `
+      },
+      'doc-county': {
+        title: 'County Viability & 0.5% Buy-In Evaluation',
+        badge: 'Cluster C • Municipal Relations',
+        badgeClass: 'badge-blue',
+        content: `
+          <div class="doc-meta-badge-row">
+            <span class="badge badge-blue">Reference: DOC-LEG-02</span>
+            <span class="badge badge-dark">Local Government</span>
+          </div>
+
+          <h4>Local Governance &amp; Permitting Strategy</h4>
+          <p>
+            Evaluation of Nevada County Board of Supervisors receptivity to rural cluster housing, agroforestry zoning variances, and fire-resilient guild pilot permits.
+          </p>
+          <p>
+            A 0.5% county infrastructure benefit fund is integrated into all commercial cash flows, generating guaranteed municipal support.
+          </p>
+        `
+      }
+    };
+
+    /* ==========================================================================
+       MODAL CONTROLLER ENGINE
+       ========================================================================== */
+    function openModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function handleBackdropClick(event, modalId) {
+      if (event.target === event.currentTarget) {
+        closeModal(modalId);
+      }
+    }
+
+    // Document Viewer Modal Populator
+    function openDocModal(docKey) {
+      const doc = DOSSIERS[docKey];
+      if (!doc) return;
+
+      document.getElementById('doc-modal-title').innerText = doc.title;
+      const badgeEl = document.getElementById('doc-modal-badge');
+      badgeEl.innerText = doc.badge;
+      badgeEl.className = `badge ${doc.badgeClass}`;
+      document.getElementById('doc-modal-content').innerHTML = doc.content;
+
+      openModal('doc-modal');
+    }
+
+    function printDocSim() {
+      showToast('Preparing PDF Executive Brief for download...');
+      setTimeout(() => {
+        showToast('✓ Brief compiled under Chatham House Protocol');
+      }, 1000);
+    }
+
+    /* ==========================================================================
+       AUTHENTICATION & STATE TOGGLE ENGINE (Level 1 -> Level 2)
+       ========================================================================== */
+    function handleNDASubmit(event) {
+      event.preventDefault();
+      const pwd = document.getElementById('nda-password').value.trim().toUpperCase();
+      const errorDiv = document.getElementById('nda-error');
+
+      // Valid passwords: MEDICI2026, PILOT, NEWPARADIGM, NPC2026
+      if (pwd === 'MEDICI2026' || pwd === 'PILOT' || pwd === 'NEWPARADIGM' || pwd === 'NPC2026') {
+        errorDiv.style.display = 'none';
+        closeModal('nda-modal');
+        unlockDashboard();
+        showToast('✓ Verified: Welcome to Executive Think Tank Level 2');
+      } else {
+        errorDiv.innerText = 'Invalid access code. Please use MEDICI2026 or contact Kiril Ravensong.';
+        errorDiv.style.display = 'block';
+      }
+    }
+
+    function quickUnlock() {
+      unlockDashboard();
+      showToast('✓ Quick Access: Executive Dashboard Unlocked');
+    }
+
+    function unlockDashboard() {
+      const dashboard = document.getElementById('state-dashboard');
+      dashboard.classList.add('unlocked');
+      
+      // Update Header
+      document.getElementById('header-auth-badge').style.display = 'flex';
+      const navBtn = document.getElementById('btn-open-nda-nav');
+      navBtn.innerText = 'Dashboard Active';
+      navBtn.className = 'btn btn-secondary btn-sm';
+      navBtn.onclick = () => {
+        dashboard.scrollIntoView({ behavior: 'smooth' });
+      };
+
+      // Smooth scroll to Dashboard
+      setTimeout(() => {
+        dashboard.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+    }
+
+    /* ==========================================================================
+       INTERACTIVE CALCULATOR ENGINE
+       ========================================================================== */
+    function updateCalculator(hours) {
+      const h = parseInt(hours, 10);
+      document.getElementById('hours-val').innerText = `${h.toLocaleString()} hrs`;
+
+      // Formula: 1560 hrs = 5 acres
+      const acres = (h / 1560) * 5;
+      const equityVal = acres * 15600; // Imputed value $15.6k/acre developed
+      const effectiveRate = equityVal / h;
+
+      document.getElementById('calc-acres').innerText = `${acres.toFixed(2)} Ac`;
+      document.getElementById('calc-value').innerText = `$${Math.round(equityVal).toLocaleString()}`;
+      document.getElementById('calc-rate').innerText = `$${effectiveRate.toFixed(2)}/hr`;
+    }
+
+    /* ==========================================================================
+       DYNAMIC INTAKE LANE SORTING ENGINE
+       ========================================================================== */
+    const LANE_CONFIGS = {
+      'lane-medici': {
+        label: 'Area of Expertise & Think Tank Focus *',
+        placeholder: 'Asset class design, legal architecture, normative accounting, municipal relations...',
+        bioPlaceholder: 'Describe your relevant background, holdings in Nevada County, or vision for civilizational resilience...'
+      },
+      'lane-investor': {
+        label: 'Target Investment Position & Allocation Range *',
+        placeholder: 'Position A ($250k Land), Position B ($250k Commercial), or $50M Regional Pool...',
+        bioPlaceholder: 'Provide details on your investment vehicle, capital horizon, and alignment with non-extractive return models...'
+      },
+      'lane-referrer': {
+        label: 'Key Networks & Strategic Relationships *',
+        placeholder: 'Nevada County political leaders, regional land donors, philanthropic foundations...',
+        bioPlaceholder: 'Describe the leaders or strategic assets you are interested in introducing to the Mastermind...'
+      },
+      'lane-worker': {
+        label: 'Skilled Trade / Permaculture Specialization *',
+        placeholder: 'Heavy machinery, earthworks, timber framing, biochar, permaculture guild management...',
+        bioPlaceholder: 'Detail your on-the-ground experience, toolsets, and capacity for sweat-equity settlement hours...'
+      }
+    };
+
+    function selectLane(laneKey, element) {
+      // Update UI selection
+      document.querySelectorAll('.lane-option').forEach(el => el.classList.remove('active'));
+      element.classList.add('active');
+
+      // Update Radio
+      const radio = element.querySelector('input[type="radio"]');
+      if (radio) radio.checked = true;
+
+      // Update Form Prompt
+      const config = LANE_CONFIGS[laneKey];
+      if (config) {
+        const dynamicField = document.getElementById('dynamic-lane-field');
+        dynamicField.innerHTML = `
+          <label for="intake-expertise">${config.label}</label>
+          <input type="text" id="intake-expertise" class="form-control" placeholder="${config.placeholder}" required />
+        `;
+        document.getElementById('intake-bio').placeholder = config.bioPlaceholder;
+      }
+    }
+
+    function handleDiscoverySubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById('intake-name').value;
+      const email = document.getElementById('intake-email').value;
+      const lane = document.querySelector('input[name="intake_lane"]:checked').value;
+
+      showToast(`✓ Intake Received: Thank you, ${name}.`);
+      
+      setTimeout(() => {
+        alert(`Strategic Intake Confirmed!\n\nLane: ${lane}\nName: ${name}\nEmail: ${email}\n\nKiril Ravensong has received your submission under executive mastermind protocol.`);
+      }, 300);
+    }
+
+    /* ==========================================================================
+       TOAST NOTIFICATION HELPER
+       ========================================================================== */
+    function showToast(message) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `<span>✦</span><span>${message}</span>`;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.4s ease';
+        setTimeout(() => toast.remove(), 400);
+      }, 3500);
+    }
+
+    // Initialize Calculator on load
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCalculator(1560);
+    });
+  </script>
+</body>
+</html>
