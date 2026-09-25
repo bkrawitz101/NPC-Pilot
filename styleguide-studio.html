@@ -1,0 +1,3603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design Tokens & Styleguide Studio | New Paradigm Capital</title>
+  <meta name="description" content="Interactive Design Token & Styleguide Studio for Creative Directors. Generate and export Section 3 of the NPC Implementation Plan." />
+
+  <!-- Google Fonts for Web App & Previews -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --app-bg: #0F1117;
+      --app-sidebar: #181B24;
+      --app-surface: #202430;
+      --app-surface-hover: #292E3D;
+      --app-border: #2D3342;
+      --app-text: #F3F4F6;
+      --app-text-muted: #9CA3AF;
+      --app-accent: #D4AF37;
+      --app-accent-hover: #E5C358;
+      --app-primary-btn: #30210F;
+      --app-primary-border: #D4A359;
+      --app-blue: #9eb0d1;
+      --app-green: #10B981;
+      --app-radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--app-bg);
+      color: var(--app-text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Top App Header */
+    .app-header {
+      background: var(--app-sidebar);
+      border-bottom: 1px solid var(--app-border);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .app-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.05em;
+    }
+
+    .brand-pill {
+      background: linear-gradient(135deg, #30210F, #5c3e1e);
+      border: 1px solid var(--app-accent);
+      color: var(--app-accent);
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-app {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.85rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+
+    .btn-app-secondary {
+      background: var(--app-surface);
+      color: var(--app-text);
+      border-color: var(--app-border);
+    }
+
+    .btn-app-secondary:hover {
+      background: var(--app-surface-hover);
+      border-color: var(--app-text-muted);
+    }
+
+    .btn-app-gold {
+      background: linear-gradient(135deg, #30210F, #453017);
+      color: #FFFFFF;
+      border-color: var(--app-accent);
+    }
+
+    .btn-app-gold:hover {
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+      border-color: var(--app-accent-hover);
+    }
+
+    .btn-app-highlight {
+      background: rgba(212, 175, 55, 0.18);
+      border-color: var(--app-accent);
+      color: var(--app-accent);
+    }
+
+    .btn-app-highlight:hover {
+      background: rgba(212, 175, 55, 0.3);
+    }
+
+    /* Live Sync Status Indicator */
+    .sync-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--app-green);
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 0.2rem 0.55rem;
+      border-radius: 9999px;
+    }
+
+    .sync-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--app-green);
+      box-shadow: 0 0 6px var(--app-green);
+    }
+
+    /* Main Studio Layout: 2 Columns Standard */
+    .studio-layout {
+      display: grid;
+      grid-template-columns: 530px 1fr;
+      flex: 1;
+      height: calc(100vh - 58px);
+      overflow: hidden;
+      transition: grid-template-columns 0.3s ease;
+    }
+
+    @media (max-width: 1100px) {
+      .studio-layout {
+        grid-template-columns: 1fr;
+        height: auto;
+        overflow: visible;
+      }
+    }
+
+    /* Left Control Panel */
+    .controls-panel {
+      background: var(--app-sidebar);
+      border-right: 1px solid var(--app-border);
+      overflow-y: auto;
+      padding: 1.25rem 1.5rem 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      transition: all 0.25s ease;
+    }
+
+    /* Floating Pop-out HUD Header */
+    .hud-header {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.65rem 0.85rem;
+      background: rgba(15, 17, 23, 0.85);
+      border: 1px solid var(--app-border);
+      border-radius: 8px;
+      margin-bottom: -0.25rem;
+      cursor: grab;
+      user-select: none;
+    }
+
+    .hud-header:active {
+      cursor: grabbing;
+    }
+
+    .hud-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--app-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .hud-drag-hint {
+      font-size: 0.65rem;
+      color: var(--app-text-muted);
+      font-weight: 400;
+      text-transform: none;
+    }
+
+    .hud-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hud-btn {
+      background: var(--app-surface);
+      border: 1px solid var(--app-border);
+      color: var(--app-text);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.15s ease;
+    }
+
+    .hud-btn:hover {
+      background: var(--app-surface-hover);
+      color: var(--app-accent);
+      border-color: var(--app-accent);
+    }
+
+    /* 1. SEPARATE WINDOW MODE: MAIN WINDOW FULL SCREEN PREVIEW */
+    body.mode-fullscreen-preview .studio-layout {
+      display: flex !important;
+      flex-direction: column !important;
+      width: 100% !important;
+      height: calc(100vh - 58px) !important;
+      overflow: hidden !important;
+    }
+
+    body.mode-fullscreen-preview .controls-panel {
+      display: none !important;
+    }
+
+    body.mode-fullscreen-preview .preview-panel {
+      display: flex !important;
+      flex-direction: column !important;
+      flex: 1 1 auto !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      height: 100% !important;
+      overflow-y: auto !important;
+    }
+
+    body.mode-fullscreen-preview .preview-canvas-container {
+      width: 100% !important;
+      max-width: 100% !important;
+      padding: 2.25rem 2.5rem !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+    }
+
+    body.mode-fullscreen-preview .sandbox-frame {
+      width: 100% !important;
+      max-width: 1100px !important;
+    }
+
+    body.mode-fullscreen-preview .code-output-container {
+      width: 100% !important;
+      max-width: 1100px !important;
+    }
+
+    /* 2. SEPARATE WINDOW MODE: DEDICATED CONTROLS-ONLY WINDOW */
+    body.controls-only-window {
+      overflow-y: auto;
+      background-color: var(--app-sidebar);
+    }
+
+    body.controls-only-window .studio-layout {
+      display: block;
+      height: auto;
+      overflow: visible;
+    }
+
+    body.controls-only-window .preview-panel {
+      display: none !important;
+    }
+
+    body.controls-only-window .controls-panel {
+      border-right: none;
+      width: 100%;
+      padding: 1rem 1.25rem 2.5rem 1.25rem;
+      overflow: visible;
+    }
+
+    /* 3. IN-PAGE FLOATING HUD MODE */
+    body.mode-popout .studio-layout {
+      display: block;
+      position: relative;
+    }
+
+    body.mode-popout .preview-panel {
+      width: 100%;
+      height: calc(100vh - 58px);
+    }
+
+    body.mode-popout .controls-panel {
+      position: fixed;
+      top: 72px;
+      right: 25px;
+      width: 480px;
+      max-height: calc(100vh - 90px);
+      z-index: 500;
+      border-radius: 12px;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(212, 175, 55, 0.25);
+      background: rgba(24, 27, 36, 0.94);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      padding: 1rem 1.25rem 1.5rem 1.25rem;
+    }
+
+    body.mode-popout .hud-header {
+      display: flex;
+    }
+
+    body.mode-popout.hud-minimized .controls-panel {
+      transform: scale(0.85);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .floating-hud-trigger {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 600;
+      background: linear-gradient(135deg, #30210F, #4a3318);
+      border: 1px solid var(--app-accent);
+      color: #FFFFFF;
+      padding: 0.75rem 1.35rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5), 0 0 15px rgba(212, 175, 55, 0.35);
+      transition: all 0.2s ease;
+    }
+
+    body.mode-popout.hud-minimized .floating-hud-trigger {
+      display: inline-flex;
+    }
+
+    .floating-hud-trigger:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.6), 0 0 22px rgba(212, 175, 55, 0.5);
+    }
+
+    /* Section Cards */
+    .section-card {
+      background: var(--app-surface);
+      border: 1px solid var(--app-border);
+      border-radius: var(--app-radius);
+      padding: 1.15rem;
+    }
+
+    .section-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--app-border);
+    }
+
+    .section-card-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--app-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Form Fields */
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .form-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .form-row label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--app-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .input-text, .input-select, .input-textarea {
+      width: 100%;
+      background: var(--app-bg);
+      border: 1px solid var(--app-border);
+      border-radius: 5px;
+      color: var(--app-text);
+      padding: 0.55rem 0.75rem;
+      font-size: 0.85rem;
+      font-family: inherit;
+      transition: border-color 0.15s;
+    }
+
+    .input-text:focus, .input-select:focus, .input-textarea:focus {
+      outline: none;
+      border-color: var(--app-accent);
+    }
+
+    .input-textarea {
+      min-height: 80px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    /* Color Tokens Input Row */
+    .color-token-item {
+      background: var(--app-bg);
+      border: 1px solid var(--app-border);
+      border-radius: 6px;
+      padding: 0.75rem;
+      margin-bottom: 0.65rem;
+      display: grid;
+      grid-template-columns: 36px 1fr 100px 26px;
+      gap: 0.6rem;
+      align-items: center;
+      position: relative;
+    }
+
+    .color-picker-wrapper {
+      position: relative;
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--app-border);
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: border-color 0.15s, background-color 0.15s;
+    }
+
+    .color-picker-wrapper.blank-swatch {
+      background: repeating-conic-gradient(#262B38 0% 25%, #181B24 0% 50%) 50% / 10px 10px;
+      border: 1px dashed var(--app-border);
+    }
+
+    .color-picker-wrapper.blank-swatch::after {
+      content: '⚲';
+      font-size: 0.8rem;
+      color: var(--app-text-muted);
+      opacity: 0.6;
+    }
+
+    .color-picker-input {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      opacity: 0;
+    }
+
+    .token-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      min-width: 0;
+    }
+
+    .token-var-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--app-accent);
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .token-desc-input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px dashed var(--app-border);
+      color: var(--app-text-muted);
+      font-size: 0.75rem;
+      padding: 0.1rem 0;
+      outline: none;
+      width: 100%;
+    }
+
+    .token-desc-input:focus {
+      border-bottom-color: var(--app-accent);
+      color: var(--app-text);
+    }
+
+    .token-hex-input {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      text-align: center;
+      background: var(--app-surface);
+      border: 1px solid var(--app-border);
+      color: var(--app-text);
+      padding: 0.4rem 0.3rem;
+      border-radius: 4px;
+    }
+
+    .token-hex-input:focus {
+      border-color: var(--app-accent);
+      outline: none;
+    }
+
+    .btn-delete-token {
+      background: transparent;
+      border: none;
+      color: var(--app-text-muted);
+      cursor: pointer;
+      font-size: 0.85rem;
+      padding: 0.25rem;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+
+    .btn-delete-token:hover {
+      color: #ef4444;
+      background: rgba(239, 68, 68, 0.15);
+    }
+
+    /* Typography Role Cards & Point Controls */
+    .typo-role-card {
+      background: var(--app-bg);
+      border: 1px solid var(--app-border);
+      border-radius: 6px;
+      padding: 0.85rem;
+      margin-bottom: 0.75rem;
+      transition: border-color 0.15s ease;
+    }
+
+    .typo-role-card:hover {
+      border-color: rgba(212, 175, 55, 0.4);
+    }
+
+    .typo-role-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.6rem;
+    }
+
+    .typo-role-name {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--app-text);
+      letter-spacing: 0.02em;
+    }
+
+    .scale-badge {
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      color: var(--app-accent);
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 600;
+    }
+
+    .typo-controls-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem 0.6rem;
+    }
+
+    .form-subrow {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .form-subrow label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--app-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .form-subrow .input-text, .form-subrow .input-select {
+      padding: 0.38rem 0.5rem;
+      font-size: 0.78rem;
+    }
+
+    /* Right Preview & Code Panel */
+    .preview-panel {
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      background: var(--app-bg);
+    }
+
+    .preview-header-bar {
+      background: var(--app-sidebar);
+      border-bottom: 1px solid var(--app-border);
+      padding: 0.65rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .tab-group {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--app-text-muted);
+      padding: 0.4rem 0.85rem;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .tab-btn:hover {
+      color: var(--app-text);
+    }
+
+    .tab-btn.active {
+      background: var(--app-surface);
+      color: var(--app-accent);
+      border-color: var(--app-border);
+    }
+
+    .preview-canvas-container {
+      padding: 2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 2rem;
+    }
+
+    /* The Simulated Full-Screen Preview Sandbox */
+    .sandbox-frame {
+      width: 100%;
+      max-width: 980px;
+      border-radius: var(--app-radius);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+      padding: 2.75rem;
+      transition: all 0.2s ease;
+      border: 1px solid #e2ded5;
+      background: #FFFFFF;
+      color: #000000;
+    }
+
+    /* Mock Portal Header Inside Preview */
+    .mock-portal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #eae5dc;
+    }
+
+    .mock-portal-logo {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    /* Sandbox Dynamic Elements */
+    #preview-section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.85rem;
+    }
+
+    #preview-section-label::before {
+      content: '';
+      display: inline-block;
+      width: 14px;
+      height: 1.5px;
+      background-color: currentColor;
+    }
+
+    #preview-headline {
+      margin-bottom: 1rem;
+    }
+
+    #preview-subheadline {
+      font-style: italic;
+      margin-bottom: 1.75rem;
+      opacity: 0.9;
+    }
+
+    #preview-callout {
+      border-left: 4px solid;
+      padding: 1.35rem 1.65rem;
+      border-radius: 4px;
+      margin-bottom: 1.75rem;
+      border: 1px solid #dcd7ce;
+      border-left-width: 4px;
+    }
+
+    #preview-body {
+      margin-bottom: 2rem;
+    }
+
+    #preview-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      border-radius: 4px;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    /* Reorderable Canvas Block Styling */
+    .canvas-block {
+      position: relative;
+      transition: transform 0.2s ease, opacity 0.2s ease, border-color 0.2s ease;
+      border-radius: 6px;
+      margin-bottom: 0.75rem;
+    }
+
+    .canvas-block:last-child {
+      margin-bottom: 0;
+    }
+
+    .canvas-block:hover {
+      outline: 1px dashed rgba(212, 175, 55, 0.45);
+      outline-offset: 4px;
+    }
+
+    .canvas-block.is-dragging {
+      opacity: 0.35;
+      transform: scale(0.98);
+    }
+
+    .canvas-block.drag-over-top {
+      border-top: 3px solid var(--app-accent) !important;
+    }
+
+    .canvas-block.drag-over-bottom {
+      border-bottom: 3px solid var(--app-accent) !important;
+    }
+
+    .canvas-block-toolbar {
+      position: absolute;
+      top: -14px;
+      right: 10px;
+      z-index: 30;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: #181B24;
+      border: 1px solid var(--app-accent);
+      border-radius: 20px;
+      padding: 2px 7px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      transform: translateY(3px);
+      user-select: none;
+    }
+
+    .canvas-block:hover .canvas-block-toolbar,
+    .canvas-block:focus-within .canvas-block-toolbar,
+    body.layout-edit-mode .canvas-block-toolbar {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .block-drag-handle {
+      cursor: grab;
+      font-size: 0.82rem;
+      color: var(--app-accent);
+      padding: 0 3px;
+      line-height: 1;
+    }
+
+    .block-drag-handle:active {
+      cursor: grabbing;
+    }
+
+    .block-type-pill {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--app-text);
+      background: rgba(255,255,255,0.08);
+      padding: 1px 5px;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    .block-tool-btn {
+      background: transparent;
+      border: none;
+      color: var(--app-text-muted);
+      cursor: pointer;
+      padding: 2px 5px;
+      font-size: 0.72rem;
+      border-radius: 3px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.12s ease;
+    }
+
+    .block-tool-btn:hover {
+      color: var(--app-accent);
+      background: rgba(212, 175, 55, 0.18);
+    }
+
+    .block-tool-btn.active {
+      color: var(--app-accent);
+      background: rgba(212, 175, 55, 0.28);
+      font-weight: 700;
+    }
+
+    /* Multi-card demonstration grid */
+    .preview-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #eae5dc;
+      transition: all 0.2s ease;
+    }
+
+    .preview-card-grid.grid-cols-1 {
+      grid-template-columns: 1fr !important;
+    }
+
+    .preview-card-grid.grid-cols-2 {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .preview-card-grid.grid-cols-3 {
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    @media (max-width: 768px) {
+      .preview-card-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    .preview-demo-card {
+      border: 1px solid #ded9ce;
+      border-radius: 6px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .preview-demo-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+    }
+
+    .demo-card-toolbar {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+      background: rgba(24, 27, 36, 0.9);
+      padding: 2px 4px;
+      border-radius: 4px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+    }
+
+    .preview-demo-card:hover .demo-card-toolbar {
+      opacity: 1;
+    }
+
+    .demo-card-tool-btn {
+      background: transparent;
+      border: none;
+      color: var(--app-accent);
+      font-size: 0.68rem;
+      cursor: pointer;
+      padding: 1px 4px;
+      border-radius: 2px;
+      font-weight: 700;
+    }
+
+    .demo-card-tool-btn:hover {
+      background: rgba(212, 175, 55, 0.25);
+    }
+
+    /* Sidebar Layout & Hierarchy List */
+    .layout-item-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-top: 0.75rem;
+    }
+
+    .layout-item-row {
+      background: var(--app-bg);
+      border: 1px solid var(--app-border);
+      border-radius: 6px;
+      padding: 0.45rem 0.65rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      transition: border-color 0.15s ease, background-color 0.15s ease;
+      user-select: none;
+    }
+
+    .layout-item-row:hover {
+      border-color: rgba(212, 175, 55, 0.4);
+    }
+
+    .layout-item-row.is-dragging {
+      opacity: 0.35;
+    }
+
+    .layout-item-row.drag-over {
+      border-color: var(--app-accent);
+      background: rgba(212, 175, 55, 0.12);
+    }
+
+    .layout-item-left {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .layout-drag-handle {
+      cursor: grab;
+      color: var(--app-accent);
+      font-size: 0.8rem;
+      line-height: 1;
+      padding: 0 2px;
+    }
+
+    .layout-drag-handle:active {
+      cursor: grabbing;
+    }
+
+    .layout-item-name {
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--app-text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .layout-item-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .align-btn-group {
+      display: inline-flex;
+      background: var(--app-surface);
+      border: 1px solid var(--app-border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .btn-align {
+      background: transparent;
+      border: none;
+      color: var(--app-text-muted);
+      font-size: 0.66rem;
+      padding: 2px 5px;
+      cursor: pointer;
+      transition: all 0.12s ease;
+      font-weight: 600;
+    }
+
+    .btn-align:hover {
+      color: var(--app-text);
+    }
+
+    .btn-align.active {
+      background: var(--app-accent);
+      color: #111827;
+      font-weight: 700;
+    }
+
+    .btn-reorder {
+      background: var(--app-surface);
+      border: 1px solid var(--app-border);
+      color: var(--app-text);
+      border-radius: 4px;
+      width: 22px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      cursor: pointer;
+      transition: all 0.12s ease;
+    }
+
+    .btn-reorder:hover:not(:disabled) {
+      border-color: var(--app-accent);
+      color: var(--app-accent);
+    }
+
+    .btn-reorder:disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+    }
+
+    .visibility-checkbox {
+      accent-color: var(--app-accent);
+      cursor: pointer;
+    }
+
+    .layout-preset-pill {
+      background: var(--app-surface);
+      border: 1px solid var(--app-border);
+      color: var(--app-text-muted);
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+
+    .layout-preset-pill:hover {
+      border-color: var(--app-accent);
+      color: var(--app-accent);
+    }
+
+    .layout-preset-pill.active {
+      background: rgba(212, 175, 55, 0.15);
+      border-color: var(--app-accent);
+      color: var(--app-accent);
+    }
+
+    /* Output Code Block Container */
+    .code-output-container {
+      width: 100%;
+      max-width: 980px;
+      background: var(--app-sidebar);
+      border: 1px solid var(--app-border);
+      border-radius: var(--app-radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .code-output-header {
+      background: var(--app-surface);
+      padding: 0.65rem 1rem;
+      border-bottom: 1px solid var(--app-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--app-accent);
+    }
+
+    .code-output-body {
+      padding: 1.25rem;
+      background: #0b0d13;
+      color: #E5E7EB;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: #181B24;
+      border: 1px solid var(--app-accent);
+      color: #FFFFFF;
+      padding: 0.75rem 1.25rem;
+      border-radius: 6px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 1000;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.2s ease;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Modal for Markdown Import */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+      padding: 1rem;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      background: var(--app-sidebar);
+      border: 1px solid var(--app-border);
+      border-radius: var(--app-radius);
+      width: 100%;
+      max-width: 650px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">
+    <span>✦</span>
+    <span id="toast-msg">Markdown copied to clipboard!</span>
+  </div>
+
+  <!-- Floating Minimized Trigger Button for HUD -->
+  <button id="floating-hud-btn" class="floating-hud-trigger" onclick="toggleHudMinimize()">
+    <span>🎨</span>
+    <span>Show Design Controls</span>
+  </button>
+
+  <!-- Top App Header -->
+  <header class="app-header">
+    <div class="app-brand">
+      <span class="brand-pill" id="app-header-pill">Section 3 Studio</span>
+      <span id="app-header-title">Design Tokens &amp; Styleguide</span>
+      <span id="external-sync-badge" class="sync-status-badge" style="display: none;">
+        <span class="sync-dot"></span>
+        <span id="sync-status-text">Linked to External Window</span>
+      </span>
+    </div>
+
+    <div class="header-actions">
+      <!-- 1. Pop out to true separate OS Window -->
+      <button id="btn-popout-window" class="btn-app btn-app-highlight" onclick="openPopoutWindow()" title="Pop out controls into a separate native OS window outside the browser">
+        ↗ Pop-out Window
+      </button>
+
+      <!-- 2. In-page Floating HUD Mode -->
+      <button id="btn-toggle-hud" class="btn-app btn-app-secondary" onclick="togglePopoutMode()" title="Float controls as draggable HUD palette inside the browser">
+        🗗 Floating HUD
+      </button>
+
+      <!-- 3. Re-dock Controls Button (Main Window) -->
+      <button id="btn-redock" class="btn-app btn-app-gold" style="display: none;" onclick="closePopoutWindow()" title="Restore controls back into the main window">
+        ⤓ Re-dock Controls
+      </button>
+
+      <!-- 4. Re-dock to Main Window Button (Controls Pop-out Window) -->
+      <button id="btn-popup-redock" class="btn-app btn-app-gold" style="display: none;" onclick="requestRedockFromPopup()" title="Re-dock controls back into the main window">
+        ⤓ Re-dock to Main Window
+      </button>
+
+      <button class="btn-app btn-app-secondary" id="btn-import-header" onclick="openImportModal()">
+        📝 Import Markdown
+      </button>
+      <button class="btn-app btn-app-secondary" id="btn-reset-header" onclick="loadNPCPresets()">
+        🔄 Reset Defaults
+      </button>
+      <button class="btn-app btn-app-secondary" id="btn-blank-header" onclick="clearToBlank()">
+        🧹 Blank Template
+      </button>
+      <button class="btn-app btn-app-gold" onclick="copyMarkdown()">
+        📋 Copy Markdown
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Studio Layout (Docked Split vs Full-Screen Live Preview) -->
+  <main class="studio-layout" id="studio-main-layout">
+    
+    <!-- LEFT: Inputs & Token Controls (Dockable, Draggable HUD, or Dedicated Window) -->
+    <aside class="controls-panel" id="controls-panel">
+      
+      <!-- Dedicated Popout Sync Banner (Shown in pop-out controls window) -->
+      <div id="popup-sync-banner" style="display: none; background: rgba(212, 175, 55, 0.12); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 6px; padding: 0.65rem 0.85rem; margin-bottom: 0.25rem; align-items: center; justify-content: space-between; gap: 0.5rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; color: var(--app-accent); font-weight: 600;">
+          <span class="sync-dot"></span>
+          <span>Popped-Out Controls Window (Live Synced)</span>
+        </div>
+        <button class="btn-app btn-app-gold" style="padding: 0.25rem 0.6rem; font-size: 0.72rem;" onclick="requestRedockFromPopup()">
+          ⤓ Re-dock
+        </button>
+      </div>
+
+      <!-- HUD Drag & Control Handle Bar (Visible in Pop-out Mode) -->
+      <div class="hud-header" id="hud-drag-handle">
+        <div class="hud-title">
+          <span>✦</span>
+          <span>Design Tokens HUD</span>
+          <span class="hud-drag-hint">(Drag to position)</span>
+        </div>
+        <div class="hud-actions">
+          <button class="hud-btn" onclick="toggleHudMinimize()" title="Minimize HUD to floating corner pill">—</button>
+          <button class="hud-btn" onclick="togglePopoutMode()" title="Dock back to side-by-side split view">🗖 Dock</button>
+        </div>
+      </div>
+
+      <!-- 1. Color Palette (CSS Variables) -->
+      <div class="section-card">
+        <div class="section-card-header">
+          <span class="section-card-title">🎨 Color Palette (CSS Variables)</span>
+          <button class="btn-app btn-app-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.7rem;" onclick="addColorToken()">
+            + Add Color
+          </button>
+        </div>
+        
+        <p style="font-size: 0.74rem; color: var(--app-text-muted); margin-bottom: 0.85rem; line-height: 1.4;">
+          Enter any hex code (or click swatch). Color names detect dynamically in real-time.
+        </p>
+
+        <div id="color-tokens-container">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- 2. Typography Specification (Clean Dropdowns & Point Scale Engine) -->
+      <div class="section-card">
+        <div class="section-card-header">
+          <span class="section-card-title">✍ Typography Specification</span>
+        </div>
+
+        <!-- Headline Font Family Dropdown -->
+        <div class="form-row">
+          <label for="select-font-headings">
+            <span>Headlines &amp; Titles Font</span>
+            <span class="scale-badge" id="badge-headings-category">Serif Display</span>
+          </label>
+          <select id="select-font-headings" class="input-select" onchange="handleHeadingsFontChange(this.value)">
+            <option value="'Adobe Caslon Pro', 'Libre Caslon Text', Georgia, serif, Arial, sans-serif" selected>Adobe Caslon Pro / Libre Caslon Text</option>
+            <option value="'Cormorant Garamond', Garamond, Georgia, serif">Cormorant Garamond (Editorial Luxury)</option>
+            <option value="'Playfair Display', Georgia, serif">Playfair Display (High-Contrast Serif)</option>
+            <option value="'Cinzel', 'Times New Roman', serif">Cinzel (Classical Roman Inscription)</option>
+            <option value="'Bodoni Moda', 'Didot', serif">Bodoni Moda (Modern High-Fashion)</option>
+            <option value="'Lora', Georgia, serif">Lora (Contemporary Serif)</option>
+            <option value="'Plus Jakarta Sans', sans-serif">Plus Jakarta Sans (Modern Neo-Grotesque)</option>
+            <option value="'Outfit', sans-serif">Outfit (Geometric Minimal)</option>
+            <option value="'Inter', sans-serif">Inter (Clean UI Sans)</option>
+            <option value="CUSTOM">Custom Font Family Stack...</option>
+          </select>
+          <input type="text" id="font-family-headings-custom" class="input-text" style="display: none; margin-top: 0.35rem;" placeholder="e.g. 'MyFont', serif" oninput="handleCustomHeadingsFont(this.value)" />
+        </div>
+
+        <!-- Body Font Family Dropdown -->
+        <div class="form-row">
+          <label for="select-font-body">
+            <span>Body &amp; Interface Font</span>
+            <span class="scale-badge" id="badge-body-category">Sans-Serif</span>
+          </label>
+          <select id="select-font-body" class="input-select" onchange="handleBodyFontChange(this.value)">
+            <option value="'Helvetica Light', 'Helvetica Neue', Helvetica, Arial, sans-serif" selected>Helvetica Light / Helvetica Neue</option>
+            <option value="'Inter', -apple-system, BlinkMacSystemFont, sans-serif">Inter (Clean UI Sans)</option>
+            <option value="'Plus Jakarta Sans', sans-serif">Plus Jakarta Sans (Refined UI)</option>
+            <option value="'Outfit', sans-serif">Outfit (Geometric Sans)</option>
+            <option value="'DM Sans', sans-serif">DM Sans (Humanist Sans)</option>
+            <option value="'Manrope', sans-serif">Manrope (Semi-Geometric)</option>
+            <option value="'Work Sans', sans-serif">Work Sans (Architectural)</option>
+            <option value="'Libre Caslon Text', Georgia, serif">Libre Caslon Text (Editorial Body)</option>
+            <option value="CUSTOM">Custom Font Family Stack...</option>
+          </select>
+          <input type="text" id="font-family-body-custom" class="input-text" style="display: none; margin-top: 0.35rem;" placeholder="e.g. 'MyBodyFont', sans-serif" oninput="handleCustomBodyFont(this.value)" />
+        </div>
+
+        <div style="border-top: 1px solid var(--app-border); margin: 1rem 0 0.75rem 0; padding-top: 0.65rem; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 0.74rem; font-weight: 700; color: var(--app-accent); text-transform: uppercase; letter-spacing: 0.08em;">Role Sizing &amp; Weights (in Points)</span>
+          <span style="font-size: 0.68rem; color: var(--app-text-muted);">Auto-converts to rem / px</span>
+        </div>
+
+        <!-- 1. Main Headlines Role (Pt & Weight) -->
+        <div class="typo-role-card">
+          <div class="typo-role-header">
+            <span class="typo-role-name">Main Headlines</span>
+            <span class="scale-badge" id="badge-headline-scale">36 pt → 3.0rem (48px)</span>
+          </div>
+          <div class="typo-controls-grid">
+            <div class="form-subrow">
+              <label>Size (pt)</label>
+              <input type="number" id="typo-headline-pt" class="input-text" value="36" min="12" max="96" step="1" oninput="updateTypoFromPoints()" />
+            </div>
+            <div class="form-subrow">
+              <label>Weight</label>
+              <select id="typo-headline-weight" class="input-select" onchange="updateTypoFromPoints()">
+                <option value="300">300 (Light)</option>
+                <option value="400">400 (Regular)</option>
+                <option value="500">500 (Medium)</option>
+                <option value="600">600 (Semi-Bold)</option>
+                <option value="700" selected>700 (Bold)</option>
+                <option value="800">800 (Extra-Bold)</option>
+              </select>
+            </div>
+            <div class="form-subrow">
+              <label>Line Height</label>
+              <select id="typo-headline-lh" class="input-select" onchange="updateTypoFromPoints()">
+                <option value="1.1">1.1 (Compact)</option>
+                <option value="1.2" selected>1.2 (Standard)</option>
+                <option value="1.3">1.3 (Relaxed)</option>
+                <option value="1.4">1.4 (Spacious)</option>
+              </select>
+            </div>
+            <div class="form-subrow">
+              <label>Tracking</label>
+              <select id="typo-headline-tracking" class="input-select" onchange="updateTypoFromPoints()">
+                <option value="-0.03em">-0.03em (Very Tight)</option>
+                <option value="-0.02em" selected>-0.02em (Tight / H1)</option>
+                <option value="-0.01em">-0.01em (Subtle)</option>
+                <option value="0">0 (Normal)</option>
+                <option value="0.05em">+0.05em (Spaced)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Section Labels Role (Pt & Weight) -->
+        <div class="typo-role-card">
+          <div class="typo-role-header">
+            <span class="typo-role-name">Section Labels (Overlines)</span>
+            <span class="scale-badge" id="badge-label-scale">8.4 pt → 0.7rem (11.2px)</span>
+          </div>
+          <div class="typo-controls-grid">
+            <div class="form-subrow">
+              <label>Size (pt)</label>
+              <input type="number" id="typo-label-pt" class="input-text" value="8.4" min="6" max="24" step="0.2" oninput="updateTypoFromPoints()" />
+            </div>
+            <div class="form-subrow">
+              <label>Weight</label>
+              <select id="typo-label-weight" class="input-select" onchange="updateTypoFromPoints()">
+                <option value="400">400 (Regular)</option>
+                <option value="500">500 (Medium)</option>
+                <option value="600">600 (Semi-Bold)</option>
+                <option value="700" selected>700 (Bold)</option>
+                <option value="800">800 (Extra-Bold)</option>
+              </select>
+            </div>
+            <div class="form-subrow">
+              <label>Tracking</label>
+              <select id="typo-label-tracking" class="input-select" onchange="updateTypoFromPoints()">
+                <option value="0.1em">+0.1em</option>
+                <option value="0.15em">+0.15em</option>
+                <option value="0.18em" selected>+0.18em (Uppercase)</option>
+                <option value="0.22em">+0.22em</option>
+                <option value="0.25em">+0.25em</option>
+              </select>
+            </div>
+            <div class="form-subrow">
+              <label>Transform</label>
+              <select id="typo-label-transform" class="input-select" onchange="updateTypoFromPoints()">
+                <option value="uppercase" selected>UPPERCASE</option>
+                <option value="none">Normal Case</option>
+                <option value="capitalize">Capitalize</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Body Copy Role (Pt & Weight) -->
+        <div class="typo-role-card">
+          <div class="typo-role-header">
+            <span class="typo-role-name">Body Copy (Paragraphs)</span>
+            <span class="scale-badge" id="badge-body-scale">12 pt → 1.0rem (16px)</span>
+          </div>
+          <div class="typo-controls-grid">
+            <div class="form-subrow">
+              <label>Size (pt)</label>
+              <input type="number" id="typo-body-pt" class="input-text" value="12" min="8" max="32" step="0.5" oninput="updateTypoFromPoints()" />
+            </div>
+            <div class="form-subrow">
+              <label>Weight / Style</label>
+              <select id="typo-body-weight" class="input-select" onchange="updateTypoFromPoints()">
+                <option value="Helvetica Light, Helvetica Medium (All Caps)" selected>Helvetica Light / Med</option>
+                <option value="300 (Light)">300 (Light)</option>
+                <option value="400 (Regular)">400 (Regular)</option>
+                <option value="500 (Medium)">500 (Medium)</option>
+                <option value="600 (Semi-Bold)">600 (Semi-Bold)</option>
+              </select>
+            </div>
+            <div class="form-subrow">
+              <label>Line Height</label>
+              <select id="typo-body-lh" class="input-select" onchange="updateTypoFromPoints()">
+                <option value="1.4">1.4 (Compact)</option>
+                <option value="1.5">1.5 (Standard)</option>
+                <option value="1.6" selected>1.6 (Editorial)</option>
+                <option value="1.75">1.75 (Open)</option>
+              </select>
+            </div>
+            <div class="form-subrow">
+              <label>Color Token</label>
+              <select id="typo-body-color" class="input-select" onchange="updateTypoFromPoints()">
+                <option value="var(--color-text-primary)" selected>--color-text-primary</option>
+                <option value="var(--color-text-heading)">--color-text-heading</option>
+                <option value="var(--color-accent)">--color-accent</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 3. Buttons & Interactivity -->
+      <div class="section-card">
+        <div class="section-card-header">
+          <span class="section-card-title">🔘 Buttons &amp; Interactivity</span>
+        </div>
+
+        <div class="form-row">
+          <label for="btn-primary-spec">Primary CTA Specification</label>
+          <input type="text" id="btn-primary-spec" class="input-text" value="Background #30210F, Border 1px solid #D4A359, Color #FFFFFF, Padding 0.85rem 2rem, Tracking 0.12em uppercase." oninput="updateStudio()" />
+        </div>
+
+        <div class="form-row">
+          <label for="btn-hover-spec">Hover Effects &amp; Transitions</label>
+          <input type="text" id="btn-hover-spec" class="input-text" value="Subtle gold glow, clean opacity transitions (200ms ease)." oninput="updateStudio()" />
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-top: 0.75rem;">
+          <div class="form-row">
+            <label for="btn-bg-hex">CTA Background</label>
+            <input type="text" id="btn-bg-hex" class="input-text" value="#30210F" oninput="updateStudio()" />
+          </div>
+          <div class="form-row">
+            <label for="btn-border-hex">CTA Border</label>
+            <input type="text" id="btn-border-hex" class="input-text" value="#D4A359" oninput="updateStudio()" />
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Asset & Imagery Guidelines -->
+      <div class="section-card">
+        <div class="section-card-header">
+          <span class="section-card-title">📷 Asset &amp; Imagery Guidelines</span>
+        </div>
+
+        <div class="form-row">
+          <label for="asset-guidelines">Strict Constraint &amp; Principles</label>
+          <textarea id="asset-guidelines" class="input-textarea" oninput="updateStudio()">Real, tangible local photography of Nevada County parcels, water infrastructure, and regional sites — strictly NO generic AI artwork.</textarea>
+        </div>
+      </div>
+
+      <!-- 5. Layout & Component Hierarchy Architecture -->
+      <div class="section-card" id="section-layout-controls">
+        <div class="section-card-header">
+          <span class="section-card-title">📐 Layout &amp; Flow Architecture</span>
+          <button class="btn-app btn-app-secondary" style="padding: 0.2rem 0.5rem; font-size: 0.68rem;" onclick="applyLayoutPreset('editorial')" title="Reset to default sequence">
+            ↺ Default
+          </button>
+        </div>
+
+        <p style="font-size: 0.74rem; color: var(--app-text-muted); margin-bottom: 0.75rem; line-height: 1.4;">
+          Reorder elements on the sample page, toggle visibility, and set alignments. Changes sync live to the Canvas and Markdown output.
+        </p>
+
+        <!-- Quick Layout Presets -->
+        <div class="form-row">
+          <label><span>Quick Layout Presets</span></label>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem;">
+            <button class="layout-preset-pill" id="preset-editorial" onclick="applyLayoutPreset('editorial')">📰 Editorial Flow</button>
+            <button class="layout-preset-pill" id="preset-spotlight" onclick="applyLayoutPreset('spotlight')">🎯 Centered Spotlight</button>
+            <button class="layout-preset-pill" id="preset-action" onclick="applyLayoutPreset('action')">⚡ Action-First</button>
+            <button class="layout-preset-pill" id="preset-narrative" onclick="applyLayoutPreset('narrative')">📖 Storytelling Flow</button>
+          </div>
+        </div>
+
+        <!-- Global Grid Columns for Feature Cards -->
+        <div class="form-row" style="margin-top: 0.6rem;">
+          <label><span>Feature Cards Grid Columns</span></label>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem;">
+            <button class="layout-preset-pill" id="btn-grid-cols-3" onclick="setCardColumns('3')">3 Columns</button>
+            <button class="layout-preset-pill" id="btn-grid-cols-2" onclick="setCardColumns('2')">2 Columns</button>
+            <button class="layout-preset-pill" id="btn-grid-cols-1" onclick="setCardColumns('1')">1 Column</button>
+          </div>
+        </div>
+
+        <!-- Component List (Populated & Synced dynamically via JS) -->
+        <div class="form-row" style="margin-top: 0.75rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <label style="margin-bottom: 0;">Component Sequence</label>
+            <span style="font-size: 0.68rem; color: var(--app-text-muted);">▲/▼ Move &bull; 👁 Hide &bull; L/C/R Align</span>
+          </div>
+          <div id="layout-item-list" class="layout-item-list">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- RIGHT / FULL SCREEN: Live Dynamic Preview Canvas & Output Code -->
+    <section class="preview-panel">
+      
+      <div class="preview-header-bar">
+        <div class="tab-group">
+          <button id="tab-btn-preview" class="tab-btn active" onclick="switchTab('preview')">
+            👁 Live Full-Screen Preview
+          </button>
+          <button id="tab-btn-markdown" class="tab-btn" onclick="switchTab('markdown')">
+            📄 Section 3 Markdown (.md)
+          </button>
+          <button id="tab-btn-css" class="tab-btn" onclick="switchTab('css')">
+            🎨 CSS Variables (:root)
+          </button>
+          <button id="tab-btn-json" class="tab-btn" onclick="switchTab('json')">
+            📦 JSON Tokens
+          </button>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span style="font-size: 0.75rem; color: var(--app-text-muted);">
+            Real-Time Dynamic Sync
+          </span>
+          <button id="btn-preview-popout" class="btn-app btn-app-secondary" style="padding: 0.25rem 0.55rem; font-size: 0.72rem;" onclick="openPopoutWindow()" title="Pop out controls into a separate window">
+            <span>↗ External Window</span>
+          </button>
+          <button id="btn-preview-redock" class="btn-app btn-app-gold" style="padding: 0.25rem 0.65rem; font-size: 0.72rem; display: none;" onclick="closePopoutWindow()" title="Re-dock controls back into this window">
+            <span>⤓ Re-dock Controls</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="preview-canvas-container">
+        
+        <!-- Tab View 1: Full-Screen Live Visual Preview -->
+        <div id="view-preview" class="sandbox-frame">
+          
+          <!-- Block 1: Mock Portal Top Bar -->
+          <div class="canvas-block" id="block-header" data-block-id="header" draggable="true">
+            <div class="canvas-block-toolbar">
+              <span class="block-drag-handle" title="Drag to reorder on canvas">⠿</span>
+              <span class="block-type-pill">Header</span>
+              <button class="block-tool-btn" onclick="moveBlock('header', -1)" title="Move Up">▲</button>
+              <button class="block-tool-btn" onclick="moveBlock('header', 1)" title="Move Down">▼</button>
+              <button class="block-tool-btn" onclick="toggleBlockVisibility('header')" title="Toggle Visibility">👁</button>
+            </div>
+            <div class="mock-portal-header">
+              <div class="mock-portal-logo" id="preview-brand-title">
+                <span id="preview-logo-text">NEW PARADIGM CAPITAL</span>
+                <span id="preview-badge" style="padding: 0.25rem 0.65rem; border-radius: 9999px; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-left: 0.5rem;">
+                  Nevada County Pilot
+                </span>
+              </div>
+              <button id="preview-header-cta" style="padding: 0.45rem 1rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer;">
+                Member Access
+              </button>
+            </div>
+          </div>
+
+          <!-- Block 2: Section Category Label -->
+          <div class="canvas-block" id="block-label" data-block-id="label" draggable="true">
+            <div class="canvas-block-toolbar">
+              <span class="block-drag-handle" title="Drag to reorder on canvas">⠿</span>
+              <span class="block-type-pill">Section Label</span>
+              <button class="block-tool-btn" onclick="cycleBlockAlign('label')" title="Cycle Alignment (Left / Center / Right)">⇋</button>
+              <button class="block-tool-btn" onclick="moveBlock('label', -1)" title="Move Up">▲</button>
+              <button class="block-tool-btn" onclick="moveBlock('label', 1)" title="Move Down">▼</button>
+              <button class="block-tool-btn" onclick="toggleBlockVisibility('label')" title="Toggle Visibility">👁</button>
+            </div>
+            <div id="preview-section-label">SYSTEMIC RESILIENCE &amp; CAPITAL ARCHITECTURE</div>
+          </div>
+          
+          <!-- Block 3: Main Headline -->
+          <div class="canvas-block" id="block-headline" data-block-id="headline" draggable="true">
+            <div class="canvas-block-toolbar">
+              <span class="block-drag-handle" title="Drag to reorder on canvas">⠿</span>
+              <span class="block-type-pill">Headline</span>
+              <button class="block-tool-btn" onclick="cycleBlockAlign('headline')" title="Cycle Alignment (Left / Center / Right)">⇋</button>
+              <button class="block-tool-btn" onclick="moveBlock('headline', -1)" title="Move Up">▲</button>
+              <button class="block-tool-btn" onclick="moveBlock('headline', 1)" title="Move Down">▼</button>
+              <button class="block-tool-btn" onclick="toggleBlockVisibility('headline')" title="Toggle Visibility">👁</button>
+            </div>
+            <h1 id="preview-headline">Redefining Wealth, Reimagining Progress</h1>
+          </div>
+          
+          <!-- Block 4: Subheadline -->
+          <div class="canvas-block" id="block-subheadline" data-block-id="subheadline" draggable="true">
+            <div class="canvas-block-toolbar">
+              <span class="block-drag-handle" title="Drag to reorder on canvas">⠿</span>
+              <span class="block-type-pill">Subheadline</span>
+              <button class="block-tool-btn" onclick="cycleBlockAlign('subheadline')" title="Cycle Alignment (Left / Center / Right)">⇋</button>
+              <button class="block-tool-btn" onclick="moveBlock('subheadline', -1)" title="Move Up">▲</button>
+              <button class="block-tool-btn" onclick="moveBlock('subheadline', 1)" title="Move Down">▼</button>
+              <button class="block-tool-btn" onclick="toggleBlockVisibility('subheadline')" title="Toggle Visibility">👁</button>
+            </div>
+            <p id="preview-subheadline">
+              A land- and labor-backed asset class structured via a targeted capital pool to deploy our flagship countywide pilot program in Nevada County, California.
+            </p>
+          </div>
+
+          <!-- Block 5: Core Governance Philosophy Callout -->
+          <div class="canvas-block" id="block-callout" data-block-id="callout" draggable="true">
+            <div class="canvas-block-toolbar">
+              <span class="block-drag-handle" title="Drag to reorder on canvas">⠿</span>
+              <span class="block-type-pill">Vision Callout</span>
+              <button class="block-tool-btn" onclick="cycleBlockAlign('callout')" title="Cycle Alignment (Left / Center / Right)">⇋</button>
+              <button class="block-tool-btn" onclick="moveBlock('callout', -1)" title="Move Up">▲</button>
+              <button class="block-tool-btn" onclick="moveBlock('callout', 1)" title="Move Down">▼</button>
+              <button class="block-tool-btn" onclick="toggleBlockVisibility('callout')" title="Toggle Visibility">👁</button>
+            </div>
+            <div id="preview-callout">
+              <div id="preview-callout-quote" style="font-weight: 700; margin-bottom: 0.45rem; line-height: 1.4;">
+                "At Rethinking Capital, we believe that there is more than enough wealth to solve all of society's core resilience, settlement, and capital challenges."
+              </div>
+              <div id="preview-callout-author" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700;">
+                Core Governance Philosophy &bull; Nevada County Pilot
+              </div>
+            </div>
+          </div>
+
+          <!-- Block 6: Dynamic Body Text -->
+          <div class="canvas-block" id="block-body" data-block-id="body" draggable="true">
+            <div class="canvas-block-toolbar">
+              <span class="block-drag-handle" title="Drag to reorder on canvas">⠿</span>
+              <span class="block-type-pill">Body Copy</span>
+              <button class="block-tool-btn" onclick="cycleBlockAlign('body')" title="Cycle Alignment (Left / Center / Right)">⇋</button>
+              <button class="block-tool-btn" onclick="moveBlock('body', -1)" title="Move Up">▲</button>
+              <button class="block-tool-btn" onclick="moveBlock('body', 1)" title="Move Down">▼</button>
+              <button class="block-tool-btn" onclick="toggleBlockVisibility('body')" title="Toggle Visibility">👁</button>
+            </div>
+            <p id="preview-body">
+              This live full-screen canvas renders your design tokens, point sizes, weights, and color palette in real-time. Drag or pop-out the floating HUD to inspect changes across every component dynamically without obstruction.
+            </p>
+          </div>
+
+          <!-- Block 7: Action Buttons -->
+          <div class="canvas-block" id="block-ctas" data-block-id="ctas" draggable="true">
+            <div class="canvas-block-toolbar">
+              <span class="block-drag-handle" title="Drag to reorder on canvas">⠿</span>
+              <span class="block-type-pill">Action CTAs</span>
+              <button class="block-tool-btn" onclick="cycleBlockAlign('ctas')" title="Cycle Alignment (Left / Center / Right)">⇋</button>
+              <button class="block-tool-btn" onclick="moveBlock('ctas', -1)" title="Move Up">▲</button>
+              <button class="block-tool-btn" onclick="moveBlock('ctas', 1)" title="Move Down">▼</button>
+              <button class="block-tool-btn" onclick="toggleBlockVisibility('ctas')" title="Toggle Visibility">👁</button>
+            </div>
+            <div id="preview-cta-container" style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+              <button id="preview-cta-btn">
+                Request Executive NDA &amp; Access &rarr;
+              </button>
+            </div>
+          </div>
+
+          <!-- Block 8: Component Card Grid -->
+          <div class="canvas-block" id="block-cards" data-block-id="cards" draggable="true">
+            <div class="canvas-block-toolbar">
+              <span class="block-drag-handle" title="Drag to reorder on canvas">⠿</span>
+              <span class="block-type-pill">Feature Grid</span>
+              <button class="block-tool-btn" onclick="moveBlock('cards', -1)" title="Move Up">▲</button>
+              <button class="block-tool-btn" onclick="moveBlock('cards', 1)" title="Move Down">▼</button>
+              <button class="block-tool-btn" onclick="toggleBlockVisibility('cards')" title="Toggle Visibility">👁</button>
+            </div>
+            <div class="preview-card-grid grid-cols-3" id="preview-cards-container">
+              <div class="preview-demo-card" id="demo-card-1" draggable="true">
+                <div class="demo-card-toolbar">
+                  <button class="demo-card-tool-btn" onclick="moveCard('demo-card-1', -1)" title="Move Left">◄</button>
+                  <button class="demo-card-tool-btn" onclick="moveCard('demo-card-1', 1)" title="Move Right">►</button>
+                </div>
+                <span id="demo-card-label-1" style="font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;">Parcels &amp; Water</span>
+                <h4 id="demo-card-title-1" style="font-size: 1.05rem; font-weight: 700;">Hydrologic Infrastructure</h4>
+                <p style="font-size: 0.82rem; line-height: 1.5; opacity: 0.85;">Securing water rights, storage reservoirs, and distribution lines across Nevada County.</p>
+              </div>
+
+              <div class="preview-demo-card" id="demo-card-2" draggable="true">
+                <div class="demo-card-toolbar">
+                  <button class="demo-card-tool-btn" onclick="moveCard('demo-card-2', -1)" title="Move Left">◄</button>
+                  <button class="demo-card-tool-btn" onclick="moveCard('demo-card-2', 1)" title="Move Right">►</button>
+                </div>
+                <span id="demo-card-label-2" style="font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;">Flagship Pilot</span>
+                <h4 id="demo-card-title-2" style="font-size: 1.05rem; font-weight: 700;">Capital Architecture</h4>
+                <p style="font-size: 0.82rem; line-height: 1.5; opacity: 0.85;">Targeted capital pool deploying sustainable community resilience and real assets.</p>
+              </div>
+
+              <div class="preview-demo-card" id="demo-card-3" draggable="true">
+                <div class="demo-card-toolbar">
+                  <button class="demo-card-tool-btn" onclick="moveCard('demo-card-3', -1)" title="Move Left">◄</button>
+                  <button class="demo-card-tool-btn" onclick="moveCard('demo-card-3', 1)" title="Move Right">►</button>
+                </div>
+                <span id="demo-card-label-3" style="font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;">Enterprise</span>
+                <h4 id="demo-card-title-3" style="font-size: 1.05rem; font-weight: 700;">Family of Businesses</h4>
+                <p style="font-size: 0.82rem; line-height: 1.5; opacity: 0.85;">LighTribe, Light Creative, and LightHouse operating entities.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Tab View 2: Markdown Code Output -->
+        <div id="view-markdown" class="code-output-container" style="display: none;">
+          <div class="code-output-header">
+            <span>markdown &bull; Section 3: Design Tokens</span>
+            <button class="btn-app btn-app-gold" style="padding: 0.3rem 0.6rem; font-size: 0.72rem;" onclick="copyMarkdown()">
+              📋 Copy Markdown
+            </button>
+          </div>
+          <pre id="markdown-code-block" class="code-output-body"></pre>
+        </div>
+
+        <!-- Tab View 3: CSS Variables -->
+        <div id="view-css" class="code-output-container" style="display: none;">
+          <div class="code-output-header">
+            <span>css &bull; :root Design Tokens</span>
+            <button class="btn-app btn-app-gold" style="padding: 0.3rem 0.6rem; font-size: 0.72rem;" onclick="copyCSS()">
+              📋 Copy CSS
+            </button>
+          </div>
+          <pre id="css-code-block" class="code-output-body"></pre>
+        </div>
+
+        <!-- Tab View 4: JSON Tokens -->
+        <div id="view-json" class="code-output-container" style="display: none;">
+          <div class="code-output-header">
+            <span>json &bull; tokens.schema.json</span>
+            <button class="btn-app btn-app-gold" style="padding: 0.3rem 0.6rem; font-size: 0.72rem;" onclick="copyJSON()">
+              📋 Copy JSON
+            </button>
+          </div>
+          <pre id="json-code-block" class="code-output-body"></pre>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Import Markdown Modal -->
+  <div id="import-modal" class="modal-overlay" onclick="handleModalBackdrop(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <h3 style="color: var(--app-accent); font-size: 1.15rem;">Import Section 3 Markdown</h3>
+      <p style="font-size: 0.82rem; color: var(--app-text-muted);">
+        Paste an existing <code>### 3. DESIGN TOKENS &amp; VISUAL STYLEGUIDE</code> markdown snippet below to auto-populate all fields and colors.
+      </p>
+      
+      <textarea id="import-textarea" class="input-textarea" style="min-height: 200px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;" placeholder="Paste ### 3. DESIGN TOKENS markdown here..."></textarea>
+
+      <div style="display: flex; justify-content: flex-end; gap: 0.6rem; margin-top: 0.5rem;">
+        <button class="btn-app btn-app-secondary" onclick="closeImportModal()">Cancel</button>
+        <button class="btn-app btn-app-gold" onclick="parseImportedMarkdown()">Parse &amp; Load Tokens</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Engine Script -->
+  <script>
+    /* BroadcastChannel for Real-Time Cross-Window Synchronization */
+    const broadcastSync = new BroadcastChannel('npc_styleguide_studio_sync');
+
+    /* Color Name Dictionary */
+    const COLOR_NAMES = [
+      // Monochromes & Neutrals
+      { name: "Pure White", hex: "#FFFFFF" },
+      { name: "Ghost White", hex: "#F8F9FA" },
+      { name: "Off-White", hex: "#F5F5F5" },
+      { name: "Snow White", hex: "#FFFAFA" },
+      { name: "Ivory", hex: "#FFFFF0" },
+      { name: "Alabaster", hex: "#F2F0EB" },
+      { name: "Floral White", hex: "#FFFAF0" },
+      { name: "Linen", hex: "#FAF0E6" },
+      { name: "Bone White", hex: "#EAE6DF" },
+      { name: "Cream", hex: "#FFFDD0" },
+      { name: "Warm Cream", hex: "#FDF5E6" },
+      { name: "Seashell", hex: "#FFF5EE" },
+      { name: "Eggshell", hex: "#F0EAD6" },
+      { name: "Parchment", hex: "#F1E9D2" },
+      { name: "Light Gray", hex: "#D3D3D3" },
+      { name: "Silver", hex: "#C0C0C0" },
+      { name: "Warm Gray", hex: "#B0A8A0" },
+      { name: "Cool Gray", hex: "#9E9EA2" },
+      { name: "Medium Gray", hex: "#808080" },
+      { name: "Slate Gray", hex: "#708090" },
+      { name: "Dim Gray", hex: "#696969" },
+      { name: "Charcoal", hex: "#36454F" },
+      { name: "Dark Slate", hex: "#2F4F4F" },
+      { name: "Gunmetal", hex: "#2A3439" },
+      { name: "Anthracite", hex: "#293133" },
+      { name: "Jet Black", hex: "#1C1C1C" },
+      { name: "Obsidian", hex: "#0B0B0B" },
+      { name: "Pure Black", hex: "#000000" },
+
+      // Golds, Bronzes & Earth Tones
+      { name: "Metallic Gold", hex: "#D4AF37" },
+      { name: "Bright Gold", hex: "#FFD700" },
+      { name: "Flat Gold", hex: "#BF8B2D" },
+      { name: "Warm Gold", hex: "#D4A359" },
+      { name: "Antique Gold", hex: "#CFB53B" },
+      { name: "Pale Gold", hex: "#E6CA65" },
+      { name: "Champagne Gold", hex: "#F7E7CE" },
+      { name: "Harvest Gold", hex: "#DA9100" },
+      { name: "Amber Gold", hex: "#FFBF00" },
+      { name: "Vegas Gold", hex: "#C5B358" },
+      { name: "Brass", hex: "#B5A642" },
+      { name: "Bronze", hex: "#CD7F32" },
+      { name: "Deep Bronze", hex: "#4A3B2C" },
+      { name: "Copper", hex: "#B87333" },
+      { name: "Dark Espresso", hex: "#30210F" },
+      { name: "Espresso Brown", hex: "#362B28" },
+      { name: "Mocha", hex: "#493628" },
+      { name: "Dark Chocolate", hex: "#3D2B1F" },
+      { name: "Coffee", hex: "#6F4E37" },
+      { name: "Taupe", hex: "#B6A690" },
+      { name: "Warm Taupe", hex: "#AF9F8C" },
+      { name: "Dark Taupe", hex: "#483C32" },
+      { name: "Sandstone", hex: "#D6C6B2" },
+      { name: "Sand", hex: "#C2B280" },
+      { name: "Khaki", hex: "#C3B091" },
+      { name: "Dark Khaki", hex: "#BDB76B" },
+      { name: "Wheat", hex: "#F5DEB3" },
+      { name: "Camel", hex: "#C19A6B" },
+      { name: "Tan", hex: "#D2B48C" },
+      { name: "Beige", hex: "#F5F5DC" },
+      { name: "Burnt Sienna", hex: "#E97451" },
+      { name: "Raw Sienna", hex: "#D68A59" },
+      { name: "Terracotta", hex: "#E2725B" },
+      { name: "Rust", hex: "#B7410E" },
+      { name: "Ochre", hex: "#CC7722" },
+      { name: "Saddle Brown", hex: "#8B4513" },
+      { name: "Russet", hex: "#80461B" },
+      { name: "Chestnut", hex: "#954535" },
+      { name: "Mahogany", hex: "#C04000" },
+
+      // Blues & Cyans
+      { name: "Sky Blue", hex: "#9EB0D1" },
+      { name: "Soft Sky Blue", hex: "#87CEEB" },
+      { name: "Light Sky Blue", hex: "#87CEFA" },
+      { name: "Baby Blue", hex: "#89CFF0" },
+      { name: "Powder Blue", hex: "#B0E0E6" },
+      { name: "Ice Blue", hex: "#AFEEEE" },
+      { name: "Cornflower Blue", hex: "#6495ED" },
+      { name: "Steel Blue", hex: "#4682B4" },
+      { name: "Royal Blue", hex: "#4169E1" },
+      { name: "Cobalt Blue", hex: "#0047AB" },
+      { name: "Electric Blue", hex: "#7DF9FF" },
+      { name: "Sapphire", hex: "#0F52BA" },
+      { name: "Ocean Blue", hex: "#1CA9C9" },
+      { name: "Cerulean", hex: "#007BA7" },
+      { name: "Dodger Blue", hex: "#1E90FF" },
+      { name: "Deep Sky Blue", hex: "#00BFFF" },
+      { name: "Pure Blue", hex: "#0000FF" },
+      { name: "Medium Blue", hex: "#0000CD" },
+      { name: "Dark Blue", hex: "#00008B" },
+      { name: "Navy Blue", hex: "#000080" },
+      { name: "Midnight Blue", hex: "#191970" },
+      { name: "Deep Navy", hex: "#0A1128" },
+      { name: "Navy Slate", hex: "#1E293B" },
+      { name: "Cadet Blue", hex: "#5F9EA0" },
+      { name: "Slate Blue", hex: "#6A5ACD" },
+      { name: "Cyan", hex: "#00FFFF" },
+      { name: "Aqua", hex: "#00FFFF" },
+      { name: "Turquoise", hex: "#40E0D0" },
+      { name: "Medium Turquoise", hex: "#48D1CC" },
+      { name: "Dark Turquoise", hex: "#00CED1" },
+      { name: "Teal", hex: "#008080" },
+      { name: "Deep Teal", hex: "#00565B" },
+      { name: "Petrol Blue", hex: "#1D4E56" },
+
+      // Greens
+      { name: "Mint Green", hex: "#98FF98" },
+      { name: "Light Mint", hex: "#E0F8F1" },
+      { name: "Seafoam Green", hex: "#9FE2BF" },
+      { name: "Celadon", hex: "#ACE1AF" },
+      { name: "Sage Green", hex: "#9CAF88" },
+      { name: "Pale Green", hex: "#98FB98" },
+      { name: "Light Green", hex: "#90EE90" },
+      { name: "Lime Green", hex: "#32CD32" },
+      { name: "Electric Lime", hex: "#00FF00" },
+      { name: "Chartreuse", hex: "#7FFF00" },
+      { name: "Yellow Green", hex: "#9ACD32" },
+      { name: "Olive Green", hex: "#808000" },
+      { name: "Olive Drab", hex: "#6B8E23" },
+      { name: "Dark Olive Green", hex: "#556B2F" },
+      { name: "Moss Green", hex: "#8A9A5B" },
+      { name: "Army Green", hex: "#4B5320" },
+      { name: "Emerald Green", hex: "#50C878" },
+      { name: "Jade Green", hex: "#00A86B" },
+      { name: "Forest Green", hex: "#228B22" },
+      { name: "Hunter Green", hex: "#355E3B" },
+      { name: "Pine Green", hex: "#01796F" },
+      { name: "Dark Green", hex: "#006400" },
+      { name: "Kelly Green", hex: "#4CBB17" },
+      { name: "Medium Sea Green", hex: "#3CB371" },
+      { name: "Dark Sea Green", hex: "#8FBC8F" },
+
+      // Reds, Corals & Pinks
+      { name: "Vibrant Red", hex: "#FF0000" },
+      { name: "Crimson", hex: "#DC143C" },
+      { name: "Scarlet", hex: "#FF2400" },
+      { name: "Firebrick", hex: "#B22222" },
+      { name: "Dark Red", hex: "#8B0000" },
+      { name: "Ruby Red", hex: "#9B111E" },
+      { name: "Cherry Red", hex: "#D2042D" },
+      { name: "Blood Red", hex: "#660000" },
+      { name: "Maroon", hex: "#800000" },
+      { name: "Burgundy", hex: "#800020" },
+      { name: "Wine", hex: "#722F37" },
+      { name: "Coral Red", hex: "#FF4040" },
+      { name: "Coral", hex: "#FF7F50" },
+      { name: "Light Coral", hex: "#F08080" },
+      { name: "Salmon", hex: "#FA8072" },
+      { name: "Dark Salmon", hex: "#E9967A" },
+      { name: "Light Salmon", hex: "#FFA07A" },
+      { name: "Peach", hex: "#FFE5B4" },
+      { name: "Peach Puff", hex: "#FFDAB9" },
+      { name: "Apricot", hex: "#FBCEB1" },
+      { name: "Rose", hex: "#FF007F" },
+      { name: "Dusty Rose", hex: "#DCAE96" },
+      { name: "Blush Pink", hex: "#DE5D83" },
+      { name: "Light Pink", hex: "#FFB6C1" },
+      { name: "Pink", hex: "#FFC0CB" },
+      { name: "Hot Pink", hex: "#FF69B4" },
+      { name: "Deep Pink", hex: "#FF1493" },
+      { name: "Raspberry", hex: "#E30B5C" },
+      { name: "Flamingo Pink", hex: "#FC8EAC" },
+
+      // Oranges & Yellows
+      { name: "Orange", hex: "#FFA500" },
+      { name: "Dark Orange", hex: "#FF8C00" },
+      { name: "Tangerine", hex: "#F28500" },
+      { name: "Amber", hex: "#FFBF00" },
+      { name: "Gold", hex: "#FFD700" },
+      { name: "Yellow", hex: "#FFFF00" },
+      { name: "Light Yellow", hex: "#FFFFE0" },
+      { name: "Lemon Yellow", hex: "#FFF44F" },
+      { name: "Canary Yellow", hex: "#FFEF00" },
+      { name: "Moccasin", hex: "#FFE4B5" },
+      { name: "Navajo White", hex: "#FFDEAD" },
+      { name: "Papaya Whip", hex: "#FFEFD5" },
+
+      // Purples & Violets
+      { name: "Lavender", hex: "#E6E6FA" },
+      { name: "Thistle", hex: "#D8BFD8" },
+      { name: "Plum", hex: "#DDA0DD" },
+      { name: "Violet", hex: "#EE82EE" },
+      { name: "Orchid", hex: "#DA70D6" },
+      { name: "Medium Orchid", hex: "#BA55D3" },
+      { name: "Dark Orchid", hex: "#9932CC" },
+      { name: "Dark Violet", hex: "#9400D3" },
+      { name: "Blue Violet", hex: "#8A2BE2" },
+      { name: "Purple", hex: "#800080" },
+      { name: "Medium Purple", hex: "#9370DB" },
+      { name: "Indigo", hex: "#4B0082" },
+      { name: "Dark Magenta", hex: "#8B008B" },
+      { name: "Magenta", hex: "#FF00FF" },
+      { name: "Fuchsia", hex: "#FF00FF" },
+      { name: "Deep Purple", hex: "#36013F" },
+      { name: "Eggplant", hex: "#614051" },
+      { name: "Mulberry", hex: "#C54B8C" },
+      { name: "Lilac", hex: "#C8A2C8" },
+      { name: "Mauve", hex: "#E0B0FF" },
+      { name: "Amethyst", hex: "#9966CC" }
+    ];
+
+    function hexToRgb(hex) {
+      if (!hex) return null;
+      let clean = hex.replace('#', '').trim();
+      if (clean.length === 3) clean = clean[0] + clean[0] + clean[1] + clean[1] + clean[2] + clean[2];
+      if (clean.length !== 6) return null;
+      const num = parseInt(clean, 16);
+      if (isNaN(num)) return null;
+      return { r: (num >> 16) & 255, g: (num >> 8) & 255, b: num & 255 };
+    }
+
+    function getClosestColorName(hex) {
+      const rgb = hexToRgb(hex);
+      if (!rgb) return null;
+      let minDistance = Infinity;
+      let closestName = 'Custom Tone';
+      for (const item of COLOR_NAMES) {
+        const itemRgb = hexToRgb(item.hex);
+        if (!itemRgb) continue;
+        const rMean = (rgb.r + itemRgb.r) / 2;
+        const deltaR = rgb.r - itemRgb.r;
+        const deltaG = rgb.g - itemRgb.g;
+        const deltaB = rgb.b - itemRgb.b;
+        const distance = Math.sqrt((2 + rMean / 256) * deltaR * deltaR + 4 * deltaG * deltaG + (2 + (255 - rMean) / 256) * deltaB * deltaB);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestName = item.name;
+        }
+      }
+      return closestName;
+    }
+
+    function convertPtToWebScale(pt) {
+      const numPt = parseFloat(pt) || 12;
+      const px = Math.round((numPt * 4 / 3) * 10) / 10;
+      const rem = Math.round((numPt / 12) * 1000) / 1000;
+      return { pt: numPt, px, rem };
+    }
+
+    /* Layout & Block Definitions */
+    const BLOCK_DEFS = {
+      header: { name: "Top Navigation Bar", short: "Header", canAlign: false, defaultAlign: "left" },
+      label: { name: "Section Category Label", short: "Section Label", canAlign: true, defaultAlign: "left" },
+      headline: { name: "Main Headline", short: "Main Headline", canAlign: true, defaultAlign: "left" },
+      subheadline: { name: "Subheadline Narrative", short: "Subheadline", canAlign: true, defaultAlign: "left" },
+      callout: { name: "Governance Callout Box", short: "Vision Callout", canAlign: true, defaultAlign: "left" },
+      body: { name: "Dynamic Body Copy", short: "Body Copy", canAlign: true, defaultAlign: "left" },
+      ctas: { name: "Action CTA Buttons", short: "Action CTAs", canAlign: true, defaultAlign: "left" },
+      cards: { name: "Feature Cards Grid", short: "Feature Grid", canAlign: false, defaultAlign: "left" }
+    };
+
+    const CARD_DEFS = {
+      'demo-card-1': { title: "Hydrologic Infrastructure", tag: "Parcels & Water" },
+      'demo-card-2': { title: "Capital Architecture", tag: "Flagship Pilot" },
+      'demo-card-3': { title: "Family of Businesses", tag: "Enterprise" }
+    };
+
+    const DEFAULT_LAYOUT = {
+      order: ['header', 'label', 'headline', 'subheadline', 'callout', 'body', 'ctas', 'cards'],
+      alignments: {
+        label: 'left',
+        headline: 'left',
+        subheadline: 'left',
+        callout: 'left',
+        body: 'left',
+        ctas: 'left'
+      },
+      visibility: {
+        header: true,
+        label: true,
+        headline: true,
+        subheadline: true,
+        callout: true,
+        body: true,
+        ctas: true,
+        cards: true
+      },
+      cardOrder: ['demo-card-1', 'demo-card-2', 'demo-card-3'],
+      cardColumns: '3'
+    };
+
+    const LAYOUT_PRESETS = {
+      editorial: {
+        name: "Default Editorial Flow",
+        order: ['header', 'label', 'headline', 'subheadline', 'callout', 'body', 'ctas', 'cards'],
+        alignments: { label: 'left', headline: 'left', subheadline: 'left', callout: 'left', body: 'left', ctas: 'left' },
+        cardColumns: '3'
+      },
+      spotlight: {
+        name: "Centered Spotlight",
+        order: ['header', 'headline', 'label', 'subheadline', 'ctas', 'callout', 'body', 'cards'],
+        alignments: { label: 'center', headline: 'center', subheadline: 'center', callout: 'center', body: 'center', ctas: 'center' },
+        cardColumns: '3'
+      },
+      action: {
+        name: "Action-First Flow",
+        order: ['header', 'label', 'headline', 'ctas', 'subheadline', 'cards', 'callout', 'body'],
+        alignments: { label: 'left', headline: 'left', subheadline: 'left', callout: 'left', body: 'left', ctas: 'left' },
+        cardColumns: '3'
+      },
+      narrative: {
+        name: "Storytelling Narrative",
+        order: ['header', 'callout', 'label', 'headline', 'subheadline', 'body', 'cards', 'ctas'],
+        alignments: { label: 'left', headline: 'left', subheadline: 'left', callout: 'left', body: 'left', ctas: 'left' },
+        cardColumns: '3'
+      }
+    };
+
+    /* Blank Initial State */
+    const BLANK_TOKENS = {
+      colors: [
+        { varName: '--color-bg-primary', role: 'Main Backdrop', desc: '', hex: '' },
+        { varName: '--color-bg-card', role: 'Containers', desc: '', hex: '' },
+        { varName: '--color-text-primary', role: 'Body Text', desc: '', hex: '' },
+        { varName: '--color-text-heading', role: 'Titles', desc: '', hex: '' },
+        { varName: '--color-accent', role: 'Titles & Accents', desc: '', hex: '' },
+        { varName: '--color-accent-blue', role: 'CTAs & Badges', desc: '', hex: '' }
+      ],
+      typography: {
+        fontHeadings: "'Adobe Caslon Pro', 'Libre Caslon Text', Georgia, serif, Arial, sans-serif",
+        fontBody: "'Helvetica Light', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+        headline: { pt: 36, weight: '700', lh: '1.2', tracking: '-0.02em' },
+        sectionLabel: { pt: 8.4, weight: '700', tracking: '0.18em', transform: 'uppercase' },
+        body: { pt: 12, weightDesc: 'Helvetica Light, Helvetica Medium (All Caps)', lh: '1.6', colorVar: 'var(--color-text-primary)' }
+      },
+      btnPrimary: "Background #30210F, Border 1px solid #D4A359, Color #FFFFFF, Padding 0.85rem 2rem, Tracking 0.12em uppercase.",
+      btnHover: "Subtle gold glow, clean opacity transitions (200ms ease).",
+      btnBgHex: "#30210F",
+      btnBorderHex: "#D4A359",
+      assetGuidelines: "Real, tangible local photography of Nevada County parcels, water infrastructure, and regional sites — strictly NO generic AI artwork.",
+      layout: JSON.parse(JSON.stringify(DEFAULT_LAYOUT))
+    };
+
+    let state = JSON.parse(JSON.stringify(BLANK_TOKENS));
+    let popoutWindowRef = null;
+
+    /* Detect Window Mode on Startup */
+    const urlParams = new URLSearchParams(window.location.search);
+    const isControlsOnlyWindow = urlParams.get('window') === 'controls';
+
+    /* Initialize Application */
+    document.addEventListener('DOMContentLoaded', () => {
+      if (isControlsOnlyWindow) {
+        document.body.classList.add('controls-only-window');
+        document.title = '✦ NPC Design Controls Palette';
+        const headerTitle = document.getElementById('app-header-title');
+        if (headerTitle) headerTitle.innerText = 'Design Controls Palette';
+        const syncBadge = document.getElementById('external-sync-badge');
+        if (syncBadge) syncBadge.style.display = 'inline-flex';
+        const syncText = document.getElementById('sync-status-text');
+        if (syncText) syncText.innerText = 'Synced Live to Main Window';
+        
+        const btnPopout = document.getElementById('btn-popout-window');
+        if (btnPopout) btnPopout.style.display = 'none';
+        const btnHud = document.getElementById('btn-toggle-hud');
+        if (btnHud) btnHud.style.display = 'none';
+        const btnPopupRedock = document.getElementById('btn-popup-redock');
+        if (btnPopupRedock) btnPopupRedock.style.display = 'inline-flex';
+        const banner = document.getElementById('popup-sync-banner');
+        if (banner) banner.style.display = 'flex';
+
+        // Try load state from localStorage
+        try {
+          const saved = localStorage.getItem('npc_studio_state');
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            state = Object.assign({}, state, parsed);
+            if (!state.layout) state.layout = JSON.parse(JSON.stringify(DEFAULT_LAYOUT));
+          }
+        } catch (e) {}
+
+        // Listen for beforeunload to notify main window to re-dock
+        window.addEventListener('beforeunload', () => {
+          try {
+            broadcastSync.postMessage({ type: 'REDOCK_REQUEST' });
+            if (window.opener && !window.opener.closed) {
+              window.opener.postMessage({ type: 'REDOCK_REQUEST' }, '*');
+            }
+          } catch (e) {}
+        });
+      } else {
+        // Try load saved state
+        try {
+          const saved = localStorage.getItem('npc_studio_state');
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            state = Object.assign({}, state, parsed);
+            if (!state.layout) state.layout = JSON.parse(JSON.stringify(DEFAULT_LAYOUT));
+          }
+        } catch (e) {}
+      }
+
+      // Ensure layout structure integrity
+      if (!state.layout) state.layout = JSON.parse(JSON.stringify(DEFAULT_LAYOUT));
+      if (!state.layout.order) state.layout.order = [...DEFAULT_LAYOUT.order];
+      if (!state.layout.alignments) state.layout.alignments = { ...DEFAULT_LAYOUT.alignments };
+      if (!state.layout.visibility) state.layout.visibility = { ...DEFAULT_LAYOUT.visibility };
+      if (!state.layout.cardOrder) state.layout.cardOrder = [...DEFAULT_LAYOUT.cardOrder];
+
+      renderColorTokens();
+      syncTypoControlsFromState();
+      renderLayoutControls();
+      initDraggableHud();
+      initDragAndDrop();
+      updateStudio(false);
+    });
+
+    /* BroadcastChannel and Message Sync Receiver */
+    broadcastSync.onmessage = (event) => {
+      if (!event.data) return;
+      if (event.data.type === 'SYNC_STATE') {
+        state = event.data.state;
+        if (!state.layout) state.layout = JSON.parse(JSON.stringify(DEFAULT_LAYOUT));
+        syncTypoControlsFromState();
+        renderColorTokens();
+        renderLayoutControls();
+        updateStudio(false);
+      } else if (event.data.type === 'REDOCK_REQUEST') {
+        closePopoutWindow();
+      }
+    };
+
+    window.addEventListener('message', (event) => {
+      if (!event.data) return;
+      if (event.data.type === 'SYNC_STATE') {
+        state = event.data.state;
+        if (!state.layout) state.layout = JSON.parse(JSON.stringify(DEFAULT_LAYOUT));
+        syncTypoControlsFromState();
+        renderColorTokens();
+        renderLayoutControls();
+        updateStudio(false);
+      } else if (event.data.type === 'REDOCK_REQUEST') {
+        closePopoutWindow();
+      }
+    });
+
+    function requestRedockFromPopup() {
+      try {
+        broadcastSync.postMessage({ type: 'REDOCK_REQUEST' });
+        if (window.opener && !window.opener.closed) {
+          window.opener.postMessage({ type: 'REDOCK_REQUEST' }, '*');
+        }
+      } catch (e) {}
+      window.close();
+    }
+
+    /* 1. SEPARATE NATIVE OS WINDOW POP-OUT */
+    function openPopoutWindow() {
+      if (popoutWindowRef && !popoutWindowRef.closed) {
+        popoutWindowRef.focus();
+        return;
+      }
+
+      localStorage.setItem('npc_studio_state', JSON.stringify(state));
+      
+      const cleanPath = window.location.pathname.split('?')[0];
+      const url = `${window.location.origin}${cleanPath}?window=controls`;
+
+      popoutWindowRef = window.open(
+        url,
+        'NPC_Studio_Controls_Window',
+        'width=540,height=920,left=80,top=80,menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=yes'
+      );
+
+      if (popoutWindowRef) {
+        document.body.classList.add('mode-fullscreen-preview');
+        document.body.classList.remove('mode-popout');
+        
+        const btnPopout = document.getElementById('btn-popout-window');
+        const btnHud = document.getElementById('btn-toggle-hud');
+        const btnRedock = document.getElementById('btn-redock');
+        const syncBadge = document.getElementById('external-sync-badge');
+        const syncText = document.getElementById('sync-status-text');
+        const previewPopout = document.getElementById('btn-preview-popout');
+        const previewRedock = document.getElementById('btn-preview-redock');
+
+        if (btnPopout) btnPopout.style.display = 'none';
+        if (btnHud) btnHud.style.display = 'none';
+        if (btnRedock) btnRedock.style.display = 'inline-flex';
+        if (syncBadge) syncBadge.style.display = 'inline-flex';
+        if (syncText) syncText.innerText = 'Remote Controls Active';
+        if (previewPopout) previewPopout.style.display = 'none';
+        if (previewRedock) previewRedock.style.display = 'inline-flex';
+
+        showToast('↗ Controls popped out into separate OS window! Live preview is full-screen.');
+
+        // Monitor window close
+        if (window.popoutCheckInterval) clearInterval(window.popoutCheckInterval);
+        window.popoutCheckInterval = setInterval(() => {
+          if (!popoutWindowRef || popoutWindowRef.closed) {
+            clearInterval(window.popoutCheckInterval);
+            window.popoutCheckInterval = null;
+            closePopoutWindow();
+          }
+        }, 800);
+      } else {
+        alert('Browser popup was blocked. Please allow popups for this site to open the separate controls window.');
+      }
+    }
+
+    function closePopoutWindow() {
+      if (window.popoutCheckInterval) {
+        clearInterval(window.popoutCheckInterval);
+        window.popoutCheckInterval = null;
+      }
+      if (popoutWindowRef && !popoutWindowRef.closed) {
+        try {
+          popoutWindowRef.close();
+        } catch (e) {}
+      }
+      popoutWindowRef = null;
+      
+      document.body.classList.remove('mode-fullscreen-preview');
+      
+      const btnPopout = document.getElementById('btn-popout-window');
+      const btnHud = document.getElementById('btn-toggle-hud');
+      const btnRedock = document.getElementById('btn-redock');
+      const syncBadge = document.getElementById('external-sync-badge');
+      const previewPopout = document.getElementById('btn-preview-popout');
+      const previewRedock = document.getElementById('btn-preview-redock');
+
+      if (btnPopout) btnPopout.style.display = 'inline-flex';
+      if (btnHud) btnHud.style.display = 'inline-flex';
+      if (btnRedock) btnRedock.style.display = 'none';
+      if (syncBadge) syncBadge.style.display = 'none';
+      if (previewPopout) previewPopout.style.display = 'inline-flex';
+      if (previewRedock) previewRedock.style.display = 'none';
+
+      showToast('✦ Controls re-docked into main window');
+    }
+
+    /* 2. IN-PAGE FLOATING HUD MODE */
+    function togglePopoutMode() {
+      const body = document.body;
+      const isPopout = body.classList.toggle('mode-popout');
+      const btn = document.getElementById('btn-toggle-hud');
+
+      if (isPopout) {
+        btn.innerText = '🗖 Dock View';
+        body.classList.remove('hud-minimized');
+        showToast('✦ Controls popped out into floating draggable HUD palette!');
+      } else {
+        btn.innerText = '🗗 Floating HUD';
+        body.classList.remove('hud-minimized');
+        const hud = document.getElementById('controls-panel');
+        hud.style.left = '';
+        hud.style.top = '';
+        hud.style.right = '';
+        showToast('✦ Controls docked to split view');
+      }
+    }
+
+    function toggleHudMinimize() {
+      document.body.classList.toggle('hud-minimized');
+    }
+
+    /* Draggable Floating HUD */
+    let isDragging = false;
+    let startX, startY, initialLeft, initialTop;
+
+    function initDraggableHud() {
+      const hud = document.getElementById('controls-panel');
+      const dragHandle = document.getElementById('hud-drag-handle');
+      if (!dragHandle || !hud) return;
+
+      dragHandle.addEventListener('mousedown', (e) => {
+        if (document.body.classList.contains('mode-popout')) {
+          isDragging = true;
+          startX = e.clientX;
+          startY = e.clientY;
+          const rect = hud.getBoundingClientRect();
+          initialLeft = rect.left;
+          initialTop = rect.top;
+          hud.style.transition = 'none';
+          e.preventDefault();
+        }
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        hud.style.left = `${Math.max(10, Math.min(window.innerWidth - hud.offsetWidth - 10, initialLeft + dx))}px`;
+        hud.style.top = `${Math.max(60, Math.min(window.innerHeight - 100, initialTop + dy))}px`;
+        hud.style.right = 'auto';
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (isDragging) {
+          isDragging = false;
+          hud.style.transition = '';
+        }
+      });
+    }
+
+    /* Render Color Input Rows */
+    function renderColorTokens() {
+      const container = document.getElementById('color-tokens-container');
+      container.innerHTML = '';
+
+      state.colors.forEach((token, index) => {
+        const isBlank = !token.hex || token.hex.trim() === '';
+        const row = document.createElement('div');
+        row.className = 'color-token-item';
+        
+        row.innerHTML = `
+          <div class="color-picker-wrapper ${isBlank ? 'blank-swatch' : ''}" id="swatch-${index}" style="background-color: ${token.hex || 'transparent'};" title="Click to pick color">
+            <input type="color" class="color-picker-input" value="${formatHexForPicker(token.hex)}" oninput="handlePickerChange(${index}, this.value)" />
+          </div>
+          <div class="token-details">
+            <span class="token-var-name">${token.varName}</span>
+            <input type="text" class="token-desc-input" id="desc-${index}" value="${token.desc || ''}" placeholder="${token.role ? 'e.g. Color Name / ' + token.role : 'e.g. Color Name / Role'}" oninput="handleDescChange(${index}, this.value)" />
+          </div>
+          <input type="text" class="token-hex-input" id="hex-${index}" value="${token.hex || ''}" placeholder="#HEX" maxlength="9" oninput="handleHexInput(${index}, this.value)" onchange="handleHexChange(${index}, this.value)" />
+          <button class="btn-delete-token" onclick="deleteColorToken(${index})" title="Remove color token">✕</button>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function formatHexForPicker(hex) {
+      if (!hex) return '#FFFFFF';
+      let clean = hex.replace('#', '').trim();
+      if (clean.length === 3) return '#' + clean[0] + clean[0] + clean[1] + clean[1] + clean[2] + clean[2];
+      if (clean.length === 6) return '#' + clean;
+      return '#FFFFFF';
+    }
+
+    function handleHexInput(index, val) {
+      const token = state.colors[index];
+      let trimmed = val.trim();
+      
+      if (!trimmed) {
+        token.hex = '';
+        token.desc = '';
+        const descInput = document.getElementById(`desc-${index}`);
+        if (descInput) descInput.value = '';
+        const swatch = document.getElementById(`swatch-${index}`);
+        if (swatch) {
+          swatch.style.backgroundColor = 'transparent';
+          swatch.classList.add('blank-swatch');
+        }
+        updateStudio();
+        return;
+      }
+
+      let hexFormatted = trimmed.startsWith('#') ? trimmed : '#' + trimmed;
+      
+      if (/^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(hexFormatted)) {
+        token.hex = hexFormatted.toUpperCase();
+        
+        const detectedName = getClosestColorName(token.hex);
+        if (detectedName) {
+          const roleText = token.role ? ` / ${token.role}` : '';
+          token.desc = `${detectedName}${roleText}`;
+          const descInput = document.getElementById(`desc-${index}`);
+          if (descInput) descInput.value = token.desc;
+        }
+
+        const swatch = document.getElementById(`swatch-${index}`);
+        if (swatch) {
+          swatch.style.backgroundColor = token.hex;
+          swatch.classList.remove('blank-swatch');
+          const picker = swatch.querySelector('.color-picker-input');
+          if (picker) picker.value = formatHexForPicker(token.hex);
+        }
+      } else {
+        token.hex = hexFormatted;
+      }
+
+      updateStudio();
+    }
+
+    function handleHexChange(index, val) {
+      handleHexInput(index, val);
+      const hexInput = document.getElementById(`hex-${index}`);
+      if (hexInput && state.colors[index].hex) {
+        hexInput.value = state.colors[index].hex;
+      }
+    }
+
+    function handlePickerChange(index, pickerHex) {
+      const token = state.colors[index];
+      token.hex = pickerHex.toUpperCase();
+      
+      const hexInput = document.getElementById(`hex-${index}`);
+      if (hexInput) hexInput.value = token.hex;
+
+      const detectedName = getClosestColorName(token.hex);
+      if (detectedName) {
+        const roleText = token.role ? ` / ${token.role}` : '';
+        token.desc = `${detectedName}${roleText}`;
+        const descInput = document.getElementById(`desc-${index}`);
+        if (descInput) descInput.value = token.desc;
+      }
+
+      const swatch = document.getElementById(`swatch-${index}`);
+      if (swatch) {
+        swatch.style.backgroundColor = token.hex;
+        swatch.classList.remove('blank-swatch');
+      }
+
+      updateStudio();
+    }
+
+    function handleDescChange(index, newDesc) {
+      state.colors[index].desc = newDesc;
+      if (newDesc.includes('/')) {
+        state.colors[index].role = newDesc.split('/')[1].trim();
+      }
+      updateStudio();
+    }
+
+    function addColorToken() {
+      const varName = prompt('Enter CSS Variable Name (e.g. --color-accent-green):', `--color-accent-${state.colors.length + 1}`);
+      if (!varName) return;
+      const role = prompt('Enter Token Role / Usage (e.g. Badges, Borders, Accents):', 'Accent');
+      state.colors.push({
+        varName: varName.trim(),
+        role: role || 'Custom Accent',
+        desc: '',
+        hex: ''
+      });
+      renderColorTokens();
+      updateStudio();
+      const newIndex = state.colors.length - 1;
+      setTimeout(() => {
+        const input = document.getElementById(`hex-${newIndex}`);
+        if (input) input.focus();
+      }, 50);
+    }
+
+    function deleteColorToken(index) {
+      if (state.colors.length <= 1) {
+        showToast('⚠️ At least one color token is required.');
+        return;
+      }
+      const deleted = state.colors.splice(index, 1)[0];
+      renderColorTokens();
+      updateStudio();
+      showToast(`✓ Removed ${deleted.varName}`);
+    }
+
+    /* Typography Event Handlers */
+    function handleHeadingsFontChange(val) {
+      const customInput = document.getElementById('font-family-headings-custom');
+      if (val === 'CUSTOM') {
+        customInput.style.display = 'block';
+        customInput.focus();
+        state.typography.fontHeadings = customInput.value || "'Georgia', serif";
+      } else {
+        customInput.style.display = 'none';
+        state.typography.fontHeadings = val;
+      }
+
+      const badge = document.getElementById('badge-headings-category');
+      if (val.includes('sans-serif')) badge.innerText = 'Sans-Serif';
+      else if (val.includes('Cinzel') || val.includes('Roman')) badge.innerText = 'Roman Serif';
+      else if (val.includes('Bodoni')) badge.innerText = 'Didone Serif';
+      else badge.innerText = 'Serif Display';
+
+      updateStudio();
+    }
+
+    function handleCustomHeadingsFont(val) {
+      state.typography.fontHeadings = val;
+      updateStudio();
+    }
+
+    function handleBodyFontChange(val) {
+      const customInput = document.getElementById('font-family-body-custom');
+      if (val === 'CUSTOM') {
+        customInput.style.display = 'block';
+        customInput.focus();
+        state.typography.fontBody = customInput.value || "'Helvetica', sans-serif";
+      } else {
+        customInput.style.display = 'none';
+        state.typography.fontBody = val;
+      }
+
+      const badge = document.getElementById('badge-body-category');
+      if (val.includes('serif') && !val.includes('sans-serif')) badge.innerText = 'Serif Body';
+      else badge.innerText = 'Sans-Serif';
+
+      updateStudio();
+    }
+
+    function handleCustomBodyFont(val) {
+      state.typography.fontBody = val;
+      updateStudio();
+    }
+
+    function updateTypoFromPoints() {
+      const hlPt = parseFloat(document.getElementById('typo-headline-pt').value) || 36;
+      const hlWeight = document.getElementById('typo-headline-weight').value;
+      const hlLh = document.getElementById('typo-headline-lh').value;
+      const hlTracking = document.getElementById('typo-headline-tracking').value;
+      state.typography.headline = { pt: hlPt, weight: hlWeight, lh: hlLh, tracking: hlTracking };
+      
+      const hlScale = convertPtToWebScale(hlPt);
+      document.getElementById('badge-headline-scale').innerText = `${hlPt} pt → ${hlScale.rem}rem (${hlScale.px}px)`;
+
+      const labelPt = parseFloat(document.getElementById('typo-label-pt').value) || 8.4;
+      const labelWeight = document.getElementById('typo-label-weight').value;
+      const labelTracking = document.getElementById('typo-label-tracking').value;
+      const labelTransform = document.getElementById('typo-label-transform').value;
+      state.typography.sectionLabel = { pt: labelPt, weight: labelWeight, tracking: labelTracking, transform: labelTransform };
+
+      const labelScale = convertPtToWebScale(labelPt);
+      document.getElementById('badge-label-scale').innerText = `${labelPt} pt → ${labelScale.rem}rem (${labelScale.px}px)`;
+
+      const bodyPt = parseFloat(document.getElementById('typo-body-pt').value) || 12;
+      const bodyWeight = document.getElementById('typo-body-weight').value;
+      const bodyLh = document.getElementById('typo-body-lh').value;
+      const bodyColor = document.getElementById('typo-body-color').value;
+      state.typography.body = { pt: bodyPt, weightDesc: bodyWeight, lh: bodyLh, colorVar: bodyColor };
+
+      const bodyScale = convertPtToWebScale(bodyPt);
+      document.getElementById('badge-body-scale').innerText = `${bodyPt} pt → ${bodyScale.rem}rem (${bodyScale.px}px)`;
+
+      updateStudio();
+    }
+
+    function syncTypoControlsFromState() {
+      const typo = state.typography;
+
+      const selectH = document.getElementById('select-font-headings');
+      let foundH = false;
+      for (let opt of selectH.options) {
+        if (opt.value === typo.fontHeadings) {
+          selectH.value = typo.fontHeadings;
+          foundH = true;
+          break;
+        }
+      }
+      if (!foundH) {
+        selectH.value = 'CUSTOM';
+        document.getElementById('font-family-headings-custom').style.display = 'block';
+        document.getElementById('font-family-headings-custom').value = typo.fontHeadings;
+      }
+
+      const selectB = document.getElementById('select-font-body');
+      let foundB = false;
+      for (let opt of selectB.options) {
+        if (opt.value === typo.fontBody) {
+          selectB.value = typo.fontBody;
+          foundB = true;
+          break;
+        }
+      }
+      if (!foundB) {
+        selectB.value = 'CUSTOM';
+        document.getElementById('font-family-body-custom').style.display = 'block';
+        document.getElementById('font-family-body-custom').value = typo.fontBody;
+      }
+
+      document.getElementById('typo-headline-pt').value = typo.headline.pt;
+      document.getElementById('typo-headline-weight').value = typo.headline.weight;
+      document.getElementById('typo-headline-lh').value = typo.headline.lh;
+      document.getElementById('typo-headline-tracking').value = typo.headline.tracking;
+
+      document.getElementById('typo-label-pt').value = typo.sectionLabel.pt;
+      document.getElementById('typo-label-weight').value = typo.sectionLabel.weight;
+      document.getElementById('typo-label-tracking').value = typo.sectionLabel.tracking;
+      document.getElementById('typo-label-transform').value = typo.sectionLabel.transform;
+
+      document.getElementById('typo-body-pt').value = typo.body.pt;
+      document.getElementById('typo-body-weight').value = typo.body.weightDesc;
+      document.getElementById('typo-body-lh').value = typo.body.lh;
+      document.getElementById('typo-body-color').value = typo.body.colorVar;
+
+      const hlScale = convertPtToWebScale(typo.headline.pt);
+      document.getElementById('badge-headline-scale').innerText = `${typo.headline.pt} pt → ${hlScale.rem}rem (${hlScale.px}px)`;
+
+      const labelScale = convertPtToWebScale(typo.sectionLabel.pt);
+      document.getElementById('badge-label-scale').innerText = `${typo.sectionLabel.pt} pt → ${labelScale.rem}rem (${labelScale.px}px)`;
+
+      const bodyScale = convertPtToWebScale(typo.body.pt);
+      document.getElementById('badge-body-scale').innerText = `${typo.body.pt} pt → ${bodyScale.rem}rem (${bodyScale.px}px)`;
+    }
+
+    function getSectionLabelsSpecString() {
+      const l = state.typography.sectionLabel;
+      const scale = convertPtToWebScale(l.pt);
+      return `text-transform: ${l.transform}; font-size: ${scale.rem}rem; font-weight: ${l.weight}; letter-spacing: ${l.tracking}; color: var(--color-accent)`;
+    }
+
+    function getHeadlinesSpecString() {
+      const h = state.typography.headline;
+      return `font-weight: ${h.weight}; letter-spacing: ${h.tracking}; line-height: ${h.lh}; color: var(--color-text-heading);`;
+    }
+
+    function getBodyCopySpecString() {
+      const b = state.typography.body;
+      const scale = convertPtToWebScale(b.pt);
+      return `${b.weightDesc}; font-size: ${scale.rem}rem; line-height: ${b.lh}; color: ${b.colorVar};`;
+    }
+
+    /* Update All Studio Displays & Code Outputs */
+    function updateStudio(shouldBroadcast = true) {
+      state.btnPrimary = document.getElementById('btn-primary-spec').value;
+      state.btnHover = document.getElementById('btn-hover-spec').value;
+      state.btnBgHex = document.getElementById('btn-bg-hex').value;
+      state.btnBorderHex = document.getElementById('btn-border-hex').value;
+      state.assetGuidelines = document.getElementById('asset-guidelines').value;
+
+      const colorMap = {};
+      state.colors.forEach(c => {
+        if (c.hex && c.hex.startsWith('#')) {
+          colorMap[c.varName] = c.hex;
+        }
+      });
+
+      const bgPrimary = colorMap['--color-bg-primary'] || '#FFFFFF';
+      const bgCard = colorMap['--color-bg-card'] || '#f3efe8';
+      const textPrimary = colorMap['--color-text-primary'] || '#111827';
+      const textHeading = colorMap['--color-text-heading'] || '#2c251e';
+      const accent = colorMap['--color-accent'] || '#bf8b2d';
+      const accentBlue = colorMap['--color-accent-blue'] || '#9eb0d1';
+
+      // 1. Update Live Sandbox Preview Frame (if present in this window)
+      const typo = state.typography;
+      const hlScale = convertPtToWebScale(typo.headline.pt);
+      const labelScale = convertPtToWebScale(typo.sectionLabel.pt);
+      const bodyScale = convertPtToWebScale(typo.body.pt);
+
+      const sandbox = document.getElementById('view-preview');
+      if (sandbox) {
+        sandbox.style.backgroundColor = bgPrimary;
+        sandbox.style.color = textPrimary;
+        sandbox.style.fontFamily = typo.fontBody;
+
+        const brandTitle = document.getElementById('preview-brand-title');
+        if (brandTitle) brandTitle.style.fontFamily = typo.fontHeadings;
+        
+        const headerCta = document.getElementById('preview-header-cta');
+        if (headerCta) {
+          headerCta.style.backgroundColor = state.btnBgHex || '#30210F';
+          headerCta.style.borderColor = state.btnBorderHex || '#D4A359';
+          headerCta.style.color = '#FFFFFF';
+          headerCta.style.border = `1px solid ${state.btnBorderHex || '#D4A359'}`;
+          headerCta.style.fontFamily = typo.fontBody;
+        }
+
+        const sectionLabel = document.getElementById('preview-section-label');
+        if (sectionLabel) {
+          sectionLabel.style.fontFamily = typo.fontHeadings;
+          sectionLabel.style.color = accent;
+          sectionLabel.style.textTransform = typo.sectionLabel.transform;
+          sectionLabel.style.fontSize = `${labelScale.rem}rem`;
+          sectionLabel.style.fontWeight = typo.sectionLabel.weight;
+          sectionLabel.style.letterSpacing = typo.sectionLabel.tracking;
+        }
+
+        const headline = document.getElementById('preview-headline');
+        if (headline) {
+          headline.style.fontFamily = typo.fontHeadings;
+          headline.style.color = textHeading;
+          headline.style.fontSize = `${hlScale.rem}rem`;
+          headline.style.fontWeight = typo.headline.weight;
+          headline.style.letterSpacing = typo.headline.tracking;
+          headline.style.lineHeight = typo.headline.lh;
+        }
+
+        const subheadline = document.getElementById('preview-subheadline');
+        if (subheadline) {
+          subheadline.style.fontFamily = typo.fontHeadings;
+          subheadline.style.color = textPrimary;
+          subheadline.style.fontSize = `${Math.round(bodyScale.rem * 1.25 * 100) / 100}rem`;
+        }
+
+        const callout = document.getElementById('preview-callout');
+        if (callout) {
+          callout.style.backgroundColor = bgCard;
+          callout.style.borderLeftColor = accent;
+          callout.style.borderColor = '#dcd7ce';
+        }
+
+        const calloutQuote = document.getElementById('preview-callout-quote');
+        if (calloutQuote) calloutQuote.style.fontFamily = typo.fontHeadings;
+
+        const calloutAuthor = document.getElementById('preview-callout-author');
+        if (calloutAuthor) calloutAuthor.style.color = accent;
+
+        const previewBody = document.getElementById('preview-body');
+        if (previewBody) {
+          previewBody.style.fontFamily = typo.fontBody;
+          previewBody.style.fontSize = `${bodyScale.rem}rem`;
+          previewBody.style.lineHeight = typo.body.lh;
+          previewBody.style.color = textPrimary;
+        }
+
+        const ctaBtn = document.getElementById('preview-cta-btn');
+        if (ctaBtn) {
+          ctaBtn.style.backgroundColor = state.btnBgHex || '#30210F';
+          ctaBtn.style.border = `1px solid ${state.btnBorderHex || '#D4A359'}`;
+          ctaBtn.style.color = '#FFFFFF';
+          ctaBtn.style.padding = '0.85rem 2rem';
+          ctaBtn.style.letterSpacing = '0.12em';
+          ctaBtn.style.textTransform = 'uppercase';
+          ctaBtn.style.fontWeight = '600';
+          ctaBtn.style.fontFamily = typo.fontBody;
+        }
+
+        const badge = document.getElementById('preview-badge');
+        if (badge) {
+          badge.style.backgroundColor = accentBlue + '33';
+          badge.style.color = '#1e3352';
+          badge.style.border = `1px solid ${accentBlue}`;
+        }
+
+        for (let i = 1; i <= 3; i++) {
+          const card = document.getElementById(`demo-card-${i}`);
+          const cardTitle = document.getElementById(`demo-card-title-${i}`);
+          const cardLabel = document.getElementById(`demo-card-label-${i}`);
+          if (card) {
+            card.style.backgroundColor = bgCard;
+            card.style.borderColor = '#ded9ce';
+          }
+          if (cardTitle) {
+            cardTitle.style.fontFamily = typo.fontHeadings;
+            cardTitle.style.color = textHeading;
+          }
+          if (cardLabel) {
+            cardLabel.style.color = accent;
+          }
+        }
+
+        // Apply Layout, Position Ordering, Alignments, and Visibility
+        applyLayoutToPreview();
+      }
+
+      // 2. Render Sidebar Layout Controls
+      renderLayoutControls();
+
+      // 3. Generate Markdown (.md)
+      const md = generateMarkdownString();
+      const mdBlock = document.getElementById('markdown-code-block');
+      if (mdBlock) mdBlock.innerText = md;
+
+      // 4. Generate CSS Variables (:root)
+      const css = generateCSSString();
+      const cssBlock = document.getElementById('css-code-block');
+      if (cssBlock) cssBlock.innerText = css;
+
+      // 5. Generate JSON
+      const jsonBlock = document.getElementById('json-code-block');
+      if (jsonBlock) jsonBlock.innerText = JSON.stringify(state, null, 2);
+
+      // Real-Time Cross-Window Broadcasting
+      if (shouldBroadcast) {
+        broadcastSync.postMessage({ type: 'SYNC_STATE', state });
+        localStorage.setItem('npc_studio_state', JSON.stringify(state));
+        if (window.opener && !window.opener.closed) {
+          window.opener.postMessage({ type: 'SYNC_STATE', state }, '*');
+        }
+        if (popoutWindowRef && !popoutWindowRef.closed) {
+          popoutWindowRef.postMessage({ type: 'SYNC_STATE', state }, '*');
+        }
+      }
+    }
+
+    /* Apply Layout Order, Visibility, and Alignments to Preview Canvas DOM */
+    function applyLayoutToPreview() {
+      const sandbox = document.getElementById('view-preview');
+      if (!sandbox) return;
+
+      if (!state.layout) state.layout = JSON.parse(JSON.stringify(DEFAULT_LAYOUT));
+      if (!state.layout.order) state.layout.order = [...DEFAULT_LAYOUT.order];
+      if (!state.layout.alignments) state.layout.alignments = { ...DEFAULT_LAYOUT.alignments };
+      if (!state.layout.visibility) state.layout.visibility = { ...DEFAULT_LAYOUT.visibility };
+      if (!state.layout.cardOrder) state.layout.cardOrder = [...DEFAULT_LAYOUT.cardOrder];
+
+      // Reorder and configure blocks
+      state.layout.order.forEach(blockId => {
+        const blockEl = document.getElementById(`block-${blockId}`);
+        if (blockEl) {
+          sandbox.appendChild(blockEl);
+
+          // Visibility
+          const isVisible = state.layout.visibility[blockId] !== false;
+          blockEl.style.display = isVisible ? '' : 'none';
+
+          // Alignment
+          const align = state.layout.alignments[blockId] || 'left';
+          applyBlockAlignment(blockId, blockEl, align);
+        }
+      });
+
+      // Card Grid Columns & Order
+      const cardGrid = document.getElementById('preview-cards-container');
+      if (cardGrid) {
+        cardGrid.classList.remove('grid-cols-1', 'grid-cols-2', 'grid-cols-3');
+        cardGrid.classList.add(`grid-cols-${state.layout.cardColumns || '3'}`);
+
+        state.layout.cardOrder.forEach(cardId => {
+          const cardEl = document.getElementById(cardId);
+          if (cardEl) {
+            cardGrid.appendChild(cardEl);
+          }
+        });
+      }
+    }
+
+    function applyBlockAlignment(blockId, blockEl, align) {
+      const accent = (state.colors.find(c => c.varName === '--color-accent') || {}).hex || '#BF8B2D';
+
+      switch (blockId) {
+        case 'label': {
+          const labelEl = document.getElementById('preview-section-label');
+          if (labelEl) {
+            labelEl.style.display = 'inline-flex';
+            blockEl.style.display = state.layout.visibility.label !== false ? 'flex' : 'none';
+            blockEl.style.justifyContent = align === 'center' ? 'center' : (align === 'right' ? 'flex-end' : 'flex-start');
+            blockEl.style.textAlign = align;
+          }
+          break;
+        }
+        case 'headline': {
+          const hl = document.getElementById('preview-headline');
+          if (hl) {
+            hl.style.textAlign = align;
+          }
+          break;
+        }
+        case 'subheadline': {
+          const sub = document.getElementById('preview-subheadline');
+          if (sub) {
+            sub.style.textAlign = align;
+            if (align === 'center') {
+              sub.style.marginLeft = 'auto';
+              sub.style.marginRight = 'auto';
+              sub.style.maxWidth = '780px';
+            } else if (align === 'right') {
+              sub.style.marginLeft = 'auto';
+              sub.style.marginRight = '0';
+              sub.style.maxWidth = '780px';
+            } else {
+              sub.style.marginLeft = '0';
+              sub.style.marginRight = 'auto';
+              sub.style.maxWidth = '';
+            }
+          }
+          break;
+        }
+        case 'callout': {
+          const callout = document.getElementById('preview-callout');
+          if (callout) {
+            callout.style.textAlign = align;
+            if (align === 'center') {
+              callout.style.marginLeft = 'auto';
+              callout.style.marginRight = 'auto';
+              callout.style.maxWidth = '850px';
+              callout.style.borderLeft = `4px solid ${accent}`;
+              callout.style.borderRight = `4px solid ${accent}`;
+            } else if (align === 'right') {
+              callout.style.marginLeft = 'auto';
+              callout.style.marginRight = '0';
+              callout.style.maxWidth = '850px';
+              callout.style.borderLeft = '1px solid #dcd7ce';
+              callout.style.borderRight = `4px solid ${accent}`;
+            } else {
+              callout.style.marginLeft = '0';
+              callout.style.marginRight = 'auto';
+              callout.style.maxWidth = '';
+              callout.style.borderLeft = `4px solid ${accent}`;
+              callout.style.borderRight = '1px solid #dcd7ce';
+            }
+          }
+          break;
+        }
+        case 'body': {
+          const bodyEl = document.getElementById('preview-body');
+          if (bodyEl) {
+            bodyEl.style.textAlign = align;
+            if (align === 'center') {
+              bodyEl.style.marginLeft = 'auto';
+              bodyEl.style.marginRight = 'auto';
+              bodyEl.style.maxWidth = '800px';
+            } else if (align === 'right') {
+              bodyEl.style.marginLeft = 'auto';
+              bodyEl.style.marginRight = '0';
+              bodyEl.style.maxWidth = '800px';
+            } else {
+              bodyEl.style.marginLeft = '0';
+              bodyEl.style.marginRight = 'auto';
+              bodyEl.style.maxWidth = '';
+            }
+          }
+          break;
+        }
+        case 'ctas': {
+          const ctaContainer = document.getElementById('preview-cta-container');
+          if (ctaContainer) {
+            ctaContainer.style.justifyContent = align === 'center' ? 'center' : (align === 'right' ? 'flex-end' : 'flex-start');
+          }
+          break;
+        }
+      }
+    }
+
+    /* Render Sidebar Layout & Hierarchy List */
+    function renderLayoutControls() {
+      const container = document.getElementById('layout-item-list');
+      if (!container) return;
+      container.innerHTML = '';
+
+      // Update card columns active buttons
+      ['1', '2', '3'].forEach(col => {
+        const btn = document.getElementById(`btn-grid-cols-${col}`);
+        if (btn) {
+          if ((state.layout.cardColumns || '3') === col) {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        }
+      });
+
+      state.layout.order.forEach((blockId, index) => {
+        const def = BLOCK_DEFS[blockId];
+        if (!def) return;
+        const isVisible = state.layout.visibility[blockId] !== false;
+        const currentAlign = state.layout.alignments[blockId] || 'left';
+
+        const row = document.createElement('div');
+        row.className = 'layout-item-row';
+        row.draggable = true;
+        row.dataset.blockId = blockId;
+
+        let alignBtnsHtml = '';
+        if (def.canAlign) {
+          alignBtnsHtml = `
+            <div class="align-btn-group" title="Set content alignment">
+              <button class="btn-align ${currentAlign === 'left' ? 'active' : ''}" onclick="setBlockAlignment('${blockId}', 'left')">L</button>
+              <button class="btn-align ${currentAlign === 'center' ? 'active' : ''}" onclick="setBlockAlignment('${blockId}', 'center')">C</button>
+              <button class="btn-align ${currentAlign === 'right' ? 'active' : ''}" onclick="setBlockAlignment('${blockId}', 'right')">R</button>
+            </div>
+          `;
+        }
+
+        row.innerHTML = `
+          <div class="layout-item-left">
+            <span class="layout-drag-handle" title="Drag to reorder in sidebar">⠿</span>
+            <input type="checkbox" class="visibility-checkbox" ${isVisible ? 'checked' : ''} onchange="toggleBlockVisibility('${blockId}')" title="Show/Hide component" />
+            <span class="layout-item-name" style="${!isVisible ? 'opacity: 0.45; text-decoration: line-through;' : ''}">
+              ${index + 1}. ${def.short}
+            </span>
+          </div>
+          <div class="layout-item-actions">
+            ${alignBtnsHtml}
+            <button class="btn-reorder" onclick="moveBlock('${blockId}', -1)" ${index === 0 ? 'disabled' : ''} title="Move Up">▲</button>
+            <button class="btn-reorder" onclick="moveBlock('${blockId}', 1)" ${index === state.layout.order.length - 1 ? 'disabled' : ''} title="Move Down">▼</button>
+          </div>
+        `;
+
+        // Sidebar Drag & Drop events
+        row.addEventListener('dragstart', (e) => {
+          e.dataTransfer.setData('text/plain', blockId);
+          row.classList.add('is-dragging');
+        });
+        row.addEventListener('dragend', () => {
+          row.classList.remove('is-dragging');
+          document.querySelectorAll('.layout-item-row').forEach(el => el.classList.remove('drag-over'));
+        });
+        row.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          row.classList.add('drag-over');
+        });
+        row.addEventListener('dragleave', () => {
+          row.classList.remove('drag-over');
+        });
+        row.addEventListener('drop', (e) => {
+          e.preventDefault();
+          row.classList.remove('drag-over');
+          const draggedId = e.dataTransfer.getData('text/plain');
+          if (!draggedId || draggedId === blockId) return;
+          reorderBlockInState(draggedId, blockId);
+          updateStudio();
+        });
+
+        container.appendChild(row);
+      });
+    }
+
+    /* Reorder State Helper */
+    function reorderBlockInState(draggedId, targetId, position = 'before') {
+      const currentOrder = state.layout.order.filter(id => id !== draggedId);
+      const targetIndex = currentOrder.indexOf(targetId);
+      if (targetIndex === -1) return;
+      
+      if (position === 'after') {
+        currentOrder.splice(targetIndex + 1, 0, draggedId);
+      } else {
+        currentOrder.splice(targetIndex, 0, draggedId);
+      }
+      state.layout.order = currentOrder;
+    }
+
+    /* Move Block Action */
+    function moveBlock(blockId, direction) {
+      const idx = state.layout.order.indexOf(blockId);
+      if (idx === -1) return;
+      const newIdx = idx + direction;
+      if (newIdx < 0 || newIdx >= state.layout.order.length) return;
+      const item = state.layout.order.splice(idx, 1)[0];
+      state.layout.order.splice(newIdx, 0, item);
+      updateStudio();
+      showToast(`✦ Repositioned ${BLOCK_DEFS[blockId]?.short || blockId}`);
+    }
+
+    /* Alignment Actions */
+    function setBlockAlignment(blockId, align) {
+      if (!state.layout.alignments) state.layout.alignments = {};
+      state.layout.alignments[blockId] = align;
+      updateStudio();
+    }
+
+    function cycleBlockAlign(blockId) {
+      const current = (state.layout.alignments && state.layout.alignments[blockId]) || 'left';
+      const next = current === 'left' ? 'center' : (current === 'center' ? 'right' : 'left');
+      setBlockAlignment(blockId, next);
+      showToast(`✦ ${BLOCK_DEFS[blockId]?.short || blockId} alignment: ${next}`);
+    }
+
+    /* Visibility Toggle */
+    function toggleBlockVisibility(blockId) {
+      if (!state.layout.visibility) state.layout.visibility = {};
+      state.layout.visibility[blockId] = !state.layout.visibility[blockId];
+      updateStudio();
+      const status = state.layout.visibility[blockId] ? 'Visible' : 'Hidden';
+      showToast(`✦ ${BLOCK_DEFS[blockId]?.short || blockId}: ${status}`);
+    }
+
+    /* Card Reorder & Grid Column Actions */
+    function moveCard(cardId, direction) {
+      if (!state.layout.cardOrder) state.layout.cardOrder = ['demo-card-1', 'demo-card-2', 'demo-card-3'];
+      const idx = state.layout.cardOrder.indexOf(cardId);
+      if (idx === -1) return;
+      const newIdx = idx + direction;
+      if (newIdx < 0 || newIdx >= state.layout.cardOrder.length) return;
+      const card = state.layout.cardOrder.splice(idx, 1)[0];
+      state.layout.cardOrder.splice(newIdx, 0, card);
+      updateStudio();
+      showToast(`✦ Moved ${CARD_DEFS[cardId]?.tag || cardId}`);
+    }
+
+    function setCardColumns(cols) {
+      state.layout.cardColumns = cols;
+      updateStudio();
+      showToast(`✦ Card Grid: ${cols} Column${cols > 1 ? 's' : ''}`);
+    }
+
+    /* Quick Layout Presets */
+    function applyLayoutPreset(presetKey) {
+      const p = LAYOUT_PRESETS[presetKey];
+      if (!p) return;
+      state.layout.order = [...p.order];
+      state.layout.alignments = { ...p.alignments };
+      state.layout.cardColumns = p.cardColumns;
+      p.order.forEach(id => { state.layout.visibility[id] = true; });
+
+      document.querySelectorAll('.layout-preset-pill').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById(`preset-${presetKey}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      updateStudio();
+      showToast(`✓ Applied Layout Preset: ${p.name}`);
+    }
+
+    /* Initialize Canvas Drag & Drop */
+    function initDragAndDrop() {
+      const blocks = document.querySelectorAll('.canvas-block');
+      let draggedBlockId = null;
+
+      blocks.forEach(block => {
+        block.addEventListener('dragstart', (e) => {
+          draggedBlockId = block.dataset.blockId;
+          e.dataTransfer.setData('text/plain', draggedBlockId);
+          block.classList.add('is-dragging');
+        });
+
+        block.addEventListener('dragend', () => {
+          block.classList.remove('is-dragging');
+          blocks.forEach(b => b.classList.remove('drag-over-top', 'drag-over-bottom'));
+          draggedBlockId = null;
+        });
+
+        block.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          if (!draggedBlockId || draggedBlockId === block.dataset.blockId) return;
+
+          const rect = block.getBoundingClientRect();
+          const midY = rect.top + rect.height / 2;
+          if (e.clientY < midY) {
+            block.classList.add('drag-over-top');
+            block.classList.remove('drag-over-bottom');
+          } else {
+            block.classList.add('drag-over-bottom');
+            block.classList.remove('drag-over-top');
+          }
+        });
+
+        block.addEventListener('dragleave', () => {
+          block.classList.remove('drag-over-top', 'drag-over-bottom');
+        });
+
+        block.addEventListener('drop', (e) => {
+          e.preventDefault();
+          const targetId = block.dataset.blockId;
+          const isAfter = block.classList.contains('drag-over-bottom');
+          block.classList.remove('drag-over-top', 'drag-over-bottom');
+
+          if (!draggedBlockId || draggedBlockId === targetId) return;
+          reorderBlockInState(draggedBlockId, targetId, isAfter ? 'after' : 'before');
+          updateStudio();
+          showToast(`✦ Repositioned ${BLOCK_DEFS[draggedBlockId]?.short || draggedBlockId}`);
+        });
+      });
+
+      // Card Grid Drag & Drop
+      const cards = document.querySelectorAll('.preview-demo-card');
+      let draggedCardId = null;
+
+      cards.forEach(card => {
+        card.addEventListener('dragstart', (e) => {
+          draggedCardId = card.id;
+          e.dataTransfer.setData('text/plain', draggedCardId);
+          card.style.opacity = '0.4';
+        });
+
+        card.addEventListener('dragend', () => {
+          card.style.opacity = '';
+          draggedCardId = null;
+        });
+
+        card.addEventListener('dragover', (e) => {
+          e.preventDefault();
+        });
+
+        card.addEventListener('drop', (e) => {
+          e.preventDefault();
+          const targetCardId = card.id;
+          if (!draggedCardId || draggedCardId === targetCardId) return;
+
+          if (!state.layout.cardOrder) state.layout.cardOrder = ['demo-card-1', 'demo-card-2', 'demo-card-3'];
+          const filtered = state.layout.cardOrder.filter(id => id !== draggedCardId);
+          const targetIdx = filtered.indexOf(targetCardId);
+          filtered.splice(targetIdx, 0, draggedCardId);
+          state.layout.cardOrder = filtered;
+          updateStudio();
+          showToast(`✦ Reordered card: ${CARD_DEFS[draggedCardId]?.tag || draggedCardId}`);
+        });
+      });
+    }
+
+    /* Markdown Generator Matching Section 3 Format with Component Hierarchy & Flow */
+    function generateMarkdownString() {
+      let colorsMd = state.colors.map(c => {
+        const hexDisplay = c.hex ? `\`${c.hex}\`` : '`[#HEX]`';
+        const descDisplay = c.desc ? ` (${c.desc})` : (c.role ? ` (${c.role})` : '');
+        return `  * \`${c.varName}\`${descDisplay}: ${hexDisplay}`;
+      }).join('\n');
+
+      const layoutOrder = (state.layout && state.layout.order) ? state.layout.order : DEFAULT_LAYOUT.order;
+      const layoutLines = layoutOrder.map((blockId, idx) => {
+        const def = BLOCK_DEFS[blockId] || { name: blockId, short: blockId, canAlign: false };
+        const isVisible = state.layout.visibility ? (state.layout.visibility[blockId] !== false) : true;
+        const align = (state.layout.alignments && state.layout.alignments[blockId]) || 'left';
+        const visTag = isVisible ? '' : ' `[Hidden]`';
+        const alignTag = def.canAlign ? ` (Alignment: \`${align}\`)` : '';
+        
+        let extra = '';
+        if (blockId === 'cards') {
+          const col = state.layout.cardColumns || '3';
+          const orderNames = (state.layout.cardOrder || ['demo-card-1', 'demo-card-2', 'demo-card-3'])
+            .map(cid => CARD_DEFS[cid] ? CARD_DEFS[cid].tag : cid)
+            .join(' -> ');
+          extra = ` (Layout: \`${col}-Column Grid\` | Cards: \`${orderNames}\`)`;
+        }
+        
+        return `  ${idx + 1}. **${def.name}:**${visTag}${alignTag}${extra}`;
+      }).join('\n');
+
+      return `### 3. DESIGN TOKENS & VISUAL STYLEGUIDE
+
+* **Color Palette (CSS Variables):**
+${colorsMd}
+* **Typography Specification:**
+  * **Font Family:** \`${state.typography.fontHeadings}\`
+  * **Section Labels:** \`${getSectionLabelsSpecString()}\`
+  * **Main Headlines:** \`${getHeadlinesSpecString()}\`
+  * **Body Copy:** \`${getBodyCopySpecString()}\`
+* **Buttons & Interactivity:**
+  * **Primary CTA:** ${state.btnPrimary}
+  * **Hover Effects:** ${state.btnHover}
+* **Asset & Imagery Guidelines:**
+  * **Strict Constraint:** ${state.assetGuidelines}
+* **Component Hierarchy & Layout Flow:**
+${layoutLines}
+`;
+    }
+
+    /* CSS Generator */
+    function generateCSSString() {
+      let vars = state.colors.map(c => {
+        const hexVal = c.hex || '/* #HEX */';
+        const comment = c.desc ? ` /* ${c.desc} */` : '';
+        return `  ${c.varName}: ${hexVal};${comment}`;
+      }).join('\n');
+
+      const typo = state.typography;
+      const hlScale = convertPtToWebScale(typo.headline.pt);
+      const labelScale = convertPtToWebScale(typo.sectionLabel.pt);
+      const bodyScale = convertPtToWebScale(typo.body.pt);
+
+      return `:root {
+  /* Color Palette */
+${vars}
+
+  /* Typography Stacks */
+  --font-family-headlines: ${typo.fontHeadings};
+  --font-family-body: ${typo.fontBody};
+
+  /* Converted Scales (from Points) */
+  --font-size-headline: ${hlScale.rem}rem; /* ${typo.headline.pt}pt (${hlScale.px}px) */
+  --font-size-label: ${labelScale.rem}rem;    /* ${typo.sectionLabel.pt}pt (${labelScale.px}px) */
+  --font-size-body: ${bodyScale.rem}rem;     /* ${typo.body.pt}pt (${bodyScale.px}px) */
+
+  /* Interactivity */
+  --btn-primary-bg: ${state.btnBgHex};
+  --btn-primary-border: ${state.btnBorderHex};
+
+  /* Layout Flow & Grid Tokens */
+  --layout-card-columns: ${state.layout.cardColumns || 3};
+}`;
+    }
+
+    /* Tab Switcher */
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.code-output-container, .sandbox-frame').forEach(el => el.style.display = 'none');
+
+      document.getElementById(`tab-btn-${tabId}`).classList.add('active');
+      document.getElementById(`view-${tabId}`).style.display = 'block';
+    }
+
+    /* Copy Actions */
+    function copyMarkdown() {
+      const text = generateMarkdownString();
+      navigator.clipboard.writeText(text);
+      showToast('✓ Section 3 Markdown copied to clipboard!');
+    }
+
+    function copyCSS() {
+      const text = generateCSSString();
+      navigator.clipboard.writeText(text);
+      showToast('✓ CSS :root block copied to clipboard!');
+    }
+
+    function copyJSON() {
+      const text = JSON.stringify(state, null, 2);
+      navigator.clipboard.writeText(text);
+      showToast('✓ JSON Tokens schema copied to clipboard!');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    /* Preset: Load New Paradigm Capital Defaults */
+    function loadNPCPresets() {
+      state.colors = [
+        { varName: '--color-bg-primary', role: 'Main Backdrop', desc: 'Pure White / Main Backdrop', hex: '#FFFFFF' },
+        { varName: '--color-bg-card', role: 'Containers', desc: 'Taupe / Containers', hex: '#B6A690' },
+        { varName: '--color-text-primary', role: 'Body Text', desc: 'Pure Black / Body Text', hex: '#000000' },
+        { varName: '--color-text-heading', role: 'Titles', desc: 'Metallic Gold / Titles', hex: '#D4AF37' },
+        { varName: '--color-accent', role: 'Titles & Accents', desc: 'Flat Gold / Titles', hex: '#BF8B2D' },
+        { varName: '--color-accent-blue', role: 'CTAs & Badges', desc: 'Sky Blue / CTAs & Badges', hex: '#9EB0D1' }
+      ];
+      state.typography = {
+        fontHeadings: "'Adobe Caslon Pro', 'Libre Caslon Text', Georgia, serif, Arial, sans-serif",
+        fontBody: "'Helvetica Light', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+        headline: { pt: 36, weight: '700', lh: '1.2', tracking: '-0.02em' },
+        sectionLabel: { pt: 8.4, weight: '700', tracking: '0.18em', transform: 'uppercase' },
+        body: { pt: 12, weightDesc: 'Helvetica Light, Helvetica Medium (All Caps)', lh: '1.6', colorVar: 'var(--color-text-primary)' }
+      };
+      state.btnPrimary = "Background #30210F, Border 1px solid #D4A359, Color #FFFFFF, Padding 0.85rem 2rem, Tracking 0.12em uppercase.";
+      state.btnHover = "Subtle gold glow, clean opacity transitions (200ms ease).";
+      state.btnBgHex = "#30210F";
+      state.btnBorderHex = "#D4A359";
+      state.assetGuidelines = "Real, tangible local photography of Nevada County parcels, water infrastructure, and regional sites — strictly NO generic AI artwork.";
+      state.layout = JSON.parse(JSON.stringify(DEFAULT_LAYOUT));
+
+      syncTypoControlsFromState();
+      renderColorTokens();
+      renderLayoutControls();
+      updateStudio();
+      showToast('✓ Loaded New Paradigm Capital default tokens');
+    }
+
+    /* Reset to Blank Template */
+    function clearToBlank() {
+      state = JSON.parse(JSON.stringify(BLANK_TOKENS));
+      state.layout = JSON.parse(JSON.stringify(DEFAULT_LAYOUT));
+      syncTypoControlsFromState();
+      renderColorTokens();
+      renderLayoutControls();
+      updateStudio();
+      showToast('✓ Cleared to blank template for Creative Director');
+    }
+
+    /* Import Markdown Parser */
+    function openImportModal() {
+      document.getElementById('import-modal').classList.add('active');
+    }
+
+    function closeImportModal() {
+      document.getElementById('import-modal').classList.remove('active');
+    }
+
+    function handleModalBackdrop(event) {
+      if (event.target === event.currentTarget) closeImportModal();
+    }
+
+    function parseImportedMarkdown() {
+      const text = document.getElementById('import-textarea').value;
+      if (!text.trim()) return;
+
+      try {
+        const colorRegex = /\*\s+`(--[a-zA-Z0-9_-]+)`(?:\s+\(([^)]+)\))?:\s+`?([#a-zA-Z0-9]+)`?/g;
+        const parsedColors = [];
+        let match;
+        while ((match = colorRegex.exec(text)) !== null) {
+          const varName = match[1];
+          const desc = match[2] || '';
+          let hex = match[3] || '';
+          if (hex === '[#HEX]' || hex === 'undefined') hex = '';
+          const role = desc.includes('/') ? desc.split('/')[1].trim() : desc;
+          parsedColors.push({ varName, desc, role, hex });
+        }
+        if (parsedColors.length > 0) state.colors = parsedColors;
+
+        const fontMatch = text.match(/\*\s+\*\*Font Family:\*\*\s+`([^`]+)`/);
+        if (fontMatch) state.typography.fontHeadings = fontMatch[1];
+
+        const labelsMatch = text.match(/\*\s+\*\*Section Labels:\*\*\s+`([^`]+)`/);
+        if (labelsMatch) {
+          const raw = labelsMatch[1];
+          const remMatch = raw.match(/font-size:\s*([0-9.]+)rem/);
+          if (remMatch) state.typography.sectionLabel.pt = Math.round(parseFloat(remMatch[1]) * 12 * 10) / 10;
+          const weightMatch = raw.match(/font-weight:\s*([0-9]+)/);
+          if (weightMatch) state.typography.sectionLabel.weight = weightMatch[1];
+          const trackMatch = raw.match(/letter-spacing:\s*([0-9.-]+em)/);
+          if (trackMatch) state.typography.sectionLabel.tracking = trackMatch[1];
+        }
+
+        const headlinesMatch = text.match(/\*\s+\*\*Main Headlines:\*\*\s+`([^`]+)`/);
+        if (headlinesMatch) {
+          const raw = headlinesMatch[1];
+          const weightMatch = raw.match(/font-weight:\s*([0-9]+)/);
+          if (weightMatch) state.typography.headline.weight = weightMatch[1];
+          const trackMatch = raw.match(/letter-spacing:\s*([0-9.-]+em)/);
+          if (trackMatch) state.typography.headline.tracking = trackMatch[1];
+          const lhMatch = raw.match(/line-height:\s*([0-9.]+)/);
+          if (lhMatch) state.typography.headline.lh = lhMatch[1];
+        }
+
+        const bodyMatch = text.match(/\*\s+\*\*Body Copy:\*\*\s+`?([^`\n]+)`?/);
+        if (bodyMatch) {
+          const raw = bodyMatch[1];
+          const remMatch = raw.match(/font-size:\s*([0-9.]+)rem/);
+          if (remMatch) state.typography.body.pt = Math.round(parseFloat(remMatch[1]) * 12 * 10) / 10;
+          const lhMatch = raw.match(/line-height:\s*([0-9.]+)/);
+          if (lhMatch) state.typography.body.lh = lhMatch[1];
+        }
+
+        const ctaMatch = text.match(/\*\s+\*\*Primary CTA:\*\*\s+([^\n]+)/);
+        if (ctaMatch) {
+          state.btnPrimary = ctaMatch[1];
+          const bgHexMatch = ctaMatch[1].match(/Background\s+([#a-zA-Z0-9]+)/i);
+          if (bgHexMatch) state.btnBgHex = bgHexMatch[1];
+        }
+
+        const constraintMatch = text.match(/\*\s+\*\*Strict Constraint:\*\*\s+([^\n]+)/);
+        if (constraintMatch) state.assetGuidelines = constraintMatch[1];
+
+        // Parse Component Hierarchy & Layout Flow
+        const layoutSectionMatch = text.match(/\*\s+\*\*Component Hierarchy & Layout Flow:\*\*([\s\S]*?)(?=\n\*|\n###|$)/);
+        if (layoutSectionMatch) {
+          const layoutSection = layoutSectionMatch[1];
+          const lineRegex = /(\d+)\.\s+\*\*([^*]+)\*\*:\s*(.*)/g;
+          const parsedOrder = [];
+          let lineMatch;
+
+          while ((lineMatch = lineRegex.exec(layoutSection)) !== null) {
+            const blockName = lineMatch[2].toLowerCase();
+            const details = lineMatch[3] || '';
+
+            let blockId = null;
+            if (blockName.includes('header') || blockName.includes('navigation')) blockId = 'header';
+            else if (blockName.includes('section') || blockName.includes('label')) blockId = 'label';
+            else if (blockName.includes('main headline') || blockName.includes('headline')) blockId = 'headline';
+            else if (blockName.includes('subheadline')) blockId = 'subheadline';
+            else if (blockName.includes('callout') || blockName.includes('governance') || blockName.includes('vision')) blockId = 'callout';
+            else if (blockName.includes('body')) blockId = 'body';
+            else if (blockName.includes('cta') || blockName.includes('button') || blockName.includes('action')) blockId = 'ctas';
+            else if (blockName.includes('card') || blockName.includes('feature')) blockId = 'cards';
+
+            if (blockId && !parsedOrder.includes(blockId)) {
+              parsedOrder.push(blockId);
+
+              // Check visibility
+              if (details.includes('[Hidden]')) {
+                state.layout.visibility[blockId] = false;
+              } else {
+                state.layout.visibility[blockId] = true;
+              }
+
+              // Check alignment
+              const alignMatch = details.match(/Alignment:\s*`?([a-z]+)`?/i);
+              if (alignMatch) {
+                state.layout.alignments[blockId] = alignMatch[1].toLowerCase();
+              }
+
+              // Check card grid columns & sequence
+              if (blockId === 'cards') {
+                const colMatch = details.match(/`?([123])-Column/i);
+                if (colMatch) state.layout.cardColumns = colMatch[1];
+              }
+            }
+          }
+
+          if (parsedOrder.length > 0) {
+            // Add any missing blocks from default order
+            DEFAULT_LAYOUT.order.forEach(id => {
+              if (!parsedOrder.includes(id)) parsedOrder.push(id);
+            });
+            state.layout.order = parsedOrder;
+          }
+        }
+
+        syncTypoControlsFromState();
+        renderColorTokens();
+        renderLayoutControls();
+        updateStudio();
+        closeImportModal();
+        showToast('✓ Successfully parsed Markdown into Styleguide Studio!');
+      } catch (err) {
+        alert('Could not fully parse markdown. Please check formatting.');
+      }
+    }
+  </script>
+</body>
+</html>
