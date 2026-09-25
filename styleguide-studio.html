@@ -1109,6 +1109,135 @@
       color: var(--app-accent);
     }
 
+    /* Media Showcase Block & Frame Styles */
+    .preview-media-wrapper {
+      width: 100%;
+      margin: 1.25rem 0 1.75rem 0;
+      transition: all 0.2s ease;
+    }
+
+    .preview-media-frame {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #11141c;
+      transition: all 0.25s ease;
+      width: 100%;
+    }
+
+    .preview-media-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .preview-media-frame:hover img {
+      transform: scale(1.015);
+    }
+
+    .preview-media-frame.frame-gold-border {
+      border: 1px solid var(--app-accent, #D4AF37);
+      border-radius: 6px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .preview-media-frame.frame-minimal {
+      border: none;
+      border-radius: 4px;
+      box-shadow: none;
+    }
+
+    .preview-media-frame.frame-card-frame {
+      border: 1px solid #ded9ce;
+      background: #b6a690;
+      padding: 0.75rem;
+      border-radius: 8px;
+    }
+
+    .preview-media-frame.frame-card-frame img {
+      border-radius: 4px;
+    }
+
+    .preview-media-frame.frame-rounded-pill {
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .preview-media-caption {
+      margin-top: 0.6rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      opacity: 0.8;
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    .media-upload-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 17, 23, 0.72);
+      backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 5;
+    }
+
+    .preview-media-frame:hover .media-upload-overlay {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .media-quick-upload-btn {
+      background: rgba(24, 27, 36, 0.95);
+      border: 1px solid var(--app-accent);
+      color: var(--app-accent);
+      padding: 0.45rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.15s ease;
+    }
+
+    .media-quick-upload-btn:hover {
+      background: var(--app-accent);
+      color: #111827;
+      transform: scale(1.03);
+    }
+
+    .media-preset-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.6rem;
+      background: var(--app-surface);
+      border: 1px solid var(--app-border);
+      border-radius: 5px;
+      color: var(--app-text);
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: left;
+    }
+
+    .media-preset-btn:hover, .media-preset-btn.active {
+      border-color: var(--app-accent);
+      color: var(--app-accent);
+      background: rgba(212, 175, 55, 0.12);
+    }
+
     /* Output Code Block Container */
     .code-output-container {
       width: 100%;
@@ -1533,6 +1662,72 @@
           <label for="asset-guidelines">Strict Constraint &amp; Principles</label>
           <textarea id="asset-guidelines" class="input-textarea" oninput="updateStudio()">Real, tangible local photography of Nevada County parcels, water infrastructure, and regional sites — strictly NO generic AI artwork.</textarea>
         </div>
+
+        <!-- Interactive Media Showcase Block Controls -->
+        <div style="border-top: 1px solid var(--app-border); padding-top: 0.75rem; margin-top: 0.75rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <label style="margin-bottom: 0; font-size: 0.75rem; font-weight: 700; color: var(--app-accent);">
+              ✦ Interactive Media Showcase Block
+            </label>
+            <span style="font-size: 0.68rem; color: var(--app-text-muted);">Syncs live to Canvas</span>
+          </div>
+
+          <!-- Quick Nevada County Preset Imagery -->
+          <div class="form-row">
+            <label><span>Nevada County Asset Presets</span></label>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem;">
+              <button class="media-preset-btn active" id="media-preset-forest" onclick="selectMediaPreset('forest')">🌲 Pine Ridge Parcel</button>
+              <button class="media-preset-btn" id="media-preset-river" onclick="selectMediaPreset('river')">💧 River &amp; Watershed</button>
+              <button class="media-preset-btn" id="media-preset-land" onclick="selectMediaPreset('land')">🌾 Agroforestry Site</button>
+              <button class="media-preset-btn" id="media-preset-sanctuary" onclick="selectMediaPreset('sanctuary')">🏛️ Retreat Sanctuary</button>
+            </div>
+          </div>
+
+          <!-- Custom URL Input & Local File Upload -->
+          <div class="form-row">
+            <label for="media-url-input"><span>Image Source URL</span></label>
+            <input type="text" id="media-url-input" class="input-text" placeholder="Paste image URL (https://...)" oninput="handleMediaUrlChange(this.value)" />
+          </div>
+
+          <div class="form-row" style="display: flex; gap: 0.5rem; align-items: center;">
+            <input type="file" id="media-file-input" accept="image/*" style="display: none;" onchange="handleMediaFileUpload(event)" />
+            <button class="btn-app btn-app-secondary" style="flex: 1; justify-content: center; padding: 0.4rem; font-size: 0.74rem;" onclick="document.getElementById('media-file-input').click()">
+              📁 Upload Local Image File
+            </button>
+            <button class="btn-app btn-app-secondary" style="padding: 0.4rem 0.6rem; font-size: 0.74rem;" onclick="resetMediaImage()" title="Reset to default image">
+              ↺ Reset
+            </button>
+          </div>
+
+          <!-- Aspect Ratio & Frame Style -->
+          <div class="typo-controls-grid" style="margin-top: 0.5rem;">
+            <div class="form-subrow">
+              <label for="media-aspect-ratio">Aspect Ratio</label>
+              <select id="media-aspect-ratio" class="input-select" onchange="handleMediaAspectRatioChange(this.value)">
+                <option value="16/9">16:9 Banner</option>
+                <option value="21/9">21:9 Cinematic</option>
+                <option value="4/3">4:3 Editorial</option>
+                <option value="1/1">1:1 Square</option>
+                <option value="auto">Auto / Natural</option>
+              </select>
+            </div>
+            <div class="form-subrow">
+              <label for="media-frame-style">Frame Style</label>
+              <select id="media-frame-style" class="input-select" onchange="handleMediaFrameStyleChange(this.value)">
+                <option value="gold-border">Gold Accent Border</option>
+                <option value="minimal">Clean Minimal</option>
+                <option value="card-frame">Taupe Card Container</option>
+                <option value="rounded-pill">Rounded 18px Soft</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Caption & Alt Text -->
+          <div class="form-row" style="margin-top: 0.5rem;">
+            <label for="media-caption-input"><span>Image Caption &amp; Description</span></label>
+            <input type="text" id="media-caption-input" class="input-text" value="Nevada County Pilot • Tangible Regional Water Infrastructure &amp; Sovereign Parcels" oninput="handleMediaCaptionChange(this.value)" />
+          </div>
+        </div>
       </div>
 
       <!-- 5. Layout & Component Hierarchy Architecture -->
@@ -1681,6 +1876,31 @@
             <p id="preview-subheadline">
               A land- and labor-backed asset class structured via a targeted capital pool to deploy our flagship countywide pilot program in Nevada County, California.
             </p>
+          </div>
+
+          <!-- Block: Dynamic Media & Photography Showcase -->
+          <div class="canvas-block" id="block-media" data-block-id="media" draggable="true">
+            <div class="canvas-block-toolbar">
+              <span class="block-drag-handle" title="Drag to reorder on canvas">⠿</span>
+              <span class="block-type-pill">Media Image</span>
+              <button class="block-tool-btn" onclick="cycleBlockAlign('media')" title="Cycle Alignment (Left / Center / Right)">⇋</button>
+              <button class="block-tool-btn" onclick="moveBlock('media', -1)" title="Move Up">▲</button>
+              <button class="block-tool-btn" onclick="moveBlock('media', 1)" title="Move Down">▼</button>
+              <button class="block-tool-btn" onclick="toggleBlockVisibility('media')" title="Toggle Visibility">👁</button>
+            </div>
+            <div id="preview-media-container" class="preview-media-wrapper">
+              <div id="preview-media-frame" class="preview-media-frame frame-gold-border" style="aspect-ratio: 16/9;">
+                <img id="preview-media-img" src="https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=1400&q=80" alt="Nevada County Pine Forest & Watershed Parcel" />
+                <div class="media-upload-overlay">
+                  <button type="button" class="media-quick-upload-btn" onclick="document.getElementById('media-file-input').click()">
+                    📷 Replace / Upload Image
+                  </button>
+                </div>
+              </div>
+              <figcaption id="preview-media-caption" class="preview-media-caption">
+                Nevada County Pilot • Tangible Regional Water Infrastructure &amp; Sovereign Parcels
+              </figcaption>
+            </div>
           </div>
 
           <!-- Block 5: Core Governance Philosophy Callout -->
@@ -2082,12 +2302,41 @@
       return { pt: numPt, px, rem };
     }
 
+    /* Media Asset Presets */
+    const MEDIA_PRESETS = {
+      forest: {
+        name: "Pine Ridge Parcel",
+        url: "https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=1400&q=80",
+        alt: "Nevada County Pine Forest & Ridge Landscape",
+        caption: "Nevada County Pilot • Sovereign Forest Parcels & Intact Regional Land Assets"
+      },
+      river: {
+        name: "River & Watershed",
+        url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1400&q=80",
+        alt: "Nevada County Watershed & River Infrastructure",
+        caption: "Hydrologic Resilience • Securing Senior Riparian & Storage Water Rights"
+      },
+      land: {
+        name: "Agroforestry Site",
+        url: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1400&q=80",
+        alt: "Fertile Living Land & Agroforestry Settlement",
+        caption: "Sebastopol Parcel Baseline • 160-Acre Land & Skilled Labor Settlement Architecture"
+      },
+      sanctuary: {
+        name: "Retreat Sanctuary",
+        url: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1400&q=80",
+        alt: "Lighthouse Operating Sanctuary & Hospitality",
+        caption: "Castile on the Ridge • 9-Acre Hospitality Sanctuary & Cash Flow Generator"
+      }
+    };
+
     /* Layout & Block Definitions */
     const BLOCK_DEFS = {
       header: { name: "Top Navigation Bar", short: "Header", canAlign: false, defaultAlign: "left" },
       label: { name: "Section Category Label", short: "Section Label", canAlign: true, defaultAlign: "left" },
       headline: { name: "Main Headline", short: "Main Headline", canAlign: true, defaultAlign: "left" },
       subheadline: { name: "Subheadline Narrative", short: "Subheadline", canAlign: true, defaultAlign: "left" },
+      media: { name: "Media & Photography Showcase", short: "Media Image", canAlign: true, defaultAlign: "center" },
       callout: { name: "Governance Callout Box", short: "Vision Callout", canAlign: true, defaultAlign: "left" },
       body: { name: "Dynamic Body Copy", short: "Body Copy", canAlign: true, defaultAlign: "left" },
       ctas: { name: "Action CTA Buttons", short: "Action CTAs", canAlign: true, defaultAlign: "left" },
@@ -2101,11 +2350,12 @@
     };
 
     const DEFAULT_LAYOUT = {
-      order: ['header', 'label', 'headline', 'subheadline', 'callout', 'body', 'ctas', 'cards'],
+      order: ['header', 'label', 'headline', 'subheadline', 'media', 'callout', 'body', 'ctas', 'cards'],
       alignments: {
         label: 'left',
         headline: 'left',
         subheadline: 'left',
+        media: 'center',
         callout: 'left',
         body: 'left',
         ctas: 'left'
@@ -2115,6 +2365,7 @@
         label: true,
         headline: true,
         subheadline: true,
+        media: true,
         callout: true,
         body: true,
         ctas: true,
@@ -2127,26 +2378,26 @@
     const LAYOUT_PRESETS = {
       editorial: {
         name: "Default Editorial Flow",
-        order: ['header', 'label', 'headline', 'subheadline', 'callout', 'body', 'ctas', 'cards'],
-        alignments: { label: 'left', headline: 'left', subheadline: 'left', callout: 'left', body: 'left', ctas: 'left' },
+        order: ['header', 'label', 'headline', 'subheadline', 'media', 'callout', 'body', 'ctas', 'cards'],
+        alignments: { label: 'left', headline: 'left', subheadline: 'left', media: 'center', callout: 'left', body: 'left', ctas: 'left' },
         cardColumns: '3'
       },
       spotlight: {
         name: "Centered Spotlight",
-        order: ['header', 'headline', 'label', 'subheadline', 'ctas', 'callout', 'body', 'cards'],
-        alignments: { label: 'center', headline: 'center', subheadline: 'center', callout: 'center', body: 'center', ctas: 'center' },
+        order: ['header', 'media', 'headline', 'label', 'subheadline', 'ctas', 'callout', 'body', 'cards'],
+        alignments: { label: 'center', headline: 'center', subheadline: 'center', media: 'center', callout: 'center', body: 'center', ctas: 'center' },
         cardColumns: '3'
       },
       action: {
         name: "Action-First Flow",
-        order: ['header', 'label', 'headline', 'ctas', 'subheadline', 'cards', 'callout', 'body'],
-        alignments: { label: 'left', headline: 'left', subheadline: 'left', callout: 'left', body: 'left', ctas: 'left' },
+        order: ['header', 'label', 'headline', 'ctas', 'media', 'subheadline', 'cards', 'callout', 'body'],
+        alignments: { label: 'left', headline: 'left', subheadline: 'left', media: 'center', callout: 'left', body: 'left', ctas: 'left' },
         cardColumns: '3'
       },
       narrative: {
         name: "Storytelling Narrative",
-        order: ['header', 'callout', 'label', 'headline', 'subheadline', 'body', 'cards', 'ctas'],
-        alignments: { label: 'left', headline: 'left', subheadline: 'left', callout: 'left', body: 'left', ctas: 'left' },
+        order: ['header', 'callout', 'label', 'headline', 'media', 'subheadline', 'body', 'cards', 'ctas'],
+        alignments: { label: 'left', headline: 'left', subheadline: 'left', media: 'center', callout: 'left', body: 'left', ctas: 'left' },
         cardColumns: '3'
       }
     };
@@ -2173,6 +2424,14 @@
       btnBgHex: "#30210F",
       btnBorderHex: "#D4A359",
       assetGuidelines: "Real, tangible local photography of Nevada County parcels, water infrastructure, and regional sites — strictly NO generic AI artwork.",
+      media: {
+        url: MEDIA_PRESETS.forest.url,
+        alt: MEDIA_PRESETS.forest.alt,
+        caption: MEDIA_PRESETS.forest.caption,
+        aspectRatio: "16/9",
+        frameStyle: "gold-border",
+        maxWidth: "100%"
+      },
       layout: JSON.parse(JSON.stringify(DEFAULT_LAYOUT))
     };
 
@@ -2182,6 +2441,30 @@
     /* Detect Window Mode on Startup */
     const urlParams = new URLSearchParams(window.location.search);
     const isControlsOnlyWindow = urlParams.get('window') === 'controls';
+
+    /* Sync Media Controls from State helper */
+    function syncMediaControlsFromState() {
+      if (!state.media) {
+        state.media = {
+          url: MEDIA_PRESETS.forest.url,
+          alt: MEDIA_PRESETS.forest.alt,
+          caption: MEDIA_PRESETS.forest.caption,
+          aspectRatio: "16/9",
+          frameStyle: "gold-border",
+          maxWidth: "100%"
+        };
+      }
+      const urlInput = document.getElementById('media-url-input');
+      if (urlInput) urlInput.value = state.media.url || '';
+      const captionInput = document.getElementById('media-caption-input');
+      if (captionInput) captionInput.value = state.media.caption || '';
+      const aspectSelect = document.getElementById('media-aspect-ratio');
+      if (aspectSelect && state.media.aspectRatio) aspectSelect.value = state.media.aspectRatio;
+      const frameSelect = document.getElementById('media-frame-style');
+      if (frameSelect && state.media.frameStyle) frameSelect.value = state.media.frameStyle;
+      const assetGuidelines = document.getElementById('asset-guidelines');
+      if (assetGuidelines && state.assetGuidelines) assetGuidelines.value = state.assetGuidelines;
+    }
 
     /* Initialize Application */
     document.addEventListener('DOMContentLoaded', () => {
@@ -2244,6 +2527,7 @@
 
       renderColorTokens();
       syncTypoControlsFromState();
+      syncMediaControlsFromState();
       renderLayoutControls();
       initDraggableHud();
       initDragAndDrop();
@@ -2257,6 +2541,7 @@
         state = event.data.state;
         if (!state.layout) state.layout = JSON.parse(JSON.stringify(DEFAULT_LAYOUT));
         syncTypoControlsFromState();
+        syncMediaControlsFromState();
         renderColorTokens();
         renderLayoutControls();
         updateStudio(false);
@@ -2271,6 +2556,7 @@
         state = event.data.state;
         if (!state.layout) state.layout = JSON.parse(JSON.stringify(DEFAULT_LAYOUT));
         syncTypoControlsFromState();
+        syncMediaControlsFromState();
         renderColorTokens();
         renderLayoutControls();
         updateStudio(false);
@@ -2871,6 +3157,36 @@
           }
         }
 
+        // Media Image Rendering
+        const mediaImg = document.getElementById('preview-media-img');
+        const mediaFrame = document.getElementById('preview-media-frame');
+        const mediaCaption = document.getElementById('preview-media-caption');
+        const mediaContainer = document.getElementById('preview-media-container');
+
+        if (state.media) {
+          if (mediaImg && state.media.url) {
+            mediaImg.src = state.media.url;
+            mediaImg.alt = state.media.alt || 'Nevada County Asset Showcase';
+          }
+          if (mediaFrame) {
+            mediaFrame.className = `preview-media-frame frame-${state.media.frameStyle || 'gold-border'}`;
+            mediaFrame.style.aspectRatio = state.media.aspectRatio === 'auto' ? 'auto' : state.media.aspectRatio || '16/9';
+            if (state.media.frameStyle === 'gold-border') {
+              mediaFrame.style.borderColor = accent;
+            } else if (state.media.frameStyle === 'card-frame') {
+              mediaFrame.style.backgroundColor = bgCard;
+            }
+          }
+          if (mediaCaption) {
+            mediaCaption.innerText = state.media.caption || '';
+            mediaCaption.style.fontFamily = typo.fontHeadings;
+            mediaCaption.style.color = textPrimary;
+          }
+          if (mediaContainer) {
+            mediaContainer.style.maxWidth = state.media.maxWidth || '100%';
+          }
+        }
+
         // Apply Layout, Position Ordering, Alignments, and Visibility
         applyLayoutToPreview();
       }
@@ -2985,6 +3301,27 @@
               sub.style.marginRight = 'auto';
               sub.style.maxWidth = '';
             }
+          }
+          break;
+        }
+        case 'media': {
+          const mediaContainer = document.getElementById('preview-media-container');
+          const caption = document.getElementById('preview-media-caption');
+          if (mediaContainer) {
+            mediaContainer.style.textAlign = align;
+            if (align === 'center') {
+              mediaContainer.style.marginLeft = 'auto';
+              mediaContainer.style.marginRight = 'auto';
+            } else if (align === 'right') {
+              mediaContainer.style.marginLeft = 'auto';
+              mediaContainer.style.marginRight = '0';
+            } else {
+              mediaContainer.style.marginLeft = '0';
+              mediaContainer.style.marginRight = 'auto';
+            }
+          }
+          if (caption) {
+            caption.style.textAlign = align;
           }
           break;
         }
@@ -3299,6 +3636,78 @@
       });
     }
 
+    /* Media Interaction Handlers */
+    function handleMediaUrlChange(url) {
+      if (!state.media) state.media = {};
+      state.media.url = url;
+      updateStudio();
+    }
+
+    function handleMediaCaptionChange(caption) {
+      if (!state.media) state.media = {};
+      state.media.caption = caption;
+      updateStudio();
+    }
+
+    function handleMediaAspectRatioChange(ratio) {
+      if (!state.media) state.media = {};
+      state.media.aspectRatio = ratio;
+      updateStudio();
+      showToast(`✦ Image Aspect Ratio: ${ratio}`);
+    }
+
+    function handleMediaFrameStyleChange(style) {
+      if (!state.media) state.media = {};
+      state.media.frameStyle = style;
+      updateStudio();
+      showToast(`✦ Image Frame: ${style}`);
+    }
+
+    function selectMediaPreset(presetKey) {
+      const p = MEDIA_PRESETS[presetKey];
+      if (!p) return;
+      if (!state.media) state.media = {};
+      state.media.url = p.url;
+      state.media.alt = p.alt;
+      state.media.caption = p.caption;
+
+      const urlInput = document.getElementById('media-url-input');
+      if (urlInput) urlInput.value = p.url;
+      const capInput = document.getElementById('media-caption-input');
+      if (capInput) capInput.value = p.caption;
+
+      document.querySelectorAll('.media-preset-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById(`media-preset-${presetKey}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      updateStudio();
+      showToast(`✓ Loaded Asset Preset: ${p.name}`);
+    }
+
+    function handleMediaFileUpload(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const dataUrl = e.target.result;
+        if (!state.media) state.media = {};
+        state.media.url = dataUrl;
+        state.media.alt = file.name;
+        
+        const urlInput = document.getElementById('media-url-input');
+        if (urlInput) urlInput.value = `[Uploaded: ${file.name}]`;
+
+        updateStudio();
+        showToast(`✓ Uploaded ${file.name} to Studio!`);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function resetMediaImage() {
+      selectMediaPreset('forest');
+    }
+
     /* Markdown Generator Matching Section 3 Format with Component Hierarchy & Flow */
     function generateMarkdownString() {
       let colorsMd = state.colors.map(c => {
@@ -3327,6 +3736,10 @@
         return `  ${idx + 1}. **${def.name}:**${visTag}${alignTag}${extra}`;
       }).join('\n');
 
+      const mediaAspect = state.media?.aspectRatio || '16/9';
+      const mediaFrame = state.media?.frameStyle || 'gold-border';
+      const mediaCaption = state.media?.caption || '';
+
       return `### 3. DESIGN TOKENS & VISUAL STYLEGUIDE
 
 * **Color Palette (CSS Variables):**
@@ -3341,6 +3754,7 @@ ${colorsMd}
   * **Hover Effects:** ${state.btnHover}
 * **Asset & Imagery Guidelines:**
   * **Strict Constraint:** ${state.assetGuidelines}
+  * **Showcase Media Spec:** Aspect Ratio: \`${mediaAspect}\` | Frame: \`${mediaFrame}\` | Caption: "${mediaCaption}"
 * **Component Hierarchy & Layout Flow:**
 ${layoutLines}
 `;
@@ -3378,6 +3792,10 @@ ${vars}
 
   /* Layout Flow & Grid Tokens */
   --layout-card-columns: ${state.layout.cardColumns || 3};
+
+  /* Media Showcase Tokens */
+  --media-aspect-ratio: ${state.media?.aspectRatio || '16/9'};
+  --media-frame-style: "${state.media?.frameStyle || 'gold-border'}";
 }`;
     }
 
@@ -3438,9 +3856,18 @@ ${vars}
       state.btnBgHex = "#30210F";
       state.btnBorderHex = "#D4A359";
       state.assetGuidelines = "Real, tangible local photography of Nevada County parcels, water infrastructure, and regional sites — strictly NO generic AI artwork.";
+      state.media = {
+        url: MEDIA_PRESETS.forest.url,
+        alt: MEDIA_PRESETS.forest.alt,
+        caption: MEDIA_PRESETS.forest.caption,
+        aspectRatio: "16/9",
+        frameStyle: "gold-border",
+        maxWidth: "100%"
+      };
       state.layout = JSON.parse(JSON.stringify(DEFAULT_LAYOUT));
 
       syncTypoControlsFromState();
+      syncMediaControlsFromState();
       renderColorTokens();
       renderLayoutControls();
       updateStudio();
@@ -3452,6 +3879,7 @@ ${vars}
       state = JSON.parse(JSON.stringify(BLANK_TOKENS));
       state.layout = JSON.parse(JSON.stringify(DEFAULT_LAYOUT));
       syncTypoControlsFromState();
+      syncMediaControlsFromState();
       renderColorTokens();
       renderLayoutControls();
       updateStudio();
@@ -3533,6 +3961,15 @@ ${vars}
         const constraintMatch = text.match(/\*\s+\*\*Strict Constraint:\*\*\s+([^\n]+)/);
         if (constraintMatch) state.assetGuidelines = constraintMatch[1];
 
+        // Parse Showcase Media Spec
+        const mediaSpecMatch = text.match(/\*\s+\*\*Showcase Media Spec:\*\*\s+Aspect Ratio:\s*`([^`]+)`\s*\|\s*Frame:\s*`([^`]+)`\s*\|\s*Caption:\s*"([^"]*)"/);
+        if (mediaSpecMatch) {
+          if (!state.media) state.media = {};
+          state.media.aspectRatio = mediaSpecMatch[1];
+          state.media.frameStyle = mediaSpecMatch[2];
+          state.media.caption = mediaSpecMatch[3];
+        }
+
         // Parse Component Hierarchy & Layout Flow
         const layoutSectionMatch = text.match(/\*\s+\*\*Component Hierarchy & Layout Flow:\*\*([\s\S]*?)(?=\n\*|\n###|$)/);
         if (layoutSectionMatch) {
@@ -3550,6 +3987,7 @@ ${vars}
             else if (blockName.includes('section') || blockName.includes('label')) blockId = 'label';
             else if (blockName.includes('main headline') || blockName.includes('headline')) blockId = 'headline';
             else if (blockName.includes('subheadline')) blockId = 'subheadline';
+            else if (blockName.includes('media') || blockName.includes('photo') || blockName.includes('image') || blockName.includes('asset')) blockId = 'media';
             else if (blockName.includes('callout') || blockName.includes('governance') || blockName.includes('vision')) blockId = 'callout';
             else if (blockName.includes('body')) blockId = 'body';
             else if (blockName.includes('cta') || blockName.includes('button') || blockName.includes('action')) blockId = 'ctas';
@@ -3589,6 +4027,7 @@ ${vars}
         }
 
         syncTypoControlsFromState();
+        syncMediaControlsFromState();
         renderColorTokens();
         renderLayoutControls();
         updateStudio();
