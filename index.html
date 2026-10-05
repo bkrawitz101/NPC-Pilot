@@ -524,7 +524,7 @@
     }
 
     /* ==========================================================================
-       2. ETHAN'S 4 QUALIFYING QUESTIONS FRAMEWORK SECTION
+       2. THE 4 QUALIFYING QUESTIONS FRAMEWORK SECTION
        ========================================================================== */
     .framework-section {
       padding: 4.5rem 0;
@@ -1680,7 +1680,7 @@
 
           <div class="vision-callout">
             <div class="vision-callout-quote">
-              "At Rethinking Capital, we believe that there is more than enough wealth to solve all of society's core resilience, settlement, and capital challenges."
+              "At Rethinking Capital, we believe that there is more than enough wealth to solve all of society's core resilience, housing, and capital challenges."
             </div>
             <div class="vision-callout-author">Core Governance Philosophy &bull; Nevada County Pilot</div>
           </div>
@@ -1692,14 +1692,6 @@
             <a href="#framework" class="btn btn-secondary">
               Explore Strategic Vision
             </a>
-          </div>
-
-          <!-- Quick Access Helper for Mastermind / Reviewers -->
-          <div class="demo-unlock-bar">
-            <span><strong>Executive Mastermind Review:</strong> Password is <code style="font-family: monospace; background: #fff; padding: 2px 6px; border-radius: 3px; border: 1px solid #d4af37;">MEDICI2026</code></span>
-            <button class="btn btn-blue btn-sm" onclick="quickUnlock()">
-              One-Click Executive Unlock &rarr;
-            </button>
           </div>
         </div>
 
@@ -1747,15 +1739,15 @@
     </section>
 
     <!-- ==========================================================================
-         2. ETHAN'S 4 QUALIFYING QUESTIONS FRAMEWORK
+         2. THE 4 QUALIFYING QUESTIONS FRAMEWORK
          ========================================================================== -->
     <section id="framework" class="framework-section">
       <div class="container">
         <div class="section-header-centered">
           <div class="section-label">Mastermind Alignment Framework</div>
-          <h2>Ethan's 4 Qualifying Questions</h2>
+          <h2>The 4 Qualifying Questions</h2>
           <p>
-            Integrated directly from the Sunday Mastermind session to anchor all messaging, governance, and capital allocation flows.
+            Key strategic questions and direct answers anchoring our mission, governance, and capital allocation architecture.
           </p>
         </div>
 
@@ -1812,7 +1804,7 @@
           <div class="question-card">
             <div class="question-num-badge">04</div>
             <div class="q-title">Executive Action</div>
-            <h3>What action do we ask?</h3>
+            <h3>What action are we asking them to take?</h3>
             <p>
               <strong>5-Step Mastermind Onboarding:</strong>
             </p>
@@ -2484,11 +2476,11 @@
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-bottom: 0.85rem;">
             <div class="form-group">
               <label for="nda-name">Full Name *</label>
-              <input type="text" id="nda-name" class="form-control" placeholder="Your Name" required value="Ethan Mastermind Member" />
+              <input type="text" id="nda-name" class="form-control" placeholder="Your Full Name" required />
             </div>
             <div class="form-group">
               <label for="nda-email">Email Address *</label>
-              <input type="email" id="nda-email" class="form-control" placeholder="name@domain.com" required value="member@newmedici.org" />
+              <input type="email" id="nda-email" class="form-control" placeholder="name@domain.com" required />
             </div>
           </div>
 
@@ -2499,7 +2491,7 @@
             </div>
             <div class="form-group">
               <label for="nda-entity">Entity / Fund</label>
-              <input type="text" id="nda-entity" class="form-control" placeholder="Family Office / Guild" />
+              <input type="text" id="nda-entity" class="form-control" placeholder="Family Office / Organization" />
             </div>
           </div>
 
@@ -2515,15 +2507,12 @@
 
           <div class="form-group" style="margin-bottom: 1rem;">
             <label for="nda-password">Executive Access Password *</label>
-            <input type="password" id="nda-password" class="form-control" placeholder="Enter password (e.g. MEDICI2026)" value="MEDICI2026" required />
-            <div style="font-size: 0.75rem; color: var(--color-accent); margin-top: 0.25rem;">
-              Hint: Default Mastermind Key is <strong>MEDICI2026</strong> or <strong>PILOT</strong>
-            </div>
+            <input type="password" id="nda-password" class="form-control" placeholder="Enter authorized access key" required />
           </div>
 
           <div class="form-group" style="margin-bottom: 1rem;">
             <label class="checkbox-container">
-              <input type="checkbox" id="nda-agreement" required checked />
+              <input type="checkbox" id="nda-agreement" required />
               <span>I agree to review non-public Pilot Foundation briefs under confidential executive think tank protocol (Chatham House Rule).</span>
             </label>
           </div>
@@ -2823,7 +2812,7 @@
         unlockDashboard();
         showToast('✓ Verified: Welcome to Executive Think Tank Level 2');
       } else {
-        errorDiv.innerText = 'Invalid access code. Please use MEDICI2026 or contact Kiril Ravensong.';
+        errorDiv.innerText = 'Invalid access code. Please verify your credentials or contact Kiril Ravensong (Strategic Director).';
         errorDiv.style.display = 'block';
       }
     }

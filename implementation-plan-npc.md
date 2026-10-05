@@ -17,8 +17,8 @@
 
 ---
 
-### 2. ETHAN'S 4 QUALIFYING QUESTIONS FRAMEWORK
-*(Integrated directly from the 2026-13-09 Sunday Mastermind session to anchor all messaging and UX flows)*
+### 2. THE 4 QUALIFYING QUESTIONS FRAMEWORK
+*(Core alignment framework anchoring all messaging, governance, and capital allocation flows)*
 
 1. **Who is the audience?**  
    * **The New Medici:** Multidisciplinary leaders, angel investors, land stewards, and conscious creators who recognize that a county-level mastermind must be deployed *now* to create a replicable template for civilizational resilience.
@@ -67,7 +67,7 @@
    * **Category Label:** SYSTEMIC RESILIENCE & CAPITAL ARCHITECTURE
    * **Main Headline:** "Redefining Wealth, Reimagining Progress"
    * **Subheadline:** "A land- and labor-backed asset class structured via a targeted capital pool to deploy our flagship countywide pilot program in Nevada County, California."
-   * **Vision Callout Box:** *"At Rethinking Capital, we believe that there is more than enough wealth to solve all of society's core resilience, settlement, and capital challenges."*
+   * **Vision Callout Box:** *"At Rethinking Capital, we believe that there is more than enough wealth to solve all of society's core resilience, housing, and capital challenges."*
    * **Action CTAs:**
      * `Request Executive NDA & Access` (Triggers Gate Modal)
      * `Explore Strategic Vision` (Smooth scroll to Overview)
