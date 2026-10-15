@@ -6,12 +6,96 @@
   <title>New Paradigm Capital | Nevada County Pilot Foundation</title>
   <meta name="description" content="Executive think tank, masterminds, and land-and-labor backed asset architecture in Nevada County, California." />
   
-  <!-- Typography Imports: Libre Caslon (Adobe Caslon Pro web alternative) -->
+  <!-- Favicon & Brand Icons: Official NPC Sacred Geometry Emblem -->
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/npc-emblem.png" />
+
+  <!-- Typography Imports: Adobe Caslon Pro & Graphik with Google Font Web Fallbacks (Libre Caslon & Inter) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
   <style>
+    /* ==========================================================================
+       LOCAL @FONT-FACE MAPPINGS: ADOBE CASLON PRO & GRAPHIK
+       ========================================================================== */
+
+    /* Adobe Caslon Pro (Bold, Bold Italic, Semibold, Semibold Italic, Regular, Regular Italic) */
+    @font-face {
+      font-family: 'Adobe Caslon Pro';
+      src: local('Adobe Caslon Pro Bold'), local('AdobeCaslonPro-Bold');
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Adobe Caslon Pro';
+      src: local('Adobe Caslon Pro Bold Italic'), local('AdobeCaslonPro-BoldItalic');
+      font-weight: 700;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: 'Adobe Caslon Pro';
+      src: local('Adobe Caslon Pro Semibold'), local('AdobeCaslonPro-Semibold');
+      font-weight: 600;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Adobe Caslon Pro';
+      src: local('Adobe Caslon Pro Semibold Italic'), local('AdobeCaslonPro-SemiboldItalic');
+      font-weight: 600;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: 'Adobe Caslon Pro';
+      src: local('Adobe Caslon Pro Regular'), local('AdobeCaslonPro-Regular'), local('Adobe Caslon Pro');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Adobe Caslon Pro';
+      src: local('Adobe Caslon Pro Regular Italic'), local('AdobeCaslonPro-Italic');
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    /* Graphik (Light, Regular + Italics & Medium/Semibold) */
+    @font-face {
+      font-family: 'Graphik';
+      src: local('Graphik Light'), local('Graphik-Light');
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Graphik';
+      src: local('Graphik Light Italic'), local('Graphik-LightItalic');
+      font-weight: 300;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: 'Graphik';
+      src: local('Graphik Regular'), local('Graphik-Regular'), local('Graphik');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Graphik';
+      src: local('Graphik Regular Italic'), local('Graphik-RegularItalic'), local('Graphik-Italic');
+      font-weight: 400;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: 'Graphik';
+      src: local('Graphik Medium'), local('Graphik-Medium');
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Graphik';
+      src: local('Graphik Semibold'), local('Graphik-Semibold'), local('Graphik-Bold');
+      font-weight: 600;
+      font-style: normal;
+    }
+
     /* ==========================================================================
        3. DESIGN TOKENS & VISUAL STYLEGUIDE (NPC Implementation Spec 2.0)
        ========================================================================== */
@@ -44,11 +128,14 @@
       --border-taupe: rgba(182, 166, 144, 0.55);
       --border-dark: rgba(48, 33, 15, 0.2);
       
-      /* Typography Specification */
-      --font-family-primary: 'Adobe Caslon Pro', 'Libre Caslon Text', 'Libre Caslon Display', Georgia, serif, Arial, sans-serif;
-      --font-family-headlines: 'Adobe Caslon Pro', 'Libre Caslon Display', 'Libre Caslon Text', Georgia, serif, Arial, sans-serif;
-      --font-family-body: 'Helvetica Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      --font-family-body-medium: 'Helvetica Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      /* Typography Specification:
+         - Headline Fonts: Adobe Caslon Pro (Bold, Bold Italic, Semibold, Semibold Italic, Regular, Regular Italic)
+         - Body Copy: Graphik Light (300) upper and lower; Graphik Regular (400) when background warrants */
+      --font-family-headlines: 'Adobe Caslon Pro', 'Libre Caslon Text', 'Libre Caslon Display', Georgia, serif;
+      --font-family-primary: 'Adobe Caslon Pro', 'Libre Caslon Text', 'Libre Caslon Display', Georgia, serif;
+      --font-family-body: 'Graphik', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-family-body-medium: 'Graphik', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-family-body-regular: 'Graphik', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       
       --shadow-sm: 0 2px 8px rgba(30, 22, 16, 0.06);
       --shadow-md: 0 8px 24px rgba(30, 22, 16, 0.09);
@@ -88,19 +175,19 @@
       background-color: #FFFFFF;
       background-image: none;
       font-family: var(--font-family-body);
-      font-weight: 300;
+      font-weight: 300; /* Graphik Light */
       font-size: 1rem;
       line-height: 1.6;
       color: var(--color-text-primary);
+      text-transform: none; /* Upper and lower */
     }
 
-    /* Section Labels Specification:
-       text-transform: uppercase; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; color: var(--color-accent) */
+    /* Section Labels Specification: Graphik Regular Upper */
     .section-label {
-      font-family: var(--font-family-primary);
+      font-family: var(--font-family-body);
       text-transform: uppercase;
       font-size: 0.7rem;
-      font-weight: 700;
+      font-weight: 400; /* Graphik Regular */
       letter-spacing: 0.18em;
       color: var(--color-accent);
       display: inline-flex;
@@ -117,30 +204,86 @@
       background-color: var(--color-accent);
     }
 
-    /* Main Headlines Specification:
-       font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; color: var(--color-text-heading); */
-    h1, h2, h3, h4, h5, h6 {
+    /* Main Headlines: Adobe Caslon Pro */
+    h1 {
       font-family: var(--font-family-headlines);
-      font-weight: 700;
+      font-weight: 700; /* Adobe Caslon Pro Bold */
       letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--color-text-heading);
+    }
+
+    h2 {
+      font-family: var(--font-family-headlines);
+      font-weight: 700; /* Adobe Caslon Pro Bold */
+      letter-spacing: -0.015em;
       line-height: 1.2;
       color: var(--color-text-heading);
     }
 
-    /* Body Copy Specification:
-       Helvetica Light, Helvetica Medium (All Caps for accents); font-size: 1rem; line-height: 1.6; color: var(--color-text-primary); */
+    h3 {
+      font-family: var(--font-family-headlines);
+      font-weight: 600; /* Adobe Caslon Pro Semibold */
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      color: var(--color-text-heading);
+    }
+
+    h4 {
+      font-family: var(--font-family-headlines);
+      font-weight: 600; /* Adobe Caslon Pro Semibold */
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      color: var(--color-text-heading);
+    }
+
+    h5, h6 {
+      font-family: var(--font-family-headlines);
+      font-weight: 400; /* Adobe Caslon Pro Regular */
+      line-height: 1.35;
+      color: var(--color-text-heading);
+    }
+
+    h1 em, h1 i, h2 em, h2 i {
+      font-style: italic; /* Adobe Caslon Pro Bold Italic */
+      font-weight: 700;
+    }
+
+    h3 em, h3 i, h4 em, h4 i {
+      font-style: italic; /* Adobe Caslon Pro Semibold Italic */
+      font-weight: 600;
+    }
+
+    h5 em, h5 i, h6 em, h6 i {
+      font-style: italic; /* Adobe Caslon Pro Regular Italic */
+      font-weight: 400;
+    }
+
+    /* Body Copy Specification: Graphik Light Upper and lower */
     p {
       font-family: var(--font-family-body);
-      font-weight: 300;
+      font-weight: 300; /* Graphik Light */
       font-size: 1rem;
       line-height: 1.6;
       color: var(--color-text-primary);
+      text-transform: none; /* Upper and lower */
     }
 
     strong, b {
       font-family: var(--font-family-body-medium);
-      font-weight: 600;
+      font-weight: 500; /* Graphik Regular/Medium */
     }
+
+    /* Explicit Typography Classes */
+    .caslon-bold { font-family: var(--font-family-headlines); font-weight: 700; font-style: normal; }
+    .caslon-bold-italic { font-family: var(--font-family-headlines); font-weight: 700; font-style: italic; }
+    .caslon-semibold { font-family: var(--font-family-headlines); font-weight: 600; font-style: normal; }
+    .caslon-semibold-italic { font-family: var(--font-family-headlines); font-weight: 600; font-style: italic; }
+    .caslon-regular { font-family: var(--font-family-headlines); font-weight: 400; font-style: normal; }
+    .caslon-regular-italic { font-family: var(--font-family-headlines); font-weight: 400; font-style: italic; }
+
+    .graphik-light { font-family: var(--font-family-body); font-weight: 300; text-transform: none; }
+    .graphik-regular { font-family: var(--font-family-body); font-weight: 400; }
 
     a {
       color: inherit;
@@ -206,13 +349,13 @@
     .btn-secondary {
       background-color: transparent;
       border: 1px solid var(--color-accent);
-      color: var(--color-text-primary);
+      color: #FFFFFF;
       font-family: var(--font-family-body-medium);
     }
 
     .btn-secondary:hover {
-      background-color: rgba(191, 139, 45, 0.08);
-      border-color: var(--color-text-heading);
+      background-color: rgba(191, 139, 45, 0.12);
+      border-color: var(--color-gold-metallic);
       color: var(--color-accent);
     }
 
@@ -294,7 +437,6 @@
       top: 0;
       z-index: 90;
       background: #FFFFFF;
-      border-bottom: 1px solid var(--border-taupe);
       transition: all var(--transition-base);
     }
 
@@ -318,6 +460,7 @@
       padding: 0;
       gap: 0.75rem;
       width: 100%;
+      border-bottom: 1px solid var(--border-taupe);
     }
 
     @media (min-width: 768px) {
@@ -343,18 +486,38 @@
       color: var(--color-text-heading);
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.65rem;
       text-transform: uppercase;
       text-decoration: none;
       line-height: 1.15;
       min-width: 0;
       flex-shrink: 1;
+      transition: opacity 0.2s ease;
+    }
+
+    .brand-logo:hover {
+      opacity: 0.92;
     }
 
     .brand-logo .brand-text {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+
+    .brand-emblem {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      flex-shrink: 0;
+      filter: drop-shadow(0 2px 6px rgba(184, 134, 11, 0.28));
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+      display: block;
+    }
+
+    .brand-logo:hover .brand-emblem {
+      transform: scale(1.08) rotate(4deg);
+      filter: drop-shadow(0 3px 10px rgba(184, 134, 11, 0.45));
     }
 
     .brand-icon {
@@ -410,6 +573,10 @@
         letter-spacing: 0.04em;
         gap: 0.45rem;
       }
+      .brand-emblem {
+        width: 30px;
+        height: 30px;
+      }
       .brand-icon {
         width: 24px;
         height: 24px;
@@ -433,6 +600,10 @@
         font-size: 0.82rem;
         letter-spacing: 0.02em;
         gap: 0.35rem;
+      }
+      .brand-emblem {
+        width: 25px;
+        height: 25px;
       }
       .brand-icon {
         width: 22px;
@@ -526,21 +697,22 @@
     }
 
     .vision-callout-quote {
-      font-family: var(--font-family-primary);
+      font-family: var(--font-family-headlines);
       font-size: 1.15rem;
       line-height: 1.5;
-      font-weight: 700;
+      font-weight: 400;
+      font-style: italic; /* Adobe Caslon Pro Regular Italic */
       color: var(--color-text-primary);
       margin-bottom: 0.5rem;
     }
 
     .vision-callout-author {
-      font-family: var(--font-family-body-medium);
+      font-family: var(--font-family-body);
       font-size: 0.75rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--color-accent);
-      font-weight: 600;
+      font-weight: 400; /* Graphik Regular */
     }
 
     .hero-actions {
@@ -548,6 +720,26 @@
       flex-wrap: wrap;
       gap: 1rem;
       align-items: center;
+    }
+
+    /* Minimal Teaser Hero Mode */
+    .hero-teaser-section {
+      min-height: calc(78vh - 120px);
+      display: flex;
+      align-items: center;
+      padding: 5rem 0 4.5rem;
+    }
+
+    .hero-teaser-content {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .hero-teaser-section {
+        min-height: auto;
+        padding: 3.5rem 0 3rem;
+      }
     }
 
     /* Executive Hero Card Preview */
@@ -628,7 +820,7 @@
     }
 
     /* ==========================================================================
-       2. THE 4 QUALIFYING QUESTIONS FRAMEWORK SECTION
+       2. THE MASTERMIND ALIGNMENT FRAMEWORK SECTION
        ========================================================================== */
     .framework-section {
       padding: 4.5rem 0;
@@ -639,7 +831,21 @@
     .section-header-centered {
       text-align: center;
       max-width: 800px;
-      margin: 0 auto 3rem;
+      margin: 0 auto 2.5rem;
+    }
+
+    .section-header-centered .section-label {
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-header-centered .section-label::after {
+      content: '';
+      display: inline-block;
+      width: 14px;
+      height: 1.5px;
+      background-color: var(--color-accent);
     }
 
     .section-header-centered h2 {
@@ -734,24 +940,25 @@
        DASHBOARD LEVEL 2: EXECUTIVE THINK TANK DASHBOARD
        ========================================================================== */
     .dashboard-wrapper {
-      padding: 3.5rem 0 5rem;
+      padding: 3.5rem 0 0;
       background: #FFFFFF;
     }
 
-    /* Status Banner */
+    /* Status Banner - Center Justified */
     .exec-status-banner {
       background: linear-gradient(135deg, var(--color-bg-obsidian) 0%, #24170a 100%);
       color: #FFFFFF;
       border: 1px solid var(--border-gold-subtle);
       border-radius: var(--radius-md);
-      padding: 1.75rem 2rem;
-      margin-bottom: 3rem;
+      padding: 2.25rem 2rem;
+      margin-bottom: 4rem;
       box-shadow: var(--shadow-lg);
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
+      justify-content: center;
+      text-align: center;
+      gap: 1.75rem;
       position: relative;
       overflow: hidden;
     }
@@ -767,48 +974,104 @@
       pointer-events: none;
     }
 
+    .exec-banner-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .exec-banner-emblem {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+      margin-bottom: 0.85rem;
+      filter: drop-shadow(0 4px 14px rgba(184, 134, 11, 0.4));
+      transition: transform 0.4s ease;
+      display: block;
+    }
+
+    .exec-status-banner:hover .exec-banner-emblem {
+      transform: scale(1.08) rotate(4deg);
+    }
+
     .exec-banner-info h2 {
       color: var(--color-gold-light);
-      font-size: 1.6rem;
-      margin-bottom: 0.35rem;
+      font-size: 1.85rem;
+      margin-bottom: 0.4rem;
+      text-align: center;
+      font-family: var(--font-family-headlines);
     }
 
     .exec-banner-info p {
       color: #d1c8bd;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+      font-weight: 400; /* Graphik Regular on dark background */
+      text-align: center;
+      margin: 0;
+      line-height: 1.5;
     }
 
     .exec-banner-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.5rem;
+      gap: 1.5rem 2.5rem;
       align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
     }
 
     .meta-stat {
-      border-left: 2px solid var(--color-gold-metallic);
-      padding-left: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 0.5rem;
     }
 
     .meta-stat .label {
-      font-family: var(--font-family-body-medium);
+      font-family: var(--font-family-body);
       font-size: 0.68rem;
+      font-weight: 400; /* Graphik Regular */
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--color-gold-light);
       opacity: 0.85;
+      margin-bottom: 0.25rem;
+      text-align: center;
     }
 
     .meta-stat .value {
       font-family: var(--font-family-headlines);
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 700;
       color: #FFFFFF;
+      text-align: center;
+    }
+
+    .meta-stat-action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* The Mastermind Alignment Framework */
+    .framework-section-dashboard {
+      padding-bottom: 4rem;
+      margin-bottom: 4rem;
+      border-bottom: 1px solid var(--border-taupe);
     }
 
     /* $500k Dual-Asset Breakdown */
     .architecture-section {
-      margin-bottom: 4.5rem;
+      padding-bottom: 4rem;
+      margin-bottom: 4rem;
+      border-bottom: 1px solid var(--border-taupe);
     }
 
     .asset-dual-grid {
@@ -1021,8 +1284,9 @@
     }
 
     .calc-res-item .lbl {
-      font-family: var(--font-family-body-medium);
+      font-family: var(--font-family-body);
       font-size: 0.68rem;
+      font-weight: 400; /* Graphik Regular */
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: #b5a999;
@@ -1031,7 +1295,7 @@
     .calc-res-item .num {
       font-family: var(--font-family-headlines);
       font-size: 1.35rem;
-      font-weight: 700;
+      font-weight: 700; /* Adobe Caslon Pro Bold */
       color: var(--color-gold-light);
       margin-top: 0.2rem;
     }
@@ -1040,9 +1304,9 @@
        DOCUMENT & INTELLIGENCE REPOSITORY (File Clusters)
        ========================================================================== */
     .docs-section {
-      margin-top: 4.5rem;
-      padding-top: 4rem;
-      border-top: 1px solid var(--border-taupe);
+      padding-bottom: 4rem;
+      margin-bottom: 4rem;
+      border-bottom: 1px solid var(--border-taupe);
     }
 
     .cluster-group {
@@ -1136,13 +1400,26 @@
     }
 
     /* ==========================================================================
-       LEVEL 3: FAMILY OF BUSINESSES (Light Portal Ecosystem)
+       LEVEL 3: FAMILY OF BUSINESSES AND GUILDS
        ========================================================================== */
     .ecosystem-section {
-      padding: 5rem 0;
-      background: #FFFFFF;
-      border-top: 1px solid var(--border-taupe);
-      border-bottom: 1px solid var(--border-taupe);
+      margin-bottom: 5rem;
+    }
+
+    @media (max-width: 768px) {
+      .exec-status-banner {
+        margin-bottom: 2.75rem;
+        padding: 1.75rem 1.25rem;
+      }
+      .framework-section-dashboard,
+      .architecture-section,
+      .docs-section {
+        padding-bottom: 2.75rem;
+        margin-bottom: 2.75rem;
+      }
+      .ecosystem-section {
+        margin-bottom: 3.5rem;
+      }
     }
 
     .ecosystem-grid {
@@ -1350,6 +1627,23 @@
       }
     }
 
+    /* Streamlined Member Onboarding & Profile Modal */
+    .onboarding-window {
+      max-width: 760px;
+    }
+
+    .onboarding-lanes-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.85rem;
+    }
+
+    @media (min-width: 640px) {
+      .onboarding-lanes-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     .lane-option {
       background: #FFFFFF;
       border: 2px solid var(--border-taupe);
@@ -1499,10 +1793,32 @@
       margin-bottom: 0.75rem;
     }
 
+    .footer-brand-link {
+      display: inline-block;
+      margin-bottom: 1.15rem;
+      text-decoration: none;
+    }
+
+    .footer-logo-img {
+      height: 54px;
+      width: auto;
+      max-width: 240px;
+      object-fit: contain;
+      filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.5));
+      display: block;
+      transition: transform 0.25s ease, filter 0.25s ease;
+    }
+
+    .footer-brand-link:hover .footer-logo-img {
+      transform: scale(1.03);
+      filter: drop-shadow(0 4px 14px rgba(184, 134, 11, 0.35));
+    }
+
     .footer-brand p {
       color: #b5a999;
       font-size: 0.88rem;
       line-height: 1.6;
+      font-weight: 400; /* Graphik Regular for dark background */
       margin-bottom: 1.25rem;
     }
 
@@ -1518,6 +1834,7 @@
       align-items: center;
       gap: 0.65rem;
       font-size: 0.85rem;
+      font-weight: 400; /* Graphik Regular */
       color: #e5ded4;
       margin-bottom: 0.5rem;
     }
@@ -1528,6 +1845,7 @@
 
     .contact-line strong {
       color: var(--color-gold-light);
+      font-weight: 500;
     }
 
     .footer-bottom {
@@ -1539,6 +1857,7 @@
       justify-content: space-between;
       gap: 1rem;
       font-size: 0.75rem;
+      font-weight: 400; /* Graphik Regular */
       color: #8c8072;
     }
 
@@ -1593,6 +1912,20 @@
       justify-content: space-between;
       background: #FFFFFF;
       border-radius: var(--radius-md) var(--radius-md) 0 0;
+    }
+
+    .modal-header-branding {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .modal-header-emblem {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      flex-shrink: 0;
+      filter: drop-shadow(0 2px 6px rgba(184, 134, 11, 0.28));
     }
 
     .modal-header h3 {
@@ -1678,6 +2011,10 @@
     }
 
     /* State Switcher Visual Notice */
+    #state-public {
+      display: block;
+    }
+
     #state-dashboard {
       display: none;
     }
@@ -1735,8 +2072,8 @@
   <header class="site-header">
     <div class="container header-inner">
       <div class="brand-group">
-        <a href="#hero" class="brand-logo">
-          <span class="brand-icon">✦</span>
+        <a href="#hero" class="brand-logo" aria-label="New Paradigm Capital Home">
+          <img src="assets/npc-emblem.png" alt="New Paradigm Capital Emblem" class="brand-emblem" />
           <span class="brand-text">NEW PARADIGM CAPITAL</span>
         </a>
         <span class="brand-tagline">Nevada County Pilot Foundation</span>
@@ -1748,6 +2085,10 @@
           <span class="auth-text-full">Level 2 Unlocked: Executive Portal</span>
           <span class="auth-text-short">Level 2 Active</span>
         </div>
+        <button id="btn-open-profile-nav" class="btn btn-secondary btn-sm" onclick="openMemberProfileModal()" style="display: none;">
+          <span class="btn-text-full">Member Profile</span>
+          <span class="btn-text-short">Profile</span>
+        </button>
         <button id="btn-open-nda-nav" class="btn btn-primary btn-sm" onclick="openModal('nda-modal')">
           <span class="btn-text-full">Member Access / NDA Request</span>
           <span class="btn-text-short">Member Access</span>
@@ -1757,13 +2098,13 @@
   </header>
 
   <!-- ==========================================================================
-       LEVEL 1: PUBLIC GATEWAY & HERO LANDING (Pre-NDA)
+       LEVEL 1: PUBLIC GATEWAY & HERO TEASER (Pre-NDA)
        ========================================================================== -->
   <main id="state-public">
-    <section id="hero" class="hero-section">
-      <div class="container hero-grid">
-        <!-- Hero Text Content -->
-        <div class="hero-content">
+    <section id="hero" class="hero-section hero-teaser-section">
+      <div class="container-narrow">
+        <!-- Hero Minimal Teaser Content -->
+        <div class="hero-content hero-teaser-content">
           <div class="section-label">SYSTEMIC RESILIENCE &amp; CAPITAL ARCHITECTURE</div>
           <h1>Redefining Wealth, Reimagining Progress</h1>
           <p class="hero-subheadline">
@@ -1781,131 +2122,6 @@
             <button class="btn btn-primary" onclick="openModal('nda-modal')">
               Request Executive NDA &amp; Access
             </button>
-            <a href="#framework" class="btn btn-secondary">
-              Explore Strategic Vision
-            </a>
-          </div>
-        </div>
-
-        <!-- Hero Preview Card -->
-        <div class="hero-card-preview">
-          <div class="card-meta-row">
-            <div>
-              <div class="badge badge-gold">Design-Build Phase</div>
-              <div style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.3rem;">Target Raised: $500,000 Seed</div>
-            </div>
-            <div class="badge badge-blue">Confidential Think Tank</div>
-          </div>
-
-          <div class="metric-grid-preview">
-            <div class="metric-box">
-              <div class="label">Position A: Village Land</div>
-              <div class="val">160 Acres</div>
-              <div class="note">Sebastopol Parcel (Intact Water)</div>
-            </div>
-            <div class="metric-box">
-              <div class="label">Position B: Hospitality</div>
-              <div class="val">9.0 Acres</div>
-              <div class="note">Castile on the Ridge (Cash Flow)</div>
-            </div>
-            <div class="metric-box">
-              <div class="label">Labor Equity Standard</div>
-              <div class="val">1,560 Hrs</div>
-              <div class="note">Per 5 Sovereign Acres</div>
-            </div>
-            <div class="metric-box">
-              <div class="label">Stranded Land Pool</div>
-              <div class="val">10,000+ Ac</div>
-              <div class="note">Regional Nevada County Base</div>
-            </div>
-          </div>
-
-          <div class="security-notice-box">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-            <div>
-              <strong>Gated Think Tank Architecture:</strong> Full balance sheets, 8 Forms of Capital index, ring-fence legal deeds, and normative accounting dossiers require signed NDA verification.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================================================
-         2. THE 4 QUALIFYING QUESTIONS FRAMEWORK
-         ========================================================================== -->
-    <section id="framework" class="framework-section">
-      <div class="container">
-        <div class="section-header-centered">
-          <div class="section-label">Mastermind Alignment Framework</div>
-          <h2>The 4 Qualifying Questions</h2>
-          <p>
-            Key strategic questions and direct answers anchoring our mission, governance, and capital allocation architecture.
-          </p>
-        </div>
-
-        <div class="questions-grid">
-          <!-- Question 1 -->
-          <div class="question-card">
-            <div class="question-num-badge">01</div>
-            <div class="q-title">Audience Architecture</div>
-            <h3>Who is the audience?</h3>
-            <p>
-              <strong>The New Medici:</strong> Multidisciplinary leaders, angel investors, land stewards, financial architects, legal experts, and conscious creators.
-            </p>
-            <p>
-              Individuals who recognize that a county-level mastermind must be deployed <em>now</em> to create a replicable civilizational template.
-            </p>
-            <div class="highlight-pill">
-              <span>✦</span> Executive Think Tank &amp; Capital Stewards
-            </div>
-          </div>
-
-          <!-- Question 2 -->
-          <div class="question-card">
-            <div class="question-num-badge">02</div>
-            <div class="q-title">Civilizational Thesis</div>
-            <h3>What is the message?</h3>
-            <p>
-              <strong>Living Villages as the Core Solution:</strong> Solving multigenerational housing, local food security, and creating ideal sanctuaries to raise children and honor elders.
-            </p>
-            <p>
-              <strong>The Nevada County Opportunity:</strong> 10,000+ acres of former cannabis cultivation land sit idle with intact water rights—ideal for labor-backed agroforestry.
-            </p>
-            <div class="highlight-pill">
-              <span>✦</span> Land-Labor Settlement &amp; Abundance
-            </div>
-          </div>
-
-          <!-- Question 3 -->
-          <div class="question-card">
-            <div class="question-num-badge">03</div>
-            <div class="q-title">Deployment Protocol</div>
-            <h3>How do we deliver it?</h3>
-            <p>
-              <strong>Need-to-Know Invite-Only Outreach:</strong> High-trust direct engagement backed by a private, gated web intelligence portal.
-            </p>
-            <p>
-              Holding high-level spatial data, normative accounting models, and legal conveyance instruments required for informed executive commitment.
-            </p>
-            <div class="highlight-pill">
-              <span>✦</span> Gated Intelligence &amp; Verified Data
-            </div>
-          </div>
-
-          <!-- Question 4 -->
-          <div class="question-card">
-            <div class="question-num-badge">04</div>
-            <div class="q-title">Executive Action</div>
-            <h3>What action are we asking them to take?</h3>
-            <p>
-              <strong>5-Step Mastermind Onboarding:</strong>
-            </p>
-            <p>
-              Sign NDA &rarr; Log In &rarr; Complete Profile &amp; Bio &rarr; Review Interest-Matching Briefs &rarr; Participate in Nevada County Mastermind or refer exceptional peers.
-            </p>
-            <div class="highlight-pill">
-              <span>✦</span> Active Think Tank Participation
-            </div>
           </div>
         </div>
       </div>
@@ -1922,7 +2138,8 @@
       <!-- Executive Status Banner -->
       <div class="exec-status-banner">
         <div class="exec-banner-info">
-          <div class="badge badge-gold" style="margin-bottom: 0.5rem;">CONFIDENTIAL EXECUTIVE PORTAL</div>
+          <img src="assets/npc-emblem.png" alt="New Paradigm Capital Emblem" class="exec-banner-emblem" />
+          <div class="badge badge-gold" style="margin-bottom: 0.65rem;">CONFIDENTIAL EXECUTIVE PORTAL</div>
           <h2>Nevada County Pilot Foundation</h2>
           <p>Pre-Phase Design-Build Mastermind &bull; 2-Property Coordinated Settlement Architecture</p>
         </div>
@@ -1940,16 +2157,97 @@
             <div class="label">Security Tier</div>
             <div class="value">Level 2 Think Tank</div>
           </div>
+          <div class="meta-stat-action">
+            <button class="btn btn-secondary btn-sm" onclick="openMemberProfileModal()" style="padding: 0.55rem 1.15rem; font-size: 0.76rem; white-space: nowrap; color: #FFFFFF;">
+              ⚙ Member Profile
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Mastermind Alignment Framework -->
+      <div id="framework" class="framework-section-dashboard">
+        <div class="section-header-centered">
+          <div class="section-label">Strategic Blueprint</div>
+          <h2>The Mastermind Alignment Framework</h2>
+          <p>
+            Core pillars and operational directives anchoring our mission, governance, and capital allocation architecture.
+          </p>
+        </div>
+
+        <div class="questions-grid">
+          <!-- Pillar 1: Audience Architecture -->
+          <div class="question-card">
+            <div class="question-num-badge">01</div>
+            <div class="q-title">Audience Architecture</div>
+            <h3>The New Medici</h3>
+            <p>
+              Multidisciplinary leaders, angel investors, land stewards, financial architects, legal experts, and conscious creators.
+            </p>
+            <p>
+              Individuals who recognize that a county-level mastermind must be deployed <em>now</em> to create a replicable civilizational template.
+            </p>
+            <div class="highlight-pill">
+              <span>✦</span> Executive Think Tank &amp; Capital Stewards
+            </div>
+          </div>
+
+          <!-- Pillar 2: Civilization Thesis -->
+          <div class="question-card">
+            <div class="question-num-badge">02</div>
+            <div class="q-title">Civilization Thesis</div>
+            <h3>Living Villages</h3>
+            <p>
+              <strong>Core Solution:</strong> Solving multigenerational housing, local food security, and creating ideal sanctuaries to raise children and honor elders independent of broader economic fragility.
+            </p>
+            <p>
+              <strong>The Nevada County Opportunity:</strong> 10,000+ acres of former cannabis cultivation land sit idle with intact water rights—ideal for labor-backed agroforestry.
+            </p>
+            <div class="highlight-pill">
+              <span>✦</span> Land-Labor Settlement &amp; Abundance
+            </div>
+          </div>
+
+          <!-- Pillar 3: Deployment Protocol -->
+          <div class="question-card">
+            <div class="question-num-badge">03</div>
+            <div class="q-title">Deployment Protocol</div>
+            <h3>Need to Know, Invite-Only Outreach</h3>
+            <p>
+              High-trust direct engagement backed by a private, gated web intelligence portal.
+            </p>
+            <p>
+              Holding high-level spatial data, normative accounting models, and legal conveyance instruments required for informed executive commitment.
+            </p>
+            <div class="highlight-pill">
+              <span>✦</span> Gated Intelligence &amp; Verified Data
+            </div>
+          </div>
+
+          <!-- Pillar 4: Executive Action -->
+          <div class="question-card">
+            <div class="question-num-badge">04</div>
+            <div class="q-title">Executive Action</div>
+            <h3>5-Step Mastermind Onboarding</h3>
+            <p>
+              Sign NDA &rarr; Log In &rarr; Complete Profile &amp; Bio &rarr; Review Interest-Matching Briefs &rarr; Participate in Nevada County Mastermind or refer exceptional peers.
+            </p>
+            <div class="highlight-pill">
+              <span>✦</span> Active Think Tank Participation
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- $500k Dual-Asset Architecture Breakdown -->
       <div class="architecture-section">
-        <div class="section-label">CAPITAL STRUCTURAL MECHANICS</div>
-        <h2 style="font-size: 2rem; margin-bottom: 0.75rem;">The $500k Dual-Asset Architecture</h2>
-        <p style="max-width: 850px; margin-bottom: 2rem; color: var(--color-text-muted);">
-          A paired-asset structure solving the historical tension between land preservation, capital repayment, and sovereign sweat-equity settlement.
-        </p>
+        <div class="section-header-centered">
+          <div class="section-label">CAPITAL STRUCTURAL MECHANICS</div>
+          <h2>The $500k Dual-Asset Architecture</h2>
+          <p>
+            A paired-asset structure solving the historical tension between land preservation, capital repayment, and sovereign sweat-equity settlement.
+          </p>
+        </div>
 
         <div class="asset-dual-grid">
           <!-- Position A -->
@@ -2114,11 +2412,13 @@
 
       <!-- Document & Intelligence Repository (Interactive File Cluster) -->
       <div id="repository" class="docs-section">
-        <div class="section-label">INTELLIGENCE DOSSIERS &amp; RESEARCH</div>
-        <h2 style="font-size: 2rem; margin-bottom: 0.75rem;">Document &amp; Intelligence Repository</h2>
-        <p style="max-width: 800px; margin-bottom: 2.5rem; color: var(--color-text-muted);">
-          Confidential briefings, legal conveyance vehicles, and normative accounting indexes for mastermind members. Click any dossier to view full executive brief.
-        </p>
+        <div class="section-header-centered">
+          <div class="section-label">INTELLIGENCE DOSSIERS &amp; RESEARCH</div>
+          <h2>Document &amp; Intelligence Repository</h2>
+          <p>
+            Confidential briefings, legal conveyance vehicles, and normative accounting indexes for mastermind members. Click any dossier to view full executive brief.
+          </p>
+        </div>
 
         <!-- Cluster A -->
         <div class="cluster-group">
@@ -2252,22 +2552,13 @@
         </div>
       </div>
 
-    </div>
-  </section>
-
-
-  <!-- ==========================================================================
-       LEVEL 3: FAMILY OF BUSINESSES (Light Portal Ecosystem)
-       ========================================================================== -->
-  <section id="ecosystem" class="ecosystem-section">
-    <div class="container">
-      <div class="section-header-centered">
-        <div class="section-label">THE LIGHT PORTAL ECOSYSTEM</div>
-        <h2>Family of Businesses &amp; Guilds</h2>
-        <p>
-          Four interconnected nodes bridging physical land stewardship, generative culture, natural intelligence, and capital architecture.
-        </p>
-      </div>
+      <!-- ==========================================================================
+         LEVEL 3: FAMILY OF BUSINESSES AND GUILDS
+         ========================================================================== -->
+      <div id="ecosystem" class="ecosystem-section">
+        <div class="section-header-centered">
+          <h2>Family of Businesses and Guilds</h2>
+        </div>
 
       <div class="ecosystem-grid">
         <!-- 1. Earth Force -->
@@ -2375,117 +2666,10 @@
             <li><strong>Nevada County Alliances:</strong> Regional land trusts and municipal policy champions.</li>
           </ul>
         </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ==========================================================================
-       LEVEL 4: DYNAMIC APPLICANT INTAKE & DISCOVERY SORTING
-       ========================================================================== -->
-  <section id="intake" class="intake-section">
-    <div class="container">
-      <div class="section-header-centered">
-        <div class="section-label">MASTERMIND &amp; CAPITAL ONBOARDING</div>
-        <h2>Executive Discovery &amp; Intake Portal</h2>
-        <p>
-          Select your primary discovery lane below to align with the Nevada County Pilot Foundation mastermind and deployment initiatives.
-        </p>
-      </div>
-
-      <div class="intake-card-container">
-        <!-- 4 Lanes Selector -->
-        <div class="lane-selector-grid">
-          <label class="lane-option active" onclick="selectLane('lane-medici', this)">
-            <input type="radio" name="intake_lane" value="Lane 1: Executive / Think Tank" checked />
-            <div class="lane-tag">LANE 01</div>
-            <h4>Executive / The New Medici</h4>
-            <p>Asset class designers, legal architects, financial engineers, and systemic innovators.</p>
-          </label>
-
-          <label class="lane-option" onclick="selectLane('lane-investor', this)">
-            <input type="radio" name="intake_lane" value="Lane 2: Investor Class" />
-            <div class="lane-tag">LANE 02</div>
-            <h4>Investor Class</h4>
-            <p>Seed participants ($250k Land, $250k Commercial) or regional $50M asset pool.</p>
-          </label>
-
-          <label class="lane-option" onclick="selectLane('lane-referrer', this)">
-            <input type="radio" name="intake_lane" value="Lane 3: Strategic Referrers" />
-            <div class="lane-tag">LANE 03</div>
-            <h4>Strategic Referrers</h4>
-            <p>Connecting pivotal political leaders, high-acreage land donors, and capital stewards.</p>
-          </label>
-
-          <label class="lane-option" onclick="selectLane('lane-worker', this)">
-            <input type="radio" name="intake_lane" value="Lane 4: Local Participants / Workers" />
-            <div class="lane-tag">LANE 04</div>
-            <h4>Local Stewards &amp; Workers</h4>
-            <p>Skilled craftspeople, permaculture rangers, builders, and active land stewards.</p>
-          </label>
-        </div>
-
-        <!-- Dynamic Form Fields -->
-        <form id="discovery-form" onsubmit="handleDiscoverySubmit(event)">
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="intake-name">Full Name *</label>
-              <input type="text" id="intake-name" class="form-control" placeholder="Kiril Ravensong" required />
-            </div>
-
-            <div class="form-group">
-              <label for="intake-email">Email Address *</label>
-              <input type="email" id="intake-email" class="form-control" placeholder="you@domain.com" required />
-            </div>
-
-            <div class="form-group">
-              <label for="intake-phone">Phone / Signal *</label>
-              <input type="tel" id="intake-phone" class="form-control" placeholder="+1 (530) 859-3888" required />
-            </div>
-
-            <div class="form-group">
-              <label for="intake-entity">Entity / Organization</label>
-              <input type="text" id="intake-entity" class="form-control" placeholder="Rethinking Capital / Private Foundation" />
-            </div>
-
-            <!-- Dynamic Lane Specific Input -->
-            <div class="form-group full-width" id="dynamic-lane-field">
-              <label for="intake-expertise">Area of Expertise &amp; Strategic Contribution *</label>
-              <input type="text" id="intake-expertise" class="form-control" placeholder="Normative accounting, municipal land law, regenerative finance..." required />
-            </div>
-
-            <div class="form-group full-width">
-              <label for="intake-bio">Intangible Assets &amp; Background Summary *</label>
-              <textarea id="intake-bio" class="form-control" placeholder="Describe your relevant background, holdings in Nevada County, or vision for civilizational resilience..." required></textarea>
-            </div>
-
-            <div class="form-group full-width">
-              <label for="intake-availability">Mastermind Availability &amp; Preferred Cadence</label>
-              <select id="intake-availability" class="form-control">
-                <option value="Sunday Mastermind Series (Weekly)">Sunday Mastermind Series (Weekly 10am PT)</option>
-                <option value="Executive Working Group (Bi-Weekly)">Executive Working Group (Bi-Weekly)</option>
-                <option value="In-Person Nevada County Site Walk">In-Person Nevada County Site Walk</option>
-                <option value="Direct Strategic Bilateral with Kiril Ravensong">Direct Strategic Bilateral with Kiril Ravensong</option>
-              </select>
-            </div>
-
-            <div class="form-group full-width" style="margin-top: 0.5rem;">
-              <label class="checkbox-container">
-                <input type="checkbox" id="intake-nda-check" required checked />
-                <span>I agree to participate under the confidential Chatham House &amp; Executive Think Tank protocols of New Paradigm Capital.</span>
-              </label>
-            </div>
-
-            <div class="form-group full-width" style="margin-top: 1rem;">
-              <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.1rem;">
-                Submit Strategic Intake &amp; Request Mastermind Seat &rarr;
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </section>
+      </div><!-- End .ecosystem-grid -->
+      </div><!-- End #ecosystem -->
+    </div><!-- End #state-dashboard .container -->
+  </section><!-- End #state-dashboard -->
 
 
   <!-- ==========================================================================
@@ -2495,10 +2679,9 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="brand-logo" style="color: var(--color-gold-light); margin-bottom: 0.75rem;">
-            <span class="brand-icon">✦</span>
-            <span>NEW PARADIGM CAPITAL</span>
-          </div>
+          <a href="#hero" class="footer-brand-link" aria-label="New Paradigm Capital Home">
+            <img src="assets/npc-logo-white.png" alt="New Paradigm Capital" class="footer-logo-img" />
+          </a>
           <p>
             Deploying land- and labor-backed asset class frameworks across Nevada County, California. Transforming stranded parcels into self-sufficient, multigenerational living villages.
           </p>
@@ -2552,9 +2735,12 @@
   <div id="nda-modal" class="modal-backdrop" onclick="handleBackdropClick(event, 'nda-modal')">
     <div class="modal-window" onclick="event.stopPropagation()">
       <div class="modal-header">
-        <div>
-          <div class="badge badge-gold" style="margin-bottom: 0.3rem;">EXECUTIVE ACCESS GATE</div>
-          <h3>Non-Disclosure &amp; Security Protocol</h3>
+        <div class="modal-header-branding">
+          <img src="assets/npc-emblem.png" alt="NPC Emblem" class="modal-header-emblem" />
+          <div>
+            <div class="badge badge-gold" style="margin-bottom: 0.3rem;">EXECUTIVE ACCESS GATE</div>
+            <h3>Non-Disclosure &amp; Security Protocol</h3>
+          </div>
         </div>
         <button class="modal-close-btn" onclick="closeModal('nda-modal')">&times;</button>
       </div>
@@ -2612,7 +2798,7 @@
           <div id="nda-error" style="color: #b91c1c; font-size: 0.82rem; margin-bottom: 0.75rem; display: none;"></div>
 
           <button type="submit" class="btn btn-primary" style="width: 100%;">
-            Verify Credentials &amp; Unlock Level 2 Dashboard &rarr;
+            Sign NDA &amp; Continue to Registration &rarr;
           </button>
         </form>
       </div>
@@ -2626,9 +2812,12 @@
   <div id="doc-modal" class="modal-backdrop" onclick="handleBackdropClick(event, 'doc-modal')">
     <div class="modal-window doc-viewer-modal" onclick="event.stopPropagation()">
       <div class="modal-header">
-        <div>
-          <div id="doc-modal-badge" class="badge badge-gold" style="margin-bottom: 0.3rem;">EXECUTIVE DOSSIER</div>
-          <h3 id="doc-modal-title">Dossier Viewer</h3>
+        <div class="modal-header-branding">
+          <img src="assets/npc-emblem.png" alt="NPC Emblem" class="modal-header-emblem" />
+          <div>
+            <div id="doc-modal-badge" class="badge badge-gold" style="margin-bottom: 0.3rem;">EXECUTIVE DOSSIER</div>
+            <h3 id="doc-modal-title">Dossier Viewer</h3>
+          </div>
         </div>
         <button class="modal-close-btn" onclick="closeModal('doc-modal')">&times;</button>
       </div>
@@ -2644,6 +2833,116 @@
         <button class="btn btn-primary btn-sm" onclick="closeModal('doc-modal')">
           Close Dossier
         </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==========================================================================
+       MODAL 3: EXECUTIVE DISCOVERY AND INTAKE PROTOCOL (Member Onboarding / Profile)
+       ========================================================================== -->
+  <div id="onboarding-modal" class="modal-backdrop" onclick="handleBackdropClick(event, 'onboarding-modal')">
+    <div class="modal-window onboarding-window" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-header-branding">
+          <img src="assets/npc-emblem.png" alt="NPC Emblem" class="modal-header-emblem" />
+          <div>
+            <div class="badge badge-gold" style="margin-bottom: 0.3rem;" id="onboarding-modal-badge">EXECUTIVE DISCOVERY</div>
+            <h3 id="onboarding-modal-title">Executive Discovery and Intake Protocol</h3>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('onboarding-modal')">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <p id="onboarding-intro-text" style="font-size: 0.88rem; color: var(--color-text-muted); margin-bottom: 1.5rem;">
+          Welcome to the Pilot Foundation. Please complete your member discovery profile to align your strategic focus, interest tier, and access credentials.
+        </p>
+
+        <form id="onboarding-form" onsubmit="handleOnboardingSubmit(event)">
+          <!-- Member Identification (Prefilled from NDA or Editable) -->
+          <div class="form-grid" style="margin-bottom: 1.5rem;">
+            <div class="form-group">
+              <label for="onboarding-name">Full Name *</label>
+              <input type="text" id="onboarding-name" class="form-control" placeholder="Kiril Ravensong" required />
+            </div>
+            <div class="form-group">
+              <label for="onboarding-email">Email Address *</label>
+              <input type="email" id="onboarding-email" class="form-control" placeholder="you@domain.com" required />
+            </div>
+            <div class="form-group">
+              <label for="onboarding-phone">Phone / Signal *</label>
+              <input type="tel" id="onboarding-phone" class="form-control" placeholder="+1 (530) 859-3888" required />
+            </div>
+            <div class="form-group">
+              <label for="onboarding-entity">Entity / Organization</label>
+              <input type="text" id="onboarding-entity" class="form-control" placeholder="Rethinking Capital / Private Foundation" />
+            </div>
+          </div>
+
+          <!-- Question: Which describes you best? -->
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-family: var(--font-family-headlines); font-size: 1.08rem; color: var(--color-text-heading); margin-bottom: 0.85rem; font-weight: 700;">
+              Which describes you best?
+            </label>
+            <div class="onboarding-lanes-grid">
+              <!-- Option 1: Executive (New Medici) -->
+              <label class="lane-option active" onclick="selectOnboardingOption('medici', this)">
+                <input type="radio" name="onboarding_role" value="Executive (New Medici)" checked />
+                <h4>Executive (New Medici)</h4>
+                <p>Asset class designers, legal architects, financial engineers, and systemic innovators.</p>
+              </label>
+
+              <!-- Option 2: Investor Class -->
+              <label class="lane-option" onclick="selectOnboardingOption('investor', this)">
+                <input type="radio" name="onboarding_role" value="Investor Class" />
+                <h4>Investor Class</h4>
+                <p>Seed participants ($250k Land, $250k Commercial) or regional $50M asset pool.</p>
+              </label>
+
+              <!-- Option 3: Strategic Referrers -->
+              <label class="lane-option" onclick="selectOnboardingOption('referrer', this)">
+                <input type="radio" name="onboarding_role" value="Strategic Referrers" />
+                <h4>Strategic Referrers</h4>
+                <p>Connecting pivotal political leaders, high-acreage land donors, and capital stewards.</p>
+              </label>
+
+              <!-- Option 4: Local Stewards and Workers -->
+              <label class="lane-option" onclick="selectOnboardingOption('worker', this)">
+                <input type="radio" name="onboarding_role" value="Local Stewards and Workers" />
+                <h4>Local Stewards and Workers</h4>
+                <p>Skilled craftspeople, permaculture rangers, builders, and active land stewards.</p>
+              </label>
+            </div>
+          </div>
+
+          <!-- Dynamic Field based on selected option -->
+          <div class="form-group full-width" id="onboarding-dynamic-field" style="margin-bottom: 1.25rem;">
+            <label for="onboarding-expertise" id="onboarding-expertise-label">Area of Expertise &amp; Think Tank Focus *</label>
+            <input type="text" id="onboarding-expertise" class="form-control" placeholder="Asset class design, legal architecture, normative accounting, municipal relations..." required />
+          </div>
+
+          <!-- Intangibles / Bio Field -->
+          <div class="form-group full-width" style="margin-bottom: 1.25rem;">
+            <label for="onboarding-bio">Intangible Assets &amp; Background Summary *</label>
+            <textarea id="onboarding-bio" class="form-control" rows="3" placeholder="Describe your relevant background, holdings in Nevada County, or vision for civilizational resilience..." required></textarea>
+          </div>
+
+          <!-- Mastermind Availability -->
+          <div class="form-group full-width" style="margin-bottom: 1.5rem;">
+            <label for="onboarding-availability">Mastermind Availability &amp; Preferred Cadence</label>
+            <select id="onboarding-availability" class="form-control">
+              <option value="Sunday Mastermind Series (Weekly)">Sunday Mastermind Series (Weekly 10am PT)</option>
+              <option value="Executive Working Group (Bi-Weekly)">Executive Working Group (Bi-Weekly)</option>
+              <option value="In-Person Nevada County Site Walk">In-Person Nevada County Site Walk</option>
+              <option value="Direct Strategic Bilateral with Kiril Ravensong">Direct Strategic Bilateral with Kiril Ravensong</option>
+            </select>
+          </div>
+
+          <button type="submit" id="onboarding-submit-btn" class="btn btn-primary" style="width: 100%; padding: 1.05rem;">
+            Complete Registration &amp; Enter Executive Portal &rarr;
+          </button>
+        </form>
       </div>
     </div>
   </div>
@@ -2716,7 +3015,7 @@
         `
       },
       'doc-thesis': {
-        title: 'Mastermind Core Thesis: The 4 Questions & Civilizational Resilience',
+        title: 'Mastermind Core Thesis: Civilizational Resilience',
         badge: 'Cluster A • Strategic Governance',
         badgeClass: 'badge-gold',
         content: `
@@ -2900,9 +3199,38 @@
       // Valid passwords: MEDICI2026, PILOT, NEWPARADIGM, NPC2026
       if (pwd === 'MEDICI2026' || pwd === 'PILOT' || pwd === 'NEWPARADIGM' || pwd === 'NPC2026') {
         errorDiv.style.display = 'none';
+
+        // Harvest NDA details to prefill member profile
+        const name = document.getElementById('nda-name').value.trim();
+        const email = document.getElementById('nda-email').value.trim();
+        const phone = document.getElementById('nda-phone').value.trim();
+        const entity = document.getElementById('nda-entity').value.trim();
+        const role = document.getElementById('nda-role').value;
+
+        const userProfile = {
+          name: name || 'Executive Member',
+          email: email || '',
+          phone: phone || '',
+          entity: entity || '',
+          role: role || 'Executive (New Medici)',
+          expertise: '',
+          bio: '',
+          availability: 'Sunday Mastermind Series (Weekly)'
+        };
+        sessionStorage.setItem('npc_user_profile', JSON.stringify(userProfile));
+        localStorage.setItem('npc_user_profile', JSON.stringify(userProfile));
+
         closeModal('nda-modal');
-        unlockDashboard();
-        showToast('✓ Verified: Welcome to Executive Think Tank Level 2');
+
+        // Check if onboarding was already completed
+        if (sessionStorage.getItem('npc_onboarding_completed') === 'true') {
+          unlockDashboard(true);
+        } else {
+          // Trigger one-time onboarding modal right after signing NDA
+          prefillOnboardingModal(userProfile);
+          openModal('onboarding-modal');
+          showToast('✓ NDA Signed: Complete Executive Discovery Profile');
+        }
       } else {
         errorDiv.innerText = 'Invalid access code. Please verify your credentials or contact Kiril Ravensong (Strategic Director).';
         errorDiv.style.display = 'block';
@@ -2910,27 +3238,71 @@
     }
 
     function quickUnlock() {
-      unlockDashboard();
-      showToast('✓ Quick Access: Executive Dashboard Unlocked');
+      unlockDashboard(true);
     }
 
-    function unlockDashboard() {
+    function unlockDashboard(showNotification = true) {
+      const publicState = document.getElementById('state-public');
       const dashboard = document.getElementById('state-dashboard');
-      dashboard.classList.add('unlocked');
-      
-      // Update Header
-      document.getElementById('header-auth-badge').style.display = 'flex';
-      const navBtn = document.getElementById('btn-open-nda-nav');
-      navBtn.innerText = 'Dashboard Active';
-      navBtn.className = 'btn btn-secondary btn-sm';
-      navBtn.onclick = () => {
-        dashboard.scrollIntoView({ behavior: 'smooth' });
-      };
 
-      // Smooth scroll to Dashboard
-      setTimeout(() => {
-        dashboard.scrollIntoView({ behavior: 'smooth' });
-      }, 150);
+      if (publicState) {
+        publicState.style.display = 'none';
+      }
+      if (dashboard) {
+        dashboard.classList.add('unlocked');
+      }
+
+      // Update Header
+      const authBadge = document.getElementById('header-auth-badge');
+      if (authBadge) authBadge.style.display = 'flex';
+
+      const profileBtn = document.getElementById('btn-open-profile-nav');
+      if (profileBtn) profileBtn.style.display = 'inline-flex';
+
+      const navBtn = document.getElementById('btn-open-nda-nav');
+      if (navBtn) {
+        navBtn.innerHTML = '<span class="btn-text-full">Lock Portal</span><span class="btn-text-short">Lock</span>';
+        navBtn.className = 'btn btn-secondary btn-sm';
+        navBtn.onclick = lockDashboard;
+      }
+
+      sessionStorage.setItem('npc_portal_unlocked', 'true');
+
+      if (showNotification) {
+        showToast('✓ Verified: Welcome to Executive Think Tank Level 2');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function lockDashboard() {
+      const publicState = document.getElementById('state-public');
+      const dashboard = document.getElementById('state-dashboard');
+
+      if (dashboard) {
+        dashboard.classList.remove('unlocked');
+      }
+      if (publicState) {
+        publicState.style.display = 'block';
+      }
+
+      // Reset Header
+      const authBadge = document.getElementById('header-auth-badge');
+      if (authBadge) authBadge.style.display = 'none';
+
+      const profileBtn = document.getElementById('btn-open-profile-nav');
+      if (profileBtn) profileBtn.style.display = 'none';
+
+      const navBtn = document.getElementById('btn-open-nda-nav');
+      if (navBtn) {
+        navBtn.innerHTML = '<span class="btn-text-full">Member Access / NDA Request</span><span class="btn-text-short">Member Access</span>';
+        navBtn.className = 'btn btn-primary btn-sm';
+        navBtn.onclick = () => openModal('nda-modal');
+      }
+
+      sessionStorage.removeItem('npc_portal_unlocked');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      showToast('Executive Portal Locked');
     }
 
     /* ==========================================================================
@@ -2951,63 +3323,139 @@
     }
 
     /* ==========================================================================
-       DYNAMIC INTAKE LANE SORTING ENGINE
+       DYNAMIC INTAKE & MEMBER ONBOARDING PROTOCOL
        ========================================================================== */
-    const LANE_CONFIGS = {
-      'lane-medici': {
+    const ONBOARDING_CONFIGS = {
+      'medici': {
+        role: 'Executive (New Medici)',
         label: 'Area of Expertise & Think Tank Focus *',
         placeholder: 'Asset class design, legal architecture, normative accounting, municipal relations...',
         bioPlaceholder: 'Describe your relevant background, holdings in Nevada County, or vision for civilizational resilience...'
       },
-      'lane-investor': {
+      'investor': {
+        role: 'Investor Class',
         label: 'Target Investment Position & Allocation Range *',
         placeholder: 'Position A ($250k Land), Position B ($250k Commercial), or $50M Regional Pool...',
         bioPlaceholder: 'Provide details on your investment vehicle, capital horizon, and alignment with non-extractive return models...'
       },
-      'lane-referrer': {
+      'referrer': {
+        role: 'Strategic Referrers',
         label: 'Key Networks & Strategic Relationships *',
         placeholder: 'Nevada County political leaders, regional land donors, philanthropic foundations...',
         bioPlaceholder: 'Describe the leaders or strategic assets you are interested in introducing to the Mastermind...'
       },
-      'lane-worker': {
+      'worker': {
+        role: 'Local Stewards and Workers',
         label: 'Skilled Trade / Permaculture Specialization *',
         placeholder: 'Heavy machinery, earthworks, timber framing, biochar, permaculture guild management...',
         bioPlaceholder: 'Detail your on-the-ground experience, toolsets, and capacity for sweat-equity settlement hours...'
       }
     };
 
-    function selectLane(laneKey, element) {
-      // Update UI selection
-      document.querySelectorAll('.lane-option').forEach(el => el.classList.remove('active'));
-      element.classList.add('active');
+    function selectOnboardingOption(optKey, element) {
+      document.querySelectorAll('.onboarding-lanes-grid .lane-option').forEach(el => el.classList.remove('active'));
+      if (element) {
+        element.classList.add('active');
+        const radio = element.querySelector('input[type="radio"]');
+        if (radio) radio.checked = true;
+      }
 
-      // Update Radio
-      const radio = element.querySelector('input[type="radio"]');
-      if (radio) radio.checked = true;
-
-      // Update Form Prompt
-      const config = LANE_CONFIGS[laneKey];
+      const config = ONBOARDING_CONFIGS[optKey];
       if (config) {
-        const dynamicField = document.getElementById('dynamic-lane-field');
-        dynamicField.innerHTML = `
-          <label for="intake-expertise">${config.label}</label>
-          <input type="text" id="intake-expertise" class="form-control" placeholder="${config.placeholder}" required />
-        `;
-        document.getElementById('intake-bio').placeholder = config.bioPlaceholder;
+        const labelEl = document.getElementById('onboarding-expertise-label');
+        const inputEl = document.getElementById('onboarding-expertise');
+        const bioEl = document.getElementById('onboarding-bio');
+        if (labelEl) labelEl.innerText = config.label;
+        if (inputEl) inputEl.placeholder = config.placeholder;
+        if (bioEl) bioEl.placeholder = config.bioPlaceholder;
       }
     }
 
-    function handleDiscoverySubmit(event) {
-      event.preventDefault();
-      const name = document.getElementById('intake-name').value;
-      const email = document.getElementById('intake-email').value;
-      const lane = document.querySelector('input[name="intake_lane"]:checked').value;
+    function prefillOnboardingModal(profile) {
+      if (!profile) return;
+      if (profile.name) document.getElementById('onboarding-name').value = profile.name;
+      if (profile.email) document.getElementById('onboarding-email').value = profile.email;
+      if (profile.phone) document.getElementById('onboarding-phone').value = profile.phone;
+      if (profile.entity) document.getElementById('onboarding-entity').value = profile.entity;
+      if (profile.expertise) document.getElementById('onboarding-expertise').value = profile.expertise;
+      if (profile.bio) document.getElementById('onboarding-bio').value = profile.bio;
+      if (profile.availability) document.getElementById('onboarding-availability').value = profile.availability;
 
-      showToast(`✓ Intake Received: Thank you, ${name}.`);
-      
-      setTimeout(() => {
-        alert(`Strategic Intake Confirmed!\n\nLane: ${lane}\nName: ${name}\nEmail: ${email}\n\nKiril Ravensong has received your submission under executive mastermind protocol.`);
-      }, 300);
+      let optKey = 'medici';
+      if (profile.role) {
+        if (profile.role.includes('Investor')) optKey = 'investor';
+        else if (profile.role.includes('Referrer') || profile.role.includes('Advisor')) optKey = 'referrer';
+        else if (profile.role.includes('Steward') || profile.role.includes('Worker') || profile.role.includes('Participant')) optKey = 'worker';
+      }
+
+      const matchingOption = document.querySelector(`.onboarding-lanes-grid input[value*="${profile.role}"]`);
+      if (matchingOption) {
+        selectOnboardingOption(optKey, matchingOption.closest('.lane-option'));
+      } else {
+        const defaultOpt = document.querySelector('.onboarding-lanes-grid .lane-option');
+        if (defaultOpt) selectOnboardingOption('medici', defaultOpt);
+      }
+    }
+
+    function handleOnboardingSubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById('onboarding-name').value.trim();
+      const email = document.getElementById('onboarding-email').value.trim();
+      const phone = document.getElementById('onboarding-phone').value.trim();
+      const entity = document.getElementById('onboarding-entity').value.trim();
+      const roleRadio = document.querySelector('input[name="onboarding_role"]:checked');
+      const role = roleRadio ? roleRadio.value : 'Executive (New Medici)';
+      const expertise = document.getElementById('onboarding-expertise').value.trim();
+      const bio = document.getElementById('onboarding-bio').value.trim();
+      const availability = document.getElementById('onboarding-availability').value;
+
+      const profile = {
+        name,
+        email,
+        phone,
+        entity,
+        role,
+        expertise,
+        bio,
+        availability,
+        completedAt: new Date().toISOString()
+      };
+
+      sessionStorage.setItem('npc_user_profile', JSON.stringify(profile));
+      localStorage.setItem('npc_user_profile', JSON.stringify(profile));
+      sessionStorage.setItem('npc_onboarding_completed', 'true');
+
+      closeModal('onboarding-modal');
+      unlockDashboard(true);
+      showToast(`✓ Profile Registered: Welcome, ${name || 'Member'}`);
+    }
+
+    function openMemberProfileModal() {
+      let profile = null;
+      try {
+        const raw = sessionStorage.getItem('npc_user_profile') || localStorage.getItem('npc_user_profile');
+        if (raw) profile = JSON.parse(raw);
+      } catch (e) {}
+
+      if (!profile) {
+        profile = {
+          name: 'Executive Member',
+          email: '',
+          phone: '',
+          entity: '',
+          role: 'Executive (New Medici)',
+          expertise: '',
+          bio: '',
+          availability: 'Sunday Mastermind Series (Weekly)'
+        };
+      }
+
+      prefillOnboardingModal(profile);
+      document.getElementById('onboarding-modal-badge').innerText = 'MEMBER PROFILE';
+      document.getElementById('onboarding-modal-title').innerText = 'Executive Discovery and Intake Protocol';
+      document.getElementById('onboarding-intro-text').innerText = 'Review and update your executive discovery profile, interest tier, and mastermind preferences.';
+      document.getElementById('onboarding-submit-btn').innerText = 'Save Profile Changes →';
+      openModal('onboarding-modal');
     }
 
     /* ==========================================================================
@@ -3027,9 +3475,12 @@
       }, 3500);
     }
 
-    // Initialize Calculator on load
+    // Initialize on load
     document.addEventListener('DOMContentLoaded', () => {
       updateCalculator(1560);
+      if (sessionStorage.getItem('npc_portal_unlocked') === 'true') {
+        unlockDashboard(false);
+      }
     });
   </script>
 </body>

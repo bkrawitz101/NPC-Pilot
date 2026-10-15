@@ -17,18 +17,18 @@
 
 ---
 
-### 2. THE 4 QUALIFYING QUESTIONS FRAMEWORK
+### 2. THE MASTERMIND ALIGNMENT FRAMEWORK
 *(Core alignment framework anchoring all messaging, governance, and capital allocation flows)*
 
-1. **Who is the audience?**  
-   * **The New Medici:** Multidisciplinary leaders, angel investors, land stewards, and conscious creators who recognize that a county-level mastermind must be deployed *now* to create a replicable template for civilizational resilience.
-2. **What is the message?**  
-   * **Living Villages as the Core Solution:** Living villages solve nearly all current crises—providing multigenerational affordable housing, local food security, and an optimal environment to raise children and honor elders, independent of broader economic fragility.
-   * **The Nevada County Opportunity:** 10,000+ acres of former marijuana cultivation land sit unused with intact water rights. While worthless to conventional cash buyers due to lack of infrastructure, they are ideal for land-labor backed agroforestry settlements.
-3. **How do we deliver it?**  
-   * **Need-to-Know Invite-Only Outreach:** Direct engagement backed by a private, gated web portal that holds high-level data and non-public briefs required for informed decision-making.
-4. **What action are we asking them to take?**  
-   * **Sign an NDA -> Log in -> Complete a simple bio -> Review interest-matching briefs -> Participate in the Mastermind or refer exceptional peers.**
+1. **Audience Architecture: The New Medici**  
+   * Multidisciplinary leaders, angel investors, land stewards, financial architects, legal experts, and conscious creators who recognize that a county-level mastermind must be deployed *now* to create a replicable civilizational template.
+2. **Civilization Thesis: Living Villages**  
+   * **Living Villages as the Core Solution:** Solving multigenerational housing, local food security, and creating ideal sanctuaries to raise children and honor elders, independent of broader economic fragility.
+   * **The Nevada County Opportunity:** 10,000+ acres of former cannabis cultivation land sit idle with intact water rights—ideal for labor-backed agroforestry settlements.
+3. **Deployment Protocol: Need to Know, Invite-Only Outreach**  
+   * High-trust direct engagement backed by a private, gated web portal that holds high-level data and non-public briefs required for informed decision-making.
+4. **Executive Action: 5-Step Mastermind Onboarding**  
+   * Sign NDA -> Log In -> Complete Profile & Bio -> Review Interest-Matching Briefs -> Participate in the Mastermind or refer exceptional peers.
 
 ---
 
@@ -42,10 +42,10 @@
   * `--color-accent` (Flat Gold / Titles): `#bf8b2d`
   * `--color-accent-blue` (Sky Blue / CTAs & Badges): `#9eb0d1`
 * **Typography Specification:**
-  * **Font Family:** `'Adobe Caslon Pro', serif, Arial, sans-serif`
-  * **Section Labels:** `text-transform: uppercase; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; color: var(--color-accent)`
-  * **Main Headlines:** `font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; color: var(--color-text-heading);`
-  * **Body Copy:** `Helvetica Light, Helvetica Medium (All Caps); font-size: 1rem; line-height: 1.6; color: var(--color-text-primary);`
+  * **Headline Fonts:** `Adobe Caslon Pro` (Bold 700, Bold Italic 700, Semibold 600, Semibold Italic 600, Regular 400, Regular Italic 400).
+  * **Section Labels:** `text-transform: uppercase; font-size: 0.7rem; font-weight: 400; letter-spacing: 0.18em; color: var(--color-accent); font-family: Graphik`
+  * **Main Headlines:** `font-family: 'Adobe Caslon Pro', serif; font-weight: 700/600/400; letter-spacing: -0.015em; color: var(--color-text-heading);`
+  * **Body Copy:** `Graphik Light` (300, upper and lower case); `Graphik Regular` (400) when background warrants (dark surfaces, buttons, badges, forms).
 * **Buttons & Interactivity:**
   * **Primary CTA:** Background `#30210F`, Border `1px solid #D4A359`, Color `#FFFFFF`, Padding `0.85rem 2rem`, Tracking `0.12em uppercase`.
   * **Hover Effects:** Subtle gold glow, clean opacity transitions (200ms ease).
@@ -56,36 +56,43 @@
 
 ### 4. COMPLETE SITE ARCHITECTURE & CONTENT SPECIFICATION
 
-#### LEVEL 1: PUBLIC GATEWAY & HERO LANDING (Pre-NDA)
+#### LEVEL 1: PUBLIC GATEWAY & HERO TEASER (Pre-NDA / Minimal Landing)
 
 1. **Top Navigation Bar:**
    * Logo / Brand: **NEW PARADIGM CAPITAL**
    * Tagline Badge: *Nevada County Pilot Foundation*
-   * CTA Button: `Member Access / NDA Request`
+   * CTA Button: `Member Access / NDA Request` (Toggles NDA Gate Modal; changes to `Lock Portal` upon authentication)
 
-2. **Hero Section:**
+2. **Hero Minimal Teaser Section:**
    * **Category Label:** SYSTEMIC RESILIENCE & CAPITAL ARCHITECTURE
    * **Main Headline:** "Redefining Wealth, Reimagining Progress"
    * **Subheadline:** "A land- and labor-backed asset class structured via a targeted capital pool to deploy our flagship countywide pilot program in Nevada County, California."
    * **Vision Callout Box:** *"At Rethinking Capital, we believe that there is more than enough wealth to solve all of society's core resilience, housing, and capital challenges."*
-   * **Action CTAs:**
-     * `Request Executive NDA & Access` (Triggers Gate Modal)
-     * `Explore Strategic Vision` (Smooth scroll to Overview)
+   * **Author/Citation:** `Core Governance Philosophy • Nevada County Pilot`
+   * **Single Action CTA:** `Request Executive NDA & Access` (Opens NDA & Security Protocol Modal)
+   * **Teaser Architecture:** All core blueprints, models, business ecosystem profiles, and discovery intake forms are strictly gated behind member access.
 
 3. **Public Gateway Modal (NDA & Password Gate):**
-   * Form Fields: Full Name, Email Address, Phone Number, Entity / Organization, Strategic Interest (Investor / Advisor / Landowner / Participant).
-   * Checkbox: *"I agree to review non-public Pilot Foundation briefs under confidential executive think tank protocol."*
-   * Password Input (Client-side trigger to unlock Dashboard Level 2).
+   * Form Fields: Full Name, Email Address, Phone Number, Entity / Fund, Strategic Interest.
+   * Checkbox: *"I agree to review non-public Pilot Foundation briefs under confidential executive think tank protocol (Chatham House Rule)."*
+   * Password Input (Supports `MEDICI2026`, `PILOT`, `NEWPARADIGM`, `NPC2026` to unlock Dashboard Level 2).
 
 ---
 
-#### LEVEL 2: EXECUTIVE THINK TANK DASHBOARD (Post-NDA Unlocked)
+#### LEVEL 2: EXECUTIVE THINK TANK DASHBOARD (Post-NDA Gated Content)
 
 1. **Executive Status Banner:**
    * **Status:** Pre-Phase Design-Build Pilot Foundation ($500,000 Seed Raise)
    * **Location Target:** Nevada County, CA (2 Properties within a 15–30 minute driving radius)
+   * **Security Tier:** Level 2 Think Tank
 
-2. **The $500k Dual-Asset Architecture Breakdown:**
+2. **The Mastermind Alignment Framework:**
+   * **Audience Architecture:** *The New Medici* — Multidisciplinary leaders, angel investors, land stewards, financial architects, legal experts, and conscious creators.
+   * **Civilization Thesis:** *Living Villages* — Solving multigenerational housing, local food security, and creating ideal sanctuaries to raise children and honor elders; leveraging 10,000+ acres of idle cultivation land with intact water rights.
+   * **Deployment Protocol:** *Need to Know, Invite-Only Outreach* — High-trust direct engagement backed by a gated web intelligence portal holding spatial data, normative accounting models, and legal conveyance instruments.
+   * **Executive Action:** *5-Step Mastermind Onboarding* — Sign NDA → Log In → Complete Profile & Bio → Review Interest-Matching Briefs → Participate in Nevada County Mastermind or refer exceptional peers.
+
+3. **The $500k Dual-Asset Architecture Breakdown:**
    * **Position A — Village Land Acquisition (~$250,000):**
      * Asset: 160 Acres Sebastopol Raw Land Parcel (former cultivation site with intact water rights).
      * Mechanism: Skilled labor settles against land equity at **1,560 hours per 5 sovereign acres** (up to ~32 gross parcels).
@@ -105,7 +112,7 @@
    * **Cluster A: Normative Accounting & Intangibles Framework:**
      * *Nevada County 8 Forms of Capital Assessment Index* (Financial, Social, Intellectual, Natural, Cultural, Spiritual, Experiential, Material).
      * *Rethinking Capital Normative Accounting Briefing Note* (Double-entry bookkeeping capitalizing natural/human assets onto balance sheets).
-     * *Mastermind Core Thesis:* The 4 Questions Framework & Civilizational Resilience Brief.
+     * *Mastermind Core Thesis:* The Mastermind Alignment Framework & Civilizational Resilience Brief.
    * **Cluster B: Land & Stranded Asset Recovery:**
      * *10,000+ Acre Agroforestry Opportunity:* Rehabilitating former cultivation sites valued at zero by cash buyers due to intact water rights.
      * *Stranded Assets & Fire Remediation Whitepaper:* Fire insurance challenges, underwater debt, and site remediation R&D.
@@ -116,9 +123,7 @@
 
 ---
 
-#### LEVEL 3: FAMILY OF BUSINESSES (Light Portal Ecosystem)
-
-A responsive 4-card interactive grid representing the interconnected businesses:
+#### LEVEL 3: FAMILY OF BUSINESSES AND GUILDS
 
 1. **Earth Force:**
    * *Focus:* Cultivating resilient food forest villages, living university guilds, and self-sufficient settlements.
@@ -137,16 +142,19 @@ A responsive 4-card interactive grid representing the interconnected businesses:
 
 ---
 
-#### LEVEL 4: DYNAMIC APPLICANT INTAKE & DISCOVERY SORTING
+#### POST-REGISTRATION ONBOARDING & MEMBER PROFILE: EXECUTIVE DISCOVERY AND INTAKE PROTOCOL
 
-An interactive step-by-step form that sorts respondents into four distinct discovery lanes for mastermind and investment onboarding:
+The discovery protocol is decoupled from the public page canvas and triggered as a one-time onboarding workflow immediately after a user signs their NDA and creates their profile. It is also accessible at any time inside the unlocked member area via the 'Member Profile' navigation button or the executive status banner.
 
-* **Lane Selection:**
-  * `Lane 1: Executive / Think Tank ("The New Medici")` (Asset class designers, legal, & financial architects)
-  * `Lane 2: Investor Class` (Position A $250k Land, Position B $250k Commercial, or $50M Regional Pool)
-  * `Lane 3: Strategic Referrers` (Connecting key political, land, or capital leaders)
-  * `Lane 4: Local Participants / Workers` (Skilled labor, land donors, & regional rangers)
-* **Form Inputs:** Contact Info, Area of Expertise / Intangible Assets Contributed, Mastermind Availability.
+* **Protocol Header:** `Executive Discovery and Intake Protocol`
+* **Discovery Prompt:** `"Which describes you best?"`
+* **Role Alignment Tiers (without lane numbers):**
+  * `Executive (New Medici)` (Asset class designers, legal architects, financial engineers, and systemic innovators)
+  * `Investor Class` (Seed participants: $250k Land, $250k Commercial, or $50M regional asset pool)
+  * `Strategic Referrers` (Connecting pivotal political leaders, high-acreage land donors, and capital stewards)
+  * `Local Stewards and Workers` (Skilled craftspeople, permaculture rangers, builders, and active land stewards)
+* **Streamlined Inputs:** Full Name, Email, Phone/Signal, Entity/Organization, Role Selection, Area of Expertise / Think Tank Focus, Intangible Assets & Background Summary, and Mastermind Availability Cadence.
+* **Storage & Persistence:** Stores member profile in `sessionStorage` and `localStorage` (`npc_user_profile`), flags `npc_onboarding_completed`, and auto-fills data across modal sessions.
 * **Footer Details:**
   * Direct Contact: **Kiril Ravensong** (`KirilRavensong@protonmail.com` | 530-859-3888)
   * Copyright & Disclaimer: *New Paradigm Capital LLC · Nevada County Pilot Foundation · Version 2.0 · Confidential Executive Think Tank Briefing · Not an offer to sell securities.*
@@ -162,3 +170,14 @@ An interactive step-by-step form that sorts respondents into four distinct disco
   * Desktop: `1200px+` (Multi-column grids)
   * Tablet: `768px - 1199px` (2-column grids)
   * Mobile: `<767px` (Single column stacked layout)
+
+---
+
+### 6. BRAND IDENTITY & LOGO INTEGRATION
+
+* **Official Brand Emblem:** Handcrafted 8-fold torus sacred geometry rosette in metallic antique gold (`assets/npc-emblem.png`).
+* **Header Navigation Branding:** High-resolution sacred geometry emblem paired with live CSS typography in Adobe Caslon Pro Bold (`assets/npc-emblem.png` + `.brand-text`), with subtle hover micro-interaction.
+* **Footer Corporate Lockup:** Dark-mode optimized full corporate lockup with metallic gold emblem and warm ivory stacked typography (`assets/npc-logo-white.png`).
+* **Favicon & Touch Icon:** Integrated 64x64 favicon (`assets/favicon.png`) and Apple touch icon in `<head>`.
+* **Institutional Placement:** Sacred geometry emblem featured in the Confidential Executive Status Banner crest and all executive modal headers (`#nda-modal`, `#doc-modal`, `#onboarding-modal`).
+
