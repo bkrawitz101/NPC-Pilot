@@ -349,8 +349,9 @@
     .btn-secondary {
       background-color: transparent;
       border: 1px solid var(--color-accent);
-      color: #FFFFFF;
+      color: #30210F;
       font-family: var(--font-family-body-medium);
+      font-weight: 600;
     }
 
     .btn-secondary:hover {
@@ -557,6 +558,35 @@
       align-items: center;
       gap: 0.5rem;
       flex-shrink: 0;
+    }
+
+    /* Header Secondary Buttons (Member Profile & Lock Portal on white header background) */
+    .site-header .btn-secondary {
+      background-color: rgba(191, 139, 45, 0.06);
+      border: 1px solid var(--color-accent);
+      color: #30210F !important;
+      font-family: var(--font-family-body-medium);
+      font-weight: 600;
+      transition: all var(--transition-fast);
+    }
+
+    .site-header .btn-secondary:hover {
+      background-color: rgba(191, 139, 45, 0.16);
+      border-color: var(--color-gold-metallic);
+      color: #7A530E !important;
+      box-shadow: 0 2px 8px rgba(48, 33, 15, 0.1);
+    }
+
+    /* Secondary buttons inside dark obsidian status banner */
+    .exec-status-banner .btn-secondary {
+      background-color: rgba(255, 255, 255, 0.08);
+      border-color: var(--color-gold-metallic);
+      color: #FFFFFF !important;
+    }
+
+    .exec-status-banner .btn-secondary:hover {
+      background-color: rgba(212, 175, 55, 0.22);
+      color: var(--color-gold-light) !important;
     }
 
     .btn-text-short {
@@ -2086,8 +2116,8 @@
           <span class="auth-text-short">Level 2 Active</span>
         </div>
         <button id="btn-open-profile-nav" class="btn btn-secondary btn-sm" onclick="openMemberProfileModal()" style="display: none;">
-          <span class="btn-text-full">Member Profile</span>
-          <span class="btn-text-short">Profile</span>
+          <span class="btn-text-full">⚙ Member Profile</span>
+          <span class="btn-text-short">⚙ Profile</span>
         </button>
         <button id="btn-open-nda-nav" class="btn btn-primary btn-sm" onclick="openModal('nda-modal')">
           <span class="btn-text-full">Member Access / NDA Request</span>
@@ -3261,7 +3291,7 @@
 
       const navBtn = document.getElementById('btn-open-nda-nav');
       if (navBtn) {
-        navBtn.innerHTML = '<span class="btn-text-full">Lock Portal</span><span class="btn-text-short">Lock</span>';
+        navBtn.innerHTML = '<span class="btn-text-full">🔒 Lock Portal</span><span class="btn-text-short">🔒 Lock</span>';
         navBtn.className = 'btn btn-secondary btn-sm';
         navBtn.onclick = lockDashboard;
       }
