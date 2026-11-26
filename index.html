@@ -752,6 +752,162 @@
       font-size: 0.84rem; display: flex; align-items: center; gap: 0.55rem; animation: slideIn 0.25s ease;
     }
     @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+    /* ==========================================================================
+       MOBILE-ONLY SECTION SWITCHER & APP-LIKE RESPONSIVE POLISH (< 768px)
+       ========================================================================== */
+    .mobile-section-bar {
+      display: none;
+    }
+
+    @media (max-width: 767px) {
+      /* 1. Sticky Mobile Section Switcher inside Portals */
+      .mobile-section-bar {
+        display: flex;
+        position: sticky;
+        top: 66px;
+        z-index: 85;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-taupe);
+        padding: 0.55rem 0.85rem;
+        gap: 0.4rem;
+        justify-content: space-between;
+      }
+      .mobile-sec-tab {
+        flex: 1;
+        background: var(--color-soft-sand);
+        border: 1px solid var(--border-taupe);
+        border-radius: var(--radius-full);
+        padding: 0.44rem 0.35rem;
+        font-family: var(--font-family-body-medium);
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        color: var(--color-warm-charcoal);
+        cursor: pointer;
+        text-align: center;
+        white-space: nowrap;
+        transition: all var(--transition-fast);
+      }
+      .mobile-sec-tab.active {
+        background: var(--color-bg-obsidian);
+        border-color: var(--color-bg-obsidian);
+        color: #FFFFFF;
+      }
+      .mobile-section-bar.ef-bar .mobile-sec-tab.active {
+        background: var(--ef-forest-deep);
+        border-color: var(--ef-forest-deep);
+        color: #FFFFFF;
+      }
+
+      /* Mobile Section Visibility: NPC Portal */
+      #investors-unlocked[data-mobile-tab] #status-banner,
+      #investors-unlocked[data-mobile-tab] #framework,
+      #investors-unlocked[data-mobile-tab] #architecture,
+      #investors-unlocked[data-mobile-tab] #repository,
+      #investors-unlocked[data-mobile-tab] #ecosystem {
+        display: none;
+      }
+      #investors-unlocked[data-mobile-tab="overview"] #status-banner,
+      #investors-unlocked[data-mobile-tab="overview"] #framework {
+        display: flex;
+      }
+      #investors-unlocked[data-mobile-tab="overview"] #framework {
+        display: block;
+      }
+      #investors-unlocked[data-mobile-tab="architecture"] #architecture,
+      #investors-unlocked[data-mobile-tab="dossiers"] #repository,
+      #investors-unlocked[data-mobile-tab="guilds"] #ecosystem {
+        display: block;
+      }
+
+      /* Mobile Section Visibility: Earth Force Portal */
+      #view-earth-force[data-mobile-tab] #ef-hero-block,
+      #view-earth-force[data-mobile-tab] #ef-mission-block,
+      #view-earth-force[data-mobile-tab] #ef-tiers-block,
+      #view-earth-force[data-mobile-tab] #ef-intake-section,
+      #view-earth-force[data-mobile-tab] #ef-deployment-sites {
+        display: none;
+      }
+      #view-earth-force[data-mobile-tab="mission"] #ef-hero-block,
+      #view-earth-force[data-mobile-tab="mission"] #ef-mission-block,
+      #view-earth-force[data-mobile-tab="tiers"] #ef-tiers-block,
+      #view-earth-force[data-mobile-tab="apply"] #ef-intake-section,
+      #view-earth-force[data-mobile-tab="sites"] #ef-deployment-sites {
+        display: block;
+      }
+
+      /* 2. Above-the-Fold Compact 2-Door Gateway */
+      .gateway-hero { padding: 1.25rem 0 2rem; }
+      .gateway-emblem-crest { width: 32px; height: 32px; margin-bottom: 0.5rem; }
+      .gateway-header { margin-bottom: 1.15rem; }
+      .gateway-header .section-label { margin-bottom: 0.35rem; font-size: 0.64rem; }
+      .gateway-header h1 { font-size: 1.85rem; margin-bottom: 0.5rem; }
+      .gateway-lead { font-size: 0.88rem; line-height: 1.45; }
+      .doors-grid { gap: 0.9rem; margin-bottom: 1.5rem; }
+      .door-card { padding: 1.1rem 1.15rem; }
+      .door-kicker { margin-bottom: 0.35rem; font-size: 0.64rem; }
+      .door-card h2 { font-size: 1.32rem; margin-bottom: 0.35rem; }
+      .door-audience { font-size: 0.84rem; line-height: 1.45; margin-bottom: 0.85rem; }
+      .door-card .door-list { display: none; }
+      .door-card .btn { width: 100%; padding: 0.7rem 1rem; font-size: 0.74rem; }
+      .door-gate-note { font-size: 0.7rem; }
+      .gateway-epigraph { padding-top: 1.25rem; }
+      .gateway-epigraph blockquote { font-size: 0.94rem; margin-bottom: 0.75rem; }
+
+      /* 3. Tighter Mobile Spacing Inside Portals */
+      .dashboard-wrapper { padding: 1.25rem 0 0; }
+      .section-block { padding: 1.75rem 0; }
+      .framework-section-dashboard, .architecture-section, .docs-section {
+        padding-bottom: 2rem; margin-bottom: 0; border-bottom: none;
+      }
+      .ecosystem-section { margin-bottom: 2rem; }
+      .section-header-centered { margin-bottom: 1.35rem; }
+      .section-header-centered h2 { font-size: 1.5rem; }
+      .section-header-centered p { font-size: 0.9rem; }
+      .exec-status-banner { padding: 1.35rem 1.1rem; margin-bottom: 1.5rem; gap: 1rem; }
+      .exec-banner-emblem { width: 42px; height: 42px; margin-bottom: 0.45rem; }
+      .exec-banner-info h2 { font-size: 1.45rem; }
+      .exec-banner-meta { gap: 0.85rem 1.4rem; }
+      .question-card, .asset-card, .eco-card, .mechanic-card, .ef-contrast-card, .tier-card { padding: 1.25rem; }
+      .calc-box { padding: 1.25rem; }
+      .ef-hero { padding: 1.75rem 0 1.5rem; }
+      .ef-hero h1 { font-size: 1.75rem; }
+      .ef-hero p.ef-lead { font-size: 0.94rem; margin-bottom: 1.15rem; }
+      .ef-hero .btn { width: 100%; }
+      .site-footer { padding: 2.25rem 0 1.5rem; }
+      .toast-container { left: 1rem; right: 1rem; bottom: 1rem; }
+
+      /* 4. Native Bottom-Sheet Modals on Phones */
+      .modal-backdrop {
+        align-items: flex-end;
+        padding: 0;
+      }
+      .modal-window {
+        max-width: 100%;
+        max-height: 92vh;
+        border-radius: 16px 16px 0 0;
+        border-bottom: none;
+        transform: translateY(28px);
+      }
+      .modal-backdrop.active .modal-window {
+        transform: translateY(0);
+      }
+      .modal-window::before {
+        content: '';
+        display: block;
+        width: 40px;
+        height: 4px;
+        border-radius: 9999px;
+        background: var(--border-taupe);
+        margin: 0.6rem auto 0;
+        flex-shrink: 0;
+      }
+      .modal-header { padding: 0.9rem 1.15rem 1rem; }
+      .modal-body { padding: 1.15rem; }
+      .modal-footer { padding: 0.85rem 1.15rem 1.15rem; }
+    }
   </style>
 </head>
 <body>
@@ -864,7 +1020,14 @@
          ======================================================================== -->
     <section id="view-investors" class="portal-view">
       <!-- Unlocked Investor Portal (Original Level 2 Executive Think Tank Dashboard) -->
-      <div id="investors-unlocked" class="dashboard-wrapper" style="display: none;">
+      <div id="investors-unlocked" class="dashboard-wrapper" data-mobile-tab="overview" style="display: none;">
+        <!-- Mobile-Only Section Switcher -->
+        <div id="npc-mobile-tabs" class="mobile-section-bar" role="tablist" aria-label="NPC Portal Sections">
+          <button type="button" class="mobile-sec-tab active" data-tab="overview" onclick="setMobilePortalTab('npc', 'overview')">Overview</button>
+          <button type="button" class="mobile-sec-tab" data-tab="architecture" onclick="setMobilePortalTab('npc', 'architecture')">$500k Model</button>
+          <button type="button" class="mobile-sec-tab" data-tab="dossiers" onclick="setMobilePortalTab('npc', 'dossiers')">Dossiers</button>
+          <button type="button" class="mobile-sec-tab" data-tab="guilds" onclick="setMobilePortalTab('npc', 'guilds')">Guilds</button>
+        </div>
         <div class="container">
           <!-- Executive Status Banner -->
           <div id="status-banner" class="exec-status-banner">
@@ -1300,9 +1463,17 @@
     <!-- ========================================================================
          VIEW 3: EARTH FORCE BY NPC PORTAL (/earth-force)
          ======================================================================== -->
-    <section id="view-earth-force" class="portal-view">
+    <section id="view-earth-force" class="portal-view" data-mobile-tab="mission">
+      <!-- Mobile-Only Section Switcher -->
+      <div id="ef-mobile-tabs" class="mobile-section-bar ef-bar" role="tablist" aria-label="Earth Force Sections">
+        <button type="button" class="mobile-sec-tab active" data-tab="mission" onclick="setMobilePortalTab('ef', 'mission')">Mission</button>
+        <button type="button" class="mobile-sec-tab" data-tab="tiers" onclick="setMobilePortalTab('ef', 'tiers')">8 Forms</button>
+        <button type="button" class="mobile-sec-tab" data-tab="apply" onclick="setMobilePortalTab('ef', 'apply')">Apply</button>
+        <button type="button" class="mobile-sec-tab" data-tab="sites" onclick="setMobilePortalTab('ef', 'sites')">Sites</button>
+      </div>
+
       <!-- Mobilized Hero Banner -->
-      <div class="ef-hero">
+      <div id="ef-hero-block" class="ef-hero">
         <div class="container">
           <div class="badge badge-amber" style="margin-bottom: 0.85rem;">PORTAL 2 &bull; OPEN ENROLLMENT FUNNEL</div>
           <h1>Earth Force by NPC: Ground-Side Space Force</h1>
@@ -1321,7 +1492,7 @@
       </div>
 
       <!-- Mission Briefing & Value Proposition -->
-      <div class="section-block ef-bg">
+      <div id="ef-mission-block" class="section-block ef-bg">
         <div class="container">
           <div class="section-header-centered">
             <div class="section-label ef-label">Mission Briefing &amp; Value Proposition</div>
@@ -1354,7 +1525,7 @@
       </div>
 
       <!-- Two-Tier Recruitment Pathways -->
-      <div class="section-block">
+      <div id="ef-tiers-block" class="section-block">
         <div class="container">
           <div class="section-header-centered">
             <div class="section-label ef-label">Two-Tier Mobilization</div>
@@ -2264,7 +2435,39 @@
       }
     }
 
+    function setMobilePortalTab(portal, tabName, skipScroll = false) {
+      const containerId = portal === 'npc' ? 'investors-unlocked' : 'view-earth-force';
+      const barId = portal === 'npc' ? 'npc-mobile-tabs' : 'ef-mobile-tabs';
+      const container = document.getElementById(containerId);
+      const bar = document.getElementById(barId);
+      if (container) container.setAttribute('data-mobile-tab', tabName);
+      if (bar) {
+        bar.querySelectorAll('.mobile-sec-tab').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.tab === tabName);
+        });
+      }
+      if (!skipScroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     function scrollToId(id) {
+      const npcTabMap = {
+        'status-banner': 'overview',
+        'framework': 'overview',
+        'architecture': 'architecture',
+        'calc-box': 'architecture',
+        'repository': 'dossiers',
+        'ecosystem': 'guilds'
+      };
+      const efTabMap = {
+        'ef-hero-block': 'mission',
+        'ef-mission-block': 'mission',
+        'ef-tiers-block': 'tiers',
+        'ef-intake-section': 'apply',
+        'ef-deployment-sites': 'sites'
+      };
+      if (npcTabMap[id]) setMobilePortalTab('npc', npcTabMap[id], true);
+      if (efTabMap[id]) setMobilePortalTab('ef', efTabMap[id], true);
+
       const el = document.getElementById(id);
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
