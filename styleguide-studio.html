@@ -12,6 +12,83 @@
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* ==========================================================================
+       LOCAL @FONT-FACE MAPPINGS: ADOBE CASLON PRO & GRAPHIK
+       ========================================================================== */
+    @font-face {
+      font-family: 'Adobe Caslon Pro';
+      src: local('Adobe Caslon Pro Bold'), local('AdobeCaslonPro-Bold');
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Adobe Caslon Pro';
+      src: local('Adobe Caslon Pro Bold Italic'), local('AdobeCaslonPro-BoldItalic');
+      font-weight: 700;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: 'Adobe Caslon Pro';
+      src: local('Adobe Caslon Pro Semibold'), local('AdobeCaslonPro-Semibold');
+      font-weight: 600;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Adobe Caslon Pro';
+      src: local('Adobe Caslon Pro Semibold Italic'), local('AdobeCaslonPro-SemiboldItalic');
+      font-weight: 600;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: 'Adobe Caslon Pro';
+      src: local('Adobe Caslon Pro Regular'), local('AdobeCaslonPro-Regular'), local('Adobe Caslon Pro');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Adobe Caslon Pro';
+      src: local('Adobe Caslon Pro Regular Italic'), local('AdobeCaslonPro-Italic');
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    @font-face {
+      font-family: 'Graphik';
+      src: local('Graphik Light'), local('Graphik-Light');
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Graphik';
+      src: local('Graphik Light Italic'), local('Graphik-LightItalic');
+      font-weight: 300;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: 'Graphik';
+      src: local('Graphik Regular'), local('Graphik-Regular'), local('Graphik');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Graphik';
+      src: local('Graphik Regular Italic'), local('Graphik-RegularItalic'), local('Graphik-Italic');
+      font-weight: 400;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: 'Graphik';
+      src: local('Graphik Medium'), local('Graphik-Medium');
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Graphik';
+      src: local('Graphik Semibold'), local('Graphik-Semibold'), local('Graphik-Bold');
+      font-weight: 600;
+      font-style: normal;
+    }
+
     :root {
       --app-bg: #0F1117;
       --app-sidebar: #181B24;
@@ -284,6 +361,10 @@
     body.mode-fullscreen-preview .code-output-container {
       width: 100% !important;
       max-width: 1100px !important;
+    }
+
+    body.mode-fullscreen-preview .live-viewport-wrapper {
+      height: calc(100vh - 125px) !important;
     }
 
     /* 2. SEPARATE WINDOW MODE: DEDICATED CONTROLS-ONLY WINDOW */
@@ -682,13 +763,150 @@
     }
 
     .preview-canvas-container {
-      padding: 2rem;
+      padding: 1.25rem 1.5rem 2rem 1.5rem;
       flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      gap: 2rem;
+      gap: 1.5rem;
+      width: 100%;
+    }
+
+    /* ==========================================================================
+       LIVE CURRENT SITE PREVIEW FRAME & VIEWPORT CONTROLS
+       ========================================================================== */
+    .live-site-container {
+      width: 100%;
+      height: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      position: relative;
+    }
+
+    .live-site-toolbar {
+      width: 100%;
+      background: var(--app-sidebar);
+      border: 1px solid var(--app-border);
+      border-radius: 8px;
+      padding: 0.55rem 0.85rem;
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    }
+
+    .live-toolbar-group {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+
+    .live-toolbar-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--app-text-muted);
+      margin-right: 0.2rem;
+    }
+
+    .viewport-btn {
+      background: var(--app-surface);
+      border: 1px solid var(--app-border);
+      color: var(--app-text-muted);
+      padding: 0.3rem 0.6rem;
+      border-radius: 5px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+
+    .viewport-btn:hover {
+      color: var(--app-text);
+      border-color: var(--app-accent);
+    }
+
+    .viewport-btn.active {
+      background: rgba(212, 175, 55, 0.18);
+      border-color: var(--app-accent);
+      color: var(--app-accent);
+      font-weight: 700;
+    }
+
+    .auth-toggle-btn {
+      background: var(--app-surface);
+      border: 1px solid var(--app-border);
+      color: var(--app-text-muted);
+      padding: 0.3rem 0.65rem;
+      border-radius: 5px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+
+    .auth-toggle-btn:hover {
+      color: var(--app-text);
+    }
+
+    .auth-toggle-btn.active {
+      background: linear-gradient(135deg, #30210F, #4A351D);
+      border-color: var(--app-accent);
+      color: #FFFFFF;
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.35);
+      font-weight: 700;
+    }
+
+    .live-nav-select {
+      background: var(--app-surface);
+      border: 1px solid var(--app-border);
+      color: var(--app-text);
+      padding: 0.3rem 0.6rem;
+      border-radius: 5px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      cursor: pointer;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .live-nav-select:focus {
+      border-color: var(--app-accent);
+    }
+
+    .live-viewport-wrapper {
+      width: 100%;
+      height: calc(100vh - 145px);
+      min-height: 720px;
+      background: #FFFFFF;
+      border-radius: 8px;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      overflow: hidden;
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s ease;
+      position: relative;
+    }
+
+    .live-site-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      background: #FFFFFF;
     }
 
     /* The Simulated Full-Screen Preview Sandbox */
@@ -1380,6 +1598,9 @@
         ⤓ Re-dock to Main Window
       </button>
 
+      <a href="index.html" target="_blank" rel="noopener" class="btn-app btn-app-secondary" title="Open live index.html in a new browser tab" style="text-decoration: none;">
+        🌐 View Live Site ↗
+      </a>
       <button class="btn-app btn-app-secondary" id="btn-import-header" onclick="openImportModal()">
         📝 Import Markdown
       </button>
@@ -1477,7 +1698,8 @@
             <span class="scale-badge" id="badge-body-category">Sans-Serif</span>
           </label>
           <select id="select-font-body" class="input-select" onchange="handleBodyFontChange(this.value)">
-            <option value="'Helvetica Light', 'Helvetica Neue', Helvetica, Arial, sans-serif" selected>Helvetica Light / Helvetica Neue</option>
+            <option value="'Graphik', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" selected>Graphik / Inter (Brand Standard)</option>
+            <option value="'Helvetica Light', 'Helvetica Neue', Helvetica, Arial, sans-serif">Helvetica Light / Helvetica Neue</option>
             <option value="'Inter', -apple-system, BlinkMacSystemFont, sans-serif">Inter (Clean UI Sans)</option>
             <option value="'Plus Jakarta Sans', sans-serif">Plus Jakarta Sans (Refined UI)</option>
             <option value="'Outfit', sans-serif">Outfit (Geometric Sans)</option>
@@ -1595,11 +1817,12 @@
             <div class="form-subrow">
               <label>Weight / Style</label>
               <select id="typo-body-weight" class="input-select" onchange="updateTypoFromPoints()">
-                <option value="Helvetica Light, Helvetica Medium (All Caps)" selected>Helvetica Light / Med</option>
+                <option value="Graphik Light (300) / Regular (400)" selected>Graphik Light (300) / Regular</option>
                 <option value="300 (Light)">300 (Light)</option>
                 <option value="400 (Regular)">400 (Regular)</option>
                 <option value="500 (Medium)">500 (Medium)</option>
                 <option value="600 (Semi-Bold)">600 (Semi-Bold)</option>
+                <option value="Helvetica Light, Helvetica Medium (All Caps)">Helvetica Light / Med</option>
               </select>
             </div>
             <div class="form-subrow">
@@ -1783,8 +2006,11 @@
       
       <div class="preview-header-bar">
         <div class="tab-group">
-          <button id="tab-btn-preview" class="tab-btn active" onclick="switchTab('preview')">
-            👁 Live Full-Screen Preview
+          <button id="tab-btn-live-site" class="tab-btn active" onclick="switchTab('live-site')">
+            🌐 Live Current Site (index.html)
+          </button>
+          <button id="tab-btn-sandbox" class="tab-btn" onclick="switchTab('sandbox')">
+            🧩 Component Sandbox
           </button>
           <button id="tab-btn-markdown" class="tab-btn" onclick="switchTab('markdown')">
             📄 Section 3 Markdown (.md)
@@ -1798,8 +2024,9 @@
         </div>
 
         <div style="display: flex; align-items: center; gap: 0.75rem;">
-          <span style="font-size: 0.75rem; color: var(--app-text-muted);">
-            Real-Time Dynamic Sync
+          <span class="sync-status-badge" style="font-size: 0.72rem;">
+            <span class="sync-dot"></span>
+            <span>Real-Time Live Sync</span>
           </span>
           <button id="btn-preview-popout" class="btn-app btn-app-secondary" style="padding: 0.25rem 0.55rem; font-size: 0.72rem;" onclick="openPopoutWindow()" title="Pop out controls into a separate window">
             <span>↗ External Window</span>
@@ -1810,10 +2037,75 @@
         </div>
       </div>
 
-      <div class="preview-canvas-container">
+      <div class="preview-canvas-container" id="preview-canvas-container">
         
-        <!-- Tab View 1: Full-Screen Live Visual Preview -->
-        <div id="view-preview" class="sandbox-frame">
+        <!-- Tab View 1: Full-Screen Live Current Site Preview Frame -->
+        <div id="view-live-site" class="live-site-container view-tab-content">
+          <!-- Live Viewport & Control Toolbar -->
+          <div class="live-site-toolbar">
+            <div class="live-toolbar-group">
+              <span class="live-toolbar-label">Viewport:</span>
+              <button class="viewport-btn active" onclick="setLiveViewport('100%', this)" title="Full Fluid Width">
+                🖥️ Full
+              </button>
+              <button class="viewport-btn" onclick="setLiveViewport('1440px', this)" title="Desktop 1440px">
+                💻 1440px
+              </button>
+              <button class="viewport-btn" onclick="setLiveViewport('1200px', this)" title="Laptop 1200px">
+                💻 1200px
+              </button>
+              <button class="viewport-btn" onclick="setLiveViewport('768px', this)" title="Tablet 768px">
+                📱 768px
+              </button>
+              <button class="viewport-btn" onclick="setLiveViewport('390px', this)" title="Mobile 390px">
+                📱 390px
+              </button>
+            </div>
+
+            <div class="live-toolbar-group">
+              <span class="live-toolbar-label">Auth State:</span>
+              <button id="live-auth-l1" class="auth-toggle-btn" onclick="setLiveAuthLevel(1)" title="Lock to Level 1 Public Gateway">
+                🔒 Level 1 (Public)
+              </button>
+              <button id="live-auth-l2" class="auth-toggle-btn active" onclick="setLiveAuthLevel(2)" title="Unlock Level 2 Think Tank Dashboard">
+                🔓 Level 2 (Dashboard)
+              </button>
+            </div>
+
+            <div class="live-toolbar-group">
+              <span class="live-toolbar-label">Jump:</span>
+              <select id="live-section-nav" class="live-nav-select" onchange="jumpToLiveSection(this.value)">
+                <option value="">⚡ Jump to Section...</option>
+                <option value="hero">Top / Hero &amp; Philosophy</option>
+                <option value="status-banner">Level 2 Status Banner</option>
+                <option value="framework">Mastermind Alignment Framework</option>
+                <option value="architecture">Dual-Asset Capital Architecture</option>
+                <option value="calc-box">Labor Settlement Calculator</option>
+                <option value="repository">Document Intelligence Repository</option>
+                <option value="ecosystem">Family of Businesses &amp; Guilds</option>
+                <option value="onboarding-modal">Member Discovery / Intake Modal</option>
+                <option value="footer">Site Footer</option>
+              </select>
+            </div>
+
+            <div class="live-toolbar-group">
+              <button class="btn-app btn-app-secondary" style="padding: 0.25rem 0.55rem; font-size: 0.72rem;" onclick="reloadLiveFrame()" title="Reload live preview frame">
+                🔄 Reload
+              </button>
+              <a href="index.html" target="_blank" rel="noopener" class="btn-app btn-app-gold" style="padding: 0.25rem 0.65rem; font-size: 0.72rem; text-decoration: none;" title="Open live index.html in a new browser tab">
+                ↗ Open Tab
+              </a>
+            </div>
+          </div>
+
+          <!-- The Live Interactive Frame -->
+          <div class="live-viewport-wrapper" id="live-viewport-wrapper">
+            <iframe id="live-site-iframe" src="index.html?level=2" class="live-site-frame" title="Live Nevada County Pilot Platform"></iframe>
+          </div>
+        </div>
+
+        <!-- Tab View 2: Isolated Component Sandbox -->
+        <div id="view-sandbox" class="sandbox-frame view-tab-content" style="display: none;">
           
           <!-- Block 1: Mock Portal Top Bar -->
           <div class="canvas-block" id="block-header" data-block-id="header" draggable="true">
@@ -1999,8 +2291,8 @@
 
         </div>
 
-        <!-- Tab View 2: Markdown Code Output -->
-        <div id="view-markdown" class="code-output-container" style="display: none;">
+        <!-- Tab View 3: Markdown Code Output -->
+        <div id="view-markdown" class="code-output-container view-tab-content" style="display: none;">
           <div class="code-output-header">
             <span>markdown &bull; Section 3: Design Tokens</span>
             <button class="btn-app btn-app-gold" style="padding: 0.3rem 0.6rem; font-size: 0.72rem;" onclick="copyMarkdown()">
@@ -2010,8 +2302,8 @@
           <pre id="markdown-code-block" class="code-output-body"></pre>
         </div>
 
-        <!-- Tab View 3: CSS Variables -->
-        <div id="view-css" class="code-output-container" style="display: none;">
+        <!-- Tab View 4: CSS Variables -->
+        <div id="view-css" class="code-output-container view-tab-content" style="display: none;">
           <div class="code-output-header">
             <span>css &bull; :root Design Tokens</span>
             <button class="btn-app btn-app-gold" style="padding: 0.3rem 0.6rem; font-size: 0.72rem;" onclick="copyCSS()">
@@ -2021,8 +2313,8 @@
           <pre id="css-code-block" class="code-output-body"></pre>
         </div>
 
-        <!-- Tab View 4: JSON Tokens -->
-        <div id="view-json" class="code-output-container" style="display: none;">
+        <!-- Tab View 5: JSON Tokens -->
+        <div id="view-json" class="code-output-container view-tab-content" style="display: none;">
           <div class="code-output-header">
             <span>json &bull; tokens.schema.json</span>
             <button class="btn-app btn-app-gold" style="padding: 0.3rem 0.6rem; font-size: 0.72rem;" onclick="copyJSON()">
@@ -2402,22 +2694,29 @@
       }
     };
 
-    /* Blank Initial State */
-    const BLANK_TOKENS = {
+    /* Official Live Current Site Tokens (Matching index.html Specification) */
+    const LIVE_NPC_TOKENS = {
       colors: [
-        { varName: '--color-bg-primary', role: 'Main Backdrop', desc: '', hex: '' },
-        { varName: '--color-bg-card', role: 'Containers', desc: '', hex: '' },
-        { varName: '--color-text-primary', role: 'Body Text', desc: '', hex: '' },
-        { varName: '--color-text-heading', role: 'Titles', desc: '', hex: '' },
-        { varName: '--color-accent', role: 'Titles & Accents', desc: '', hex: '' },
-        { varName: '--color-accent-blue', role: 'CTAs & Badges', desc: '', hex: '' }
+        { varName: '--color-bg-primary', role: 'Main Backdrop', desc: 'Pure White / Main Backdrop', hex: '#FFFFFF' },
+        { varName: '--color-bg-surface', role: 'Surface Panels', desc: 'Pure White / Surface Panels', hex: '#FFFFFF' },
+        { varName: '--color-bg-card', role: 'Containers & Cards', desc: 'Taupe / Containers & Cards', hex: '#B6A690' },
+        { varName: '--color-bg-dark', role: 'Dark Timber Surfaces', desc: 'Dark Timber / Footer & Contrast Panels', hex: '#1E1610' },
+        { varName: '--color-bg-obsidian', role: 'Dark Obsidian', desc: 'Dark Obsidian / Primary CTA & Banner', hex: '#30210F' },
+        { varName: '--color-text-primary', role: 'Body Text', desc: 'Pure Black / Body Text', hex: '#000000' },
+        { varName: '--color-text-muted', role: 'Muted Text', desc: 'Warm Charcoal / Muted Text', hex: '#4A4238' },
+        { varName: '--color-text-heading', role: 'Titles & Headings', desc: 'Metallic Gold / Titles & Headings', hex: '#D4AF37' },
+        { varName: '--color-accent', role: 'Accents & Section Labels', desc: 'Flat Gold / Section Labels & Accents', hex: '#BF8B2D' },
+        { varName: '--color-accent-hover', role: 'Bright Gold Hover', desc: 'Bright Gold / Interactive Hover', hex: '#D69F38' },
+        { varName: '--color-accent-blue', role: 'Commercial Badges', desc: 'Sky Blue / Badges & Commercial', hex: '#9EB0D1' },
+        { varName: '--color-accent-blue-deep', role: 'Deep Blue Accents', desc: 'Deep Blue / Secondary Badges', hex: '#4D6896' },
+        { varName: '--color-accent-green', role: 'Land Equity', desc: 'Forest Green / Land Equity & Environmental', hex: '#3A6B4C' }
       ],
       typography: {
-        fontHeadings: "'Adobe Caslon Pro', 'Libre Caslon Text', Georgia, serif, Arial, sans-serif",
-        fontBody: "'Helvetica Light', 'Helvetica Neue', Helvetica, Arial, sans-serif",
-        headline: { pt: 36, weight: '700', lh: '1.2', tracking: '-0.02em' },
-        sectionLabel: { pt: 8.4, weight: '700', tracking: '0.18em', transform: 'uppercase' },
-        body: { pt: 12, weightDesc: 'Helvetica Light, Helvetica Medium (All Caps)', lh: '1.6', colorVar: 'var(--color-text-primary)' }
+        fontHeadings: "'Adobe Caslon Pro', 'Libre Caslon Text', 'Libre Caslon Display', Georgia, serif",
+        fontBody: "'Graphik', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+        headline: { pt: 36, weight: '700', lh: '1.15', tracking: '-0.02em' },
+        sectionLabel: { pt: 8.4, weight: '400', tracking: '0.18em', transform: 'uppercase' },
+        body: { pt: 12, weightDesc: 'Graphik Light (300) / Regular (400)', lh: '1.6', colorVar: 'var(--color-text-primary)' }
       },
       btnPrimary: "Background #30210F, Border 1px solid #D4A359, Color #FFFFFF, Padding 0.85rem 2rem, Tracking 0.12em uppercase.",
       btnHover: "Subtle gold glow, clean opacity transitions (200ms ease).",
@@ -2435,7 +2734,40 @@
       layout: JSON.parse(JSON.stringify(DEFAULT_LAYOUT))
     };
 
-    let state = JSON.parse(JSON.stringify(BLANK_TOKENS));
+    /* Blank Initial State */
+    const BLANK_TOKENS = {
+      colors: [
+        { varName: '--color-bg-primary', role: 'Main Backdrop', desc: '', hex: '' },
+        { varName: '--color-bg-card', role: 'Containers', desc: '', hex: '' },
+        { varName: '--color-text-primary', role: 'Body Text', desc: '', hex: '' },
+        { varName: '--color-text-heading', role: 'Titles', desc: '', hex: '' },
+        { varName: '--color-accent', role: 'Titles & Accents', desc: '', hex: '' },
+        { varName: '--color-accent-blue', role: 'CTAs & Badges', desc: '', hex: '' }
+      ],
+      typography: {
+        fontHeadings: "'Adobe Caslon Pro', 'Libre Caslon Text', Georgia, serif, Arial, sans-serif",
+        fontBody: "'Graphik', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+        headline: { pt: 36, weight: '700', lh: '1.15', tracking: '-0.02em' },
+        sectionLabel: { pt: 8.4, weight: '400', tracking: '0.18em', transform: 'uppercase' },
+        body: { pt: 12, weightDesc: 'Graphik Light (300) / Regular', lh: '1.6', colorVar: 'var(--color-text-primary)' }
+      },
+      btnPrimary: "Background #30210F, Border 1px solid #D4A359, Color #FFFFFF, Padding 0.85rem 2rem, Tracking 0.12em uppercase.",
+      btnHover: "Subtle gold glow, clean opacity transitions (200ms ease).",
+      btnBgHex: "#30210F",
+      btnBorderHex: "#D4A359",
+      assetGuidelines: "Real, tangible local photography of Nevada County parcels, water infrastructure, and regional sites — strictly NO generic AI artwork.",
+      media: {
+        url: MEDIA_PRESETS.forest.url,
+        alt: MEDIA_PRESETS.forest.alt,
+        caption: MEDIA_PRESETS.forest.caption,
+        aspectRatio: "16/9",
+        frameStyle: "gold-border",
+        maxWidth: "100%"
+      },
+      layout: JSON.parse(JSON.stringify(DEFAULT_LAYOUT))
+    };
+
+    let state = JSON.parse(JSON.stringify(LIVE_NPC_TOKENS));
     let popoutWindowRef = null;
 
     /* Detect Window Mode on Startup */
@@ -2532,6 +2864,14 @@
       initDraggableHud();
       initDragAndDrop();
       updateStudio(false);
+
+      // Attach listener to live site iframe when loaded
+      const liveFrame = document.getElementById('live-site-iframe');
+      if (liveFrame) {
+        liveFrame.addEventListener('load', () => {
+          applyTokensToLiveSite();
+        });
+      }
     });
 
     /* BroadcastChannel and Message Sync Receiver */
@@ -3055,7 +3395,7 @@
       const labelScale = convertPtToWebScale(typo.sectionLabel.pt);
       const bodyScale = convertPtToWebScale(typo.body.pt);
 
-      const sandbox = document.getElementById('view-preview');
+      const sandbox = document.getElementById('view-sandbox') || document.getElementById('view-preview');
       if (sandbox) {
         sandbox.style.backgroundColor = bgPrimary;
         sandbox.style.color = textPrimary;
@@ -3219,11 +3559,14 @@
           popoutWindowRef.postMessage({ type: 'SYNC_STATE', state }, '*');
         }
       }
+
+      // 1b. Real-Time Token Sync into Live Current Site Frame
+      applyTokensToLiveSite();
     }
 
     /* Apply Layout Order, Visibility, and Alignments to Preview Canvas DOM */
     function applyLayoutToPreview() {
-      const sandbox = document.getElementById('view-preview');
+      const sandbox = document.getElementById('view-sandbox') || document.getElementById('view-preview');
       if (!sandbox) return;
 
       if (!state.layout) state.layout = JSON.parse(JSON.stringify(DEFAULT_LAYOUT));
@@ -3802,10 +4145,140 @@ ${vars}
     /* Tab Switcher */
     function switchTab(tabId) {
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('.code-output-container, .sandbox-frame').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.view-tab-content').forEach(el => el.style.display = 'none');
 
-      document.getElementById(`tab-btn-${tabId}`).classList.add('active');
-      document.getElementById(`view-${tabId}`).style.display = 'block';
+      const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const activeView = document.getElementById(`view-${tabId}`);
+      if (activeView) {
+        activeView.style.display = (tabId === 'live-site') ? 'flex' : 'block';
+      }
+
+      if (tabId === 'live-site') {
+        applyTokensToLiveSite();
+      }
+    }
+
+    /* ==========================================================================
+       REAL-TIME LIVE SITE BIDIRECTIONAL SYNC & VIEWPORT CONTROLS
+       ========================================================================== */
+    let currentLiveAuthLevel = 2;
+
+    function applyTokensToLiveSite() {
+      const iframe = document.getElementById('live-site-iframe');
+      if (!iframe) return;
+
+      // 1. Direct DOM style injection if accessible
+      try {
+        const doc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);
+        if (doc && doc.documentElement) {
+          const root = doc.documentElement;
+          state.colors.forEach(c => {
+            if (c.varName && c.hex) {
+              root.style.setProperty(c.varName, c.hex);
+            }
+          });
+          if (state.typography) {
+            if (state.typography.fontHeadings) {
+              root.style.setProperty('--font-family-headlines', state.typography.fontHeadings);
+              root.style.setProperty('--font-family-primary', state.typography.fontHeadings);
+            }
+            if (state.typography.fontBody) {
+              root.style.setProperty('--font-family-body', state.typography.fontBody);
+              root.style.setProperty('--font-family-body-regular', state.typography.fontBody);
+              root.style.setProperty('--font-family-body-medium', state.typography.fontBody);
+            }
+          }
+          if (state.btnBgHex) {
+            root.style.setProperty('--color-bg-obsidian', state.btnBgHex);
+          }
+          if (state.btnBorderHex) {
+            root.style.setProperty('--border-gold-subtle', state.btnBorderHex);
+            root.style.setProperty('--color-accent', state.btnBorderHex);
+          }
+        }
+      } catch (e) {
+        // Handled via postMessage below
+      }
+
+      // 2. postMessage to frame
+      try {
+        if (iframe.contentWindow) {
+          iframe.contentWindow.postMessage({ type: 'SYNC_STATE', state }, '*');
+        }
+      } catch (e) {}
+    }
+
+    function setLiveAuthLevel(level) {
+      currentLiveAuthLevel = level;
+      const btnL1 = document.getElementById('live-auth-l1');
+      const btnL2 = document.getElementById('live-auth-l2');
+      if (btnL1) btnL1.classList.toggle('active', level === 1);
+      if (btnL2) btnL2.classList.toggle('active', level === 2);
+
+      const iframe = document.getElementById('live-site-iframe');
+      if (iframe) {
+        try {
+          if (iframe.contentWindow) {
+            if (level === 2 && typeof iframe.contentWindow.unlockDashboard === 'function') {
+              iframe.contentWindow.unlockDashboard(false);
+            } else if (level === 1 && typeof iframe.contentWindow.lockDashboard === 'function') {
+              iframe.contentWindow.lockDashboard();
+            }
+            iframe.contentWindow.postMessage({ type: 'SET_AUTH_LEVEL', level }, '*');
+          }
+        } catch (e) {}
+      }
+      broadcastSync.postMessage({ type: 'SET_AUTH_LEVEL', level });
+      showToast(level === 2 ? '🔓 Live Site: Unlocked Level 2 Dashboard' : '🔒 Live Site: Locked to Level 1 Gateway');
+    }
+
+    function jumpToLiveSection(sectionId) {
+      if (!sectionId) return;
+      const iframe = document.getElementById('live-site-iframe');
+      if (iframe) {
+        try {
+          if (iframe.contentWindow) {
+            if (sectionId === 'onboarding-modal' || sectionId === 'nda-modal') {
+              if (typeof iframe.contentWindow.openModal === 'function') {
+                iframe.contentWindow.openModal(sectionId);
+              }
+            } else {
+              const targetEl = iframe.contentWindow.document.getElementById(sectionId);
+              if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth' });
+              }
+            }
+            iframe.contentWindow.postMessage({ type: 'SCROLL_TO_SECTION', sectionId }, '*');
+          }
+        } catch (e) {
+          broadcastSync.postMessage({ type: 'SCROLL_TO_SECTION', sectionId });
+        }
+      }
+    }
+
+    function setLiveViewport(deviceWidth, el) {
+      const wrapper = document.getElementById('live-viewport-wrapper');
+      if (!wrapper) return;
+      document.querySelectorAll('.viewport-btn').forEach(b => b.classList.remove('active'));
+      if (el) el.classList.add('active');
+
+      if (deviceWidth === '100%') {
+        wrapper.style.width = '100%';
+        wrapper.style.maxWidth = '100%';
+      } else {
+        wrapper.style.width = deviceWidth;
+        wrapper.style.maxWidth = deviceWidth;
+      }
+    }
+
+    function reloadLiveFrame() {
+      const iframe = document.getElementById('live-site-iframe');
+      if (iframe) {
+        iframe.src = iframe.src;
+        showToast('🔄 Reloaded Live Site Preview');
+      }
     }
 
     /* Copy Actions */
@@ -3836,42 +4309,13 @@ ${vars}
 
     /* Preset: Load New Paradigm Capital Defaults */
     function loadNPCPresets() {
-      state.colors = [
-        { varName: '--color-bg-primary', role: 'Main Backdrop', desc: 'Pure White / Main Backdrop', hex: '#FFFFFF' },
-        { varName: '--color-bg-card', role: 'Containers', desc: 'Taupe / Containers', hex: '#B6A690' },
-        { varName: '--color-text-primary', role: 'Body Text', desc: 'Pure Black / Body Text', hex: '#000000' },
-        { varName: '--color-text-heading', role: 'Titles', desc: 'Metallic Gold / Titles', hex: '#D4AF37' },
-        { varName: '--color-accent', role: 'Titles & Accents', desc: 'Flat Gold / Titles', hex: '#BF8B2D' },
-        { varName: '--color-accent-blue', role: 'CTAs & Badges', desc: 'Sky Blue / CTAs & Badges', hex: '#9EB0D1' }
-      ];
-      state.typography = {
-        fontHeadings: "'Adobe Caslon Pro', 'Libre Caslon Text', Georgia, serif, Arial, sans-serif",
-        fontBody: "'Helvetica Light', 'Helvetica Neue', Helvetica, Arial, sans-serif",
-        headline: { pt: 36, weight: '700', lh: '1.2', tracking: '-0.02em' },
-        sectionLabel: { pt: 8.4, weight: '700', tracking: '0.18em', transform: 'uppercase' },
-        body: { pt: 12, weightDesc: 'Helvetica Light, Helvetica Medium (All Caps)', lh: '1.6', colorVar: 'var(--color-text-primary)' }
-      };
-      state.btnPrimary = "Background #30210F, Border 1px solid #D4A359, Color #FFFFFF, Padding 0.85rem 2rem, Tracking 0.12em uppercase.";
-      state.btnHover = "Subtle gold glow, clean opacity transitions (200ms ease).";
-      state.btnBgHex = "#30210F";
-      state.btnBorderHex = "#D4A359";
-      state.assetGuidelines = "Real, tangible local photography of Nevada County parcels, water infrastructure, and regional sites — strictly NO generic AI artwork.";
-      state.media = {
-        url: MEDIA_PRESETS.forest.url,
-        alt: MEDIA_PRESETS.forest.alt,
-        caption: MEDIA_PRESETS.forest.caption,
-        aspectRatio: "16/9",
-        frameStyle: "gold-border",
-        maxWidth: "100%"
-      };
-      state.layout = JSON.parse(JSON.stringify(DEFAULT_LAYOUT));
-
+      state = JSON.parse(JSON.stringify(LIVE_NPC_TOKENS));
       syncTypoControlsFromState();
       syncMediaControlsFromState();
       renderColorTokens();
       renderLayoutControls();
       updateStudio();
-      showToast('✓ Loaded New Paradigm Capital default tokens');
+      showToast('✓ Loaded Live Current Site official tokens');
     }
 
     /* Reset to Blank Template */
