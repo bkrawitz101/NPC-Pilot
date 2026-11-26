@@ -699,13 +699,28 @@
     .modal-backdrop.active .modal-window { transform: scale(1); }
     .doc-viewer-modal { max-width: 820px; }
     .onboarding-window { max-width: 760px; }
-    .modal-header { padding: 1.3rem 1.5rem; border-bottom: 1px solid var(--border-taupe); display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .modal-header { padding: 1.3rem 1.5rem; border-bottom: 1px solid var(--border-taupe); display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-shrink: 0; }
     .modal-header-branding { display: flex; align-items: center; gap: 0.8rem; }
     .modal-header-emblem { width: 38px; height: 38px; object-fit: contain; }
     .modal-header h3 { font-size: 1.2rem; color: var(--color-bg-obsidian); }
     .modal-close-btn { background: none; border: none; font-size: 1.5rem; color: var(--color-text-muted); cursor: pointer; }
-    .modal-body { padding: 1.5rem; overflow-y: auto; }
-    .modal-footer { padding: 1rem 1.5rem; border-top: 1px solid var(--border-taupe); display: flex; justify-content: flex-end; gap: 0.65rem; flex-wrap: wrap; }
+    .modal-body { padding: 1.5rem; overflow-y: auto; flex: 1 1 auto; }
+    .modal-footer { padding: 1rem 1.5rem; border-top: 1px solid var(--border-taupe); display: flex; justify-content: flex-end; gap: 0.65rem; flex-wrap: wrap; flex-shrink: 0; }
+    .nda-legal-box {
+      background: var(--color-soft-sand);
+      border: 1px solid var(--border-taupe);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.15rem;
+      max-height: 195px;
+      overflow-y: auto;
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: var(--color-warm-charcoal);
+      margin-bottom: 1.1rem;
+    }
+    .nda-legal-box h5 { font-family: var(--font-family-body-medium); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-bg-obsidian); margin-bottom: 0.5rem; }
+    .nda-legal-box p { font-size: 0.81rem; color: var(--color-warm-charcoal); margin-bottom: 0.5rem; }
+    .nda-legal-box p:last-child { margin-bottom: 0; }
     .doc-reader-body h4 { font-size: 1.12rem; margin: 1.1rem 0 0.45rem; color: var(--color-bg-obsidian); }
     .doc-reader-body p { font-size: 0.94rem; margin-bottom: 0.8rem; }
     .doc-reader-body ul { padding-left: 1.25rem; margin-bottom: 0.9rem; font-size: 0.92rem; }
@@ -1600,11 +1615,22 @@
           <button type="button" id="nda-tab-unlock" class="filter-tab" style="flex: 1;" onclick="switchNDAMode('unlock')">2. Have Password? Unlock Portal</button>
         </div>
 
-        <!-- Panel A: NDA Request Form (Emails KirilRavensong@protonmail.com) -->
+        <!-- Panel A: NDA Agreement + Request Form (Emails KirilRavensong@protonmail.com) -->
         <div id="nda-panel-request">
-          <p style="font-size: 0.88rem; color: var(--color-text-muted); margin-bottom: 0.9rem;">
-            Complete and sign the mutual NDA below to send an access request to our team. Once reviewed, we will email your private access password. <strong>No non-competes required.</strong>
+          <p style="font-size: 0.86rem; color: var(--color-text-muted); margin-bottom: 0.75rem;">
+            Please read the Mutual Non-Disclosure Agreement below, complete your details, and submit to email your request. Once reviewed, we will send your access password by email.
           </p>
+
+          <!-- Readable Placeholder NDA Document -->
+          <div class="nda-legal-box" aria-label="Mutual Non-Disclosure Agreement Text">
+            <h5>Mutual Non-Disclosure Agreement (Placeholder Draft)</h5>
+            <p><strong>1. Parties &amp; Purpose:</strong> This Mutual Non-Disclosure Agreement ("Agreement") is entered into between <strong>New Paradigm Capital LLC</strong> ("Disclosing Party") and the undersigned reviewer ("Receiving Party") solely for evaluating non-public pilot blueprints, financial architectures, normative accounting frameworks, property assessments, and mastermind briefings ("Confidential Information").</p>
+            <p><strong>2. Confidentiality &amp; Chatham House Rule:</strong> Receiving Party agrees to hold all Confidential Information in strict confidence, not to distribute, publish, or share proprietary documents with unauthorized third parties, and to abide by Chatham House protocol regarding participant identities and non-public disclosures.</p>
+            <p><strong>3. No Non-Compete Restrictions:</strong> Nothing in this Agreement restricts Receiving Party from pursuing independent investments, legal/accounting work, or land stewardship projects. Zero non-compete obligations apply.</p>
+            <p><strong>4. Informational Review Only:</strong> Access to the New Paradigm Capital portal is provided for confidential think-tank evaluation and does not constitute an offer to sell or a solicitation to buy any security.</p>
+            <p><strong>5. Digital Consent &amp; Password Issuance:</strong> By checking the box below and sending the NDA access request to <strong>KirilRavensong@protonmail.com</strong>, Receiving Party agrees to these terms. Upon approval, Disclosing Party will reply via email with the portal access password.</p>
+          </div>
+
           <form id="nda-form" onsubmit="handleNDARequest(event)">
             <div class="form-grid" style="margin-bottom: 0.9rem;">
               <div class="form-group"><label for="nda-name">Full Name *</label><input type="text" id="nda-name" class="form-control" placeholder="Your Full Name" required /></div>
